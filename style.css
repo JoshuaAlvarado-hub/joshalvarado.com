@@ -58,6 +58,10 @@ nav {
     justify-content: center;
     background-color: var(--primary-color);
     padding: 1rem;
+    border-radius: 15px;
+    margin: 1rem auto;
+    width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
