@@ -7,6 +7,7 @@
     --font-family: 'Arial', sans-serif;
     --font-size: 16px;
     /* margines */
+    --navsides: 10rem;
     --m0: 1rem;
     --m1: 2rem;
     --m2: 2.5rem;
@@ -66,7 +67,7 @@ nav {
 }
 
 .nav-left {
-    margin-right: 10rem;
+    margin-right: var(--navsides);
 }
 
 .logo {
@@ -77,6 +78,23 @@ nav {
 }
 
 .logo:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-right {
+    margin-left: var(--navsides);
+}
+
+.socials {
+    margin-right: 0.25rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.socials:hover {
     color: var(--primary-color);
     text-decoration: none;
 }
