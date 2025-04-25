@@ -1,9 +1,19 @@
 /* css variables */
 :root {
+    /* colors */
     --primary-color: #3498db;
-    --secondary-color: #2ecc71;
+    --secondary-color: #313131;
+    /* fonts */
     --font-family: 'Arial', sans-serif;
     --font-size: 16px;
+    /* margines */
+    --m0: 1rem;
+    --m1: 2rem;
+    --m2: 2.5rem;
+    --m3: 3rem;
+    /* z index */
+    --zback: -10;
+    --zfixed: 100;
 }
 
 body {
