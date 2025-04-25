@@ -16,14 +16,32 @@
     --zfixed: 100;
 }
 
+/* base */
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-family);
     font-size: var(--font-size);
-    line-height: 1.6;
-    color: #333;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* layout */
 header {
     width: 100%;
     position: fixed;
@@ -34,6 +52,7 @@ header {
     box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
 }
 
+/* nav */
 nav {
     display: flex;
     justify-content: center;
@@ -69,6 +88,7 @@ main {
     padding: 2rem;
 }
 
+/* footer */
 footer {
     background: #333;
     color: #fff;
