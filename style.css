@@ -1,4 +1,4 @@
-/* variable css */
+/* css variables */
 :root {
     --primary-color: #3498db;
     --secondary-color: #2ecc71;
@@ -6,7 +6,6 @@
     --font-size: 16px;
 }
 
-/* General body styling */
 body {
     font-family: var(--font-family);
     font-size: var(--font-size);
@@ -15,38 +14,51 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header styling */
 header {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
 }
 
-/* Navigation styling */
 nav {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: var(--secondary-color);
 }
 
-/* Main content styling */
 main {
     padding: 2rem;
 }
 
-/* Footer styling */
 footer {
     background: #333;
     color: #fff;
