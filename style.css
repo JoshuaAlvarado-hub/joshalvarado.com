@@ -136,10 +136,22 @@ footer {
     margin-top: 2rem;
 }
 
-@media screen and (max-width: 1300px) {
+/* media querries */
+
+/* large screens(desktops) */
+@media screen and (min-width: 1300px) {
+    
+}
+/* medium screens(tablets) */
+@media screen and (min-width: 768px) and (max-width: 1300px) {
+
+}
+/* small screens(phones) */
+@media screen and (min-width: 480px) and (max-width: 768px) {
     nav {
         flex-direction: column;
         align-items: center;
+        padding: 0.5rem;
     }
 
     .nav-left, .nav-right {
@@ -149,19 +161,26 @@ footer {
     nav ul {
         flex-direction: column;
         gap: 1rem;
-        padding: 0;
+    }
+
+    .logo {
+        font-size: 1.2rem;
     }
 
     nav a {
         font-size: 0.9rem;
     }
+
     .socials {
         font-size: 1.2rem;
     }
-    .logo {
-        font-size: 1.2rem;
+
+    main {
+        padding: 1rem;
     }
-    .navsides {
-        margin: 0;
-    }
+}
+
+/* extra small screens(small phones) */
+@media screen and (max-width: 480px) {
+    
 }
