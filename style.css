@@ -5,6 +5,7 @@
     /* colors */
     --primary-color: #171522;
     --secondary-color: #70a8c9;
+    --tertiary-color: #f4f4f4;
     /* fonts */
     --font-family: 'Arial', sans-serif;
     /* margines */
@@ -96,7 +97,7 @@ nav {
 }
 
 .socials:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
@@ -137,7 +138,7 @@ main {
 /* footer */
 footer {
     background: #f4f4f4;
-    color: #171522;
+    color: var(--primary-color);
     text-align: center;
     padding: 2rem 0;
     margin-top: 2rem;
@@ -159,7 +160,7 @@ footer {
     height: 3rem;
     background-color: #e0e0e0;
     border-radius: 50%;
-    color: #171522;
+    color: var(--primary-color);
     font-size: 1.5rem;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -167,13 +168,13 @@ footer {
 
 .footer-icon:hover {
     background-color: var(--secondary-color);
-    color: #fff;
+    color: var(--tertiary-color);
 }
 
 .footer-text {
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
-    color: #171522;
+    color: var(--primary-color);
 }
 
 /* media queries */
