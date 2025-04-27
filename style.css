@@ -191,6 +191,11 @@ footer {
     .nav-right {
         margin-left: calc(var(--navsides) - 20rem);
     }
+    .footer-icon {
+        width: 8rem;
+        height: 8rem;
+        font-size: 4rem;
+    }
 }
 /* small screens(phones) */
 @media screen and (min-width: 420px) and (max-width: 600px) {
@@ -203,7 +208,7 @@ footer {
     .footer-icon {
         width: 8rem;
         height: 8rem;
-        font-size: 2rem;
+        font-size: 4rem;
     }
 }
 
