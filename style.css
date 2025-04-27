@@ -200,6 +200,11 @@ footer {
     .nav-right {
         margin-left: calc(var(--navsides) - 20rem);
     }
+    .footer-icon {
+        width: 8rem;
+        height: 8rem;
+        font-size: 1.25rem;
+    }
 }
 
 /* extra small screens(small phones and smart watches) */
