@@ -198,7 +198,7 @@ footer {
     }
 }
 /* small screens(phones) */
-@media screen and (min-width: 420px) and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .nav-left {
         margin-right: calc(var(--navsides) - 20rem);
     }
@@ -206,23 +206,8 @@ footer {
         margin-left: calc(var(--navsides) - 20rem);
     }
     .footer-icon {
-        width: 3.5rem;
-        height: 3.5rem;
-        font-size: 1.75rem;
-    }
-}
-
-/* extra small screens(small phones and smart watches) */
-@media screen and (max-width: 420px) {
-    .nav-left {
-        margin-right: calc(var(--navsides) - 20rem);
-    }
-    .nav-right {
-        margin-left: calc(var(--navsides) - 20rem);
-    }
-    .footer-icon {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.5rem;
+        width: 5rem;
+        height: 5rem;
+        font-size: 2.5rem;
     }
 }
