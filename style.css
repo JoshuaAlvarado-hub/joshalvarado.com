@@ -9,6 +9,7 @@
     /* fonts */
     --font-family: 'Arial', sans-serif;
     /* nav */
+    --logo-fontsize: 1.5rem;
     --navsidepadding: 5rem;
     --navsides: calc(var(--navsidepadding) / 2);
     /* footer */
@@ -73,7 +74,7 @@ nav {
     font-family: "Poppins", sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: 1.5rem;
+    font-size: var(--logo-fontsize);
     white-space: nowrap;
 }
 
@@ -84,19 +85,21 @@ nav {
 
 .nav-right {
     margin-left: var(--navsides);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .socials {
-    margin-right: 0.25rem;
+    display: inline-flex;
+    font-size: 1.5rem;
     color: var(--primary-color);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .socials:hover {
     color: var(--secondary-color);
-    text-decoration: none;
 }
 
 nav ul {
@@ -189,7 +192,7 @@ footer {
 @media screen and (min-width: 960px) and (max-width: 1439px) {
     :root {
         --navsidepadding: 10rem;
-        --footercircles: 3rem;
+        --footercircles: 3.5rem;
     }
 }
 
@@ -204,7 +207,8 @@ footer {
 /* phones */
 @media screen and (max-width: 599px) {
     :root {
+        --logo-fontsize: 1rem;
         --navsidepadding: 2rem;
-        --footercircles: 4rem;
+        --footercircles: 3rem;
     }
 }
