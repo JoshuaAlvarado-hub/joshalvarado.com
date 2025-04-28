@@ -8,15 +8,12 @@
     --tertiary-color: #f4f4f4;
     /* fonts */
     --font-family: 'Arial', sans-serif;
-    /* margines */
-    --navsides: 25rem;
-    --m0: 1rem;
-    --m1: 2rem;
-    --m2: 2.5rem;
-    --m3: 3rem;
-    /* z index */
-    --zback: -10;
-    --zfixed: 100;
+    /* nav */
+    --navsidepadding: 5rem;
+    --navsides: calc(var(--navsidepadding) / 2);
+    /* footer */
+    --footercircles: 2rem;
+    --footercircles-fontsize: calc(var(--footercircles) / 2);
 }
 
 /* base */
@@ -64,7 +61,7 @@ nav {
     padding: 1rem;
     border-radius: 15px;
     margin: 1rem auto;
-    width: fit-content;
+    width: calc(100% - var(--navsidepadding));
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
@@ -77,6 +74,7 @@ nav {
     font-weight: 800;
     font-style: normal;
     font-size: 1.5rem;
+    white-space: nowrap;
 }
 
 .logo:hover {
@@ -156,12 +154,12 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
-    height: 3rem;
+    width: var(--footercircles);
+    height: var(--footercircles);
     background-color: #e0e0e0;
     border-radius: 50%;
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--footercircles-fontsize);
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -179,35 +177,34 @@ footer {
 
 /* media queries */
 
-/* large screens(desktops) */
-@media screen and (min-width: 992px) {
+/* extra large screens */
+@media screen and (min-width: 1440px) {
+    :root {
+        --navsides: 15rem;
+        --footercircles: 4rem;
+    }
+}
 
-}
-/* medium screens(tablets) */
-@media screen and (min-width: 600px) and (max-width: 992px) {
-    .nav-left {
-        margin-right: calc(var(--navsides) - 20rem);
-    }
-    .nav-right {
-        margin-left: calc(var(--navsides) - 20rem);
-    }
-    .footer-icon {
-        width: 4rem;
-        height: 4rem;
-        font-size: 2rem;
+/* laptops/desktops */
+@media screen and (min-width: 960px) and (max-width: 1439px) {
+    :root {
+        --navsidepadding: 10rem;
+        --footercircles: 3rem;
     }
 }
-/* small screens(phones) */
-@media screen and (max-width: 600px) {
-    .nav-left {
-        margin-right: calc(var(--navsides) - 20rem);
+
+/* tablets */
+@media screen and (min-width: 600px) and (max-width: 959px) {
+    :root {
+        --navsidepadding: 2rem;
+        --footercircles: 3.5rem;
     }
-    .nav-right {
-        margin-left: calc(var(--navsides) - 20rem);
-    }
-    .footer-icon {
-        width: 5rem;
-        height: 5rem;
-        font-size: 2.5rem;
+}
+
+/* phones */
+@media screen and (max-width: 599px) {
+    :root {
+        --navsidepadding: 2rem;
+        --footercircles: 4rem;
     }
 }
