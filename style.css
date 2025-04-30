@@ -205,6 +205,38 @@ footer {
         --navsidepadding: 2rem;
         --footercircles: 3.5rem;
     }
+
+    .nav-right {
+        display: none;
+    }
+
+    .menu-button {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .nav-items {
+        visibility: hidden;
+        align-items: center;
+        position: absolute;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - var(--navsidepadding) * 4);
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .nav-items.active {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 /* phones */
