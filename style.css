@@ -10,8 +10,7 @@
     --font-family: 'Arial', sans-serif;
     /* nav */
     --logo-fontsize: 1.5rem;
-    --navsidepadding: 5rem;
-    --navsides: calc(var(--navsidepadding) / 2);
+    --navsidepadding: clamp(1rem, 5vw, 5rem);
     /* footer */
     --footercircles: 2rem;
     --footercircles-fontsize: calc(var(--footercircles) / 2);
@@ -59,7 +58,7 @@ nav {
 }
 
 .nav-left {
-    margin-right: var(--navsides);
+    margin-right: auto;
 }
 
 .logo {
@@ -76,10 +75,11 @@ nav {
 }
 
 .nav-right {
-    margin-left: var(--navsides);
+    margin-left: auto;
     display: flex;
     gap: 1rem;
     align-items: center;
+    max-width: 30%;
 }
 
 .nav-right a {
@@ -186,7 +186,6 @@ footer {
 /* extra large screens */
 @media screen and (min-width: 1440px) {
     :root {
-        --navsides: 15rem;
         --footercircles: 4rem;
     }
 }
@@ -194,7 +193,6 @@ footer {
 /* laptops/desktops */
 @media screen and (min-width: 960px) and (max-width: 1439px) {
     :root {
-        --navsidepadding: 10rem;
         --footercircles: 3.5rem;
     }
 }
@@ -202,7 +200,6 @@ footer {
 /* tablets */
 @media screen and (min-width: 600px) and (max-width: 959px) {
     :root {
-        --navsidepadding: 2rem;
         --footercircles: 3.5rem;
     }
 
@@ -243,7 +240,6 @@ footer {
 @media screen and (max-width: 599px) {
     :root {
         --logo-fontsize: 1rem;
-        --navsidepadding: 2rem;
         --footercircles: 3rem;
     }
 
