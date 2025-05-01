@@ -21,7 +21,7 @@
 title: Joshua Alvarado - Portfolio
 email: joshua.alvarado312@example.com
 description: Joshua Alvarado's portfolio website showcasing projects, resume, and contact information.
-baseurl: "https://github.com/JoshuaAlvarado-hub/joshalvarado.com" # Leave empty for root-level deployment
+baseurl: "" # Leave empty for root-level deployment
 url: "https://joshalvarado.com" # Replace with your actual domain
 github_username:  JoshuaAlvarado-hub
 
