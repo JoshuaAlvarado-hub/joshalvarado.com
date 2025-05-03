@@ -1,21 +1,26 @@
-/* google fonts */
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-/* css variables */
+
+/* CSS Variables */
 :root {
-    /* colors */
+    /* Colors */
     --primary-color: #171522;
     --secondary-color: #70a8c9;
     --tertiary-color: #f4f4f4;
-    /* fonts */
+
+    /* Fonts */
     --font-family: 'Arial', sans-serif;
-    /* nav */
+
+    /* Navigation */
     --logo-fontsize: 1.5rem;
     --navsidepadding: clamp(1rem, 5vw, 5rem);
-    /* footer */
+
+    /* Footer */
     --footercircles: 2rem;
     --footercircles-fontsize: calc(var(--footercircles) / 2);
 }
 
+/* Global Styles */
 *, ::before, ::after {
     box-sizing: border-box;
 }
@@ -33,7 +38,14 @@ body {
     background-color: #f4f4f4;
 }
 
-/* layout */
+/* Layout */
+main {
+    flex: 1;
+    margin-top: 5rem;
+    padding: 2rem;
+}
+
+/* Header */
 header {
     width: 100%;
     position: fixed;
@@ -44,7 +56,7 @@ header {
     box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
 }
 
-/* nav */
+/* Navigation */
 nav {
     display: flex;
     justify-content: space-between;
@@ -105,9 +117,9 @@ nav ul {
 nav a {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 700; /* 100-900*/
+    font-weight: 700;
     font-style: normal;
-    font-variation-settings: "wdth" 100; /* 75-100 */
+    font-variation-settings: "wdth" 100;
     font-size: 1.1rem;
     color: var(--primary-color);
     text-decoration: none;
@@ -116,12 +128,6 @@ nav a {
 
 nav a:hover {
     color: var(--secondary-color);
-}
-
-main {
-    flex: 1;
-    margin-top: 5rem;
-    padding: 2rem;
 }
 
 .menu-button {
@@ -137,7 +143,7 @@ main {
     display: flex;
 }
 
-/* footer */
+/* Footer */
 footer {
     background: #f4f4f4;
     color: var(--primary-color);
@@ -147,11 +153,10 @@ footer {
     box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Shared styles for footer container and icons */
 .footer-socials {
     display: flex;
     justify-content: center;
-    align-items: center; /* Align items vertically */
+    align-items: center;
     gap: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -181,7 +186,7 @@ footer {
     color: var(--primary-color);
 }
 
-/* Contact Page Styles */
+/* Contact Page */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -206,14 +211,21 @@ footer {
 
 .contact-form {
     flex: 1 1 50%;
-    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-.contact-info h3, .contact-form h3 {
+.contact-info h3 {
     margin-bottom: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.contact-info h1 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
 .list-unstyled {
@@ -246,7 +258,8 @@ footer {
     font-weight: bold;
 }
 
-.form-group input, .form-group textarea {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -274,7 +287,6 @@ footer {
     background-color: #0056b3;
 }
 
-/* Standardize font styles for form inputs and textarea */
 .contact-form input,
 .contact-form textarea {
     font-family: "space-mono", monospace;
@@ -291,23 +303,54 @@ footer {
     resize: vertical;
 }
 
-/* media queries */
+.contact-form h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
 
-/* extra large screens */
+.contact-header {
+    margin-bottom: 75px;
+}
+
+.contact-header h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.contact-header p {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+    margin: 0;
+    text-align: left;
+}
+
+/* Media Queries */
+
+/* Extra Large Screens */
 @media screen and (min-width: 1440px) {
     :root {
         --footercircles: 4rem;
     }
 }
 
-/* laptops/desktops */
+/* Laptops/Desktops */
 @media screen and (min-width: 960px) and (max-width: 1439px) {
     :root {
         --footercircles: 3.5rem;
     }
 }
 
-/* tablets */
+/* Tablets */
 @media screen and (min-width: 600px) and (max-width: 959px) {
     :root {
         --footercircles: 3.5rem;
@@ -344,9 +387,65 @@ footer {
         visibility: visible;
         opacity: 1;
     }
+
+    /* Contact Wrapper */
+    .contact-wrapper {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .contact-info, .contact-form {
+        flex: 1 1 50%;
+        padding: 20px;
+    }
+
+    /* Contact Header */
+    .contact-header h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .contact-header p {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Contact Info */
+    .contact-info h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    .list-unstyled li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    /* Contact Form */
+    .contact-form h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        padding: 12px 20px;
+        width: auto;
+    }
 }
 
-/* phones */
+/* Phones */
 @media screen and (max-width: 599px) {
     :root {
         --logo-fontsize: 1rem;
@@ -383,5 +482,68 @@ footer {
     .nav-items.active {
         visibility: visible;
         opacity: 1;
+    }
+
+    /* Contact Page */
+    .container {
+        padding-top: 0;
+    }
+
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 0;
+    }
+
+    .contact-header {
+        margin-top:0;
+        padding-top: 0;
+    }
+
+    .contact-info, .contact-form {
+        flex: 1 1 100%;
+        padding: 15px;
+    }
+
+    .contact-header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .contact-header p {
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .contact-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .list-unstyled li {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-form h3 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 10px 15px;
+        width: 100%;
     }
 }
