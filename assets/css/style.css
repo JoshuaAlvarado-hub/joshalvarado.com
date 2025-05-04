@@ -220,6 +220,7 @@ footer {
 .contact-info h3 {
     margin-bottom: 15px;
     font-family: "Poppins", sans-serif;
+    color: var(--primary-color);
 }
 
 .contact-info h1 {
@@ -235,6 +236,7 @@ footer {
 
 .list-unstyled li {
     margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
 .social-links a {
@@ -274,7 +276,7 @@ footer {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--secondary-color);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -284,7 +286,7 @@ footer {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #699ab6;
 }
 
 .contact-form input,
@@ -307,7 +309,7 @@ footer {
     font-family: "Poppins", sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #333;
+    color: var(--primary-color);
     text-transform: uppercase;
     margin-top: 0;
     margin-bottom: 20px;
@@ -321,7 +323,7 @@ footer {
     font-family: "Poppins", sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: var(--primary-color);
     margin-bottom: 10px;
     text-align: left;
 }
@@ -332,6 +334,118 @@ footer {
     color: #555;
     margin: 0;
     text-align: left;
+}
+/* Work Experience Section */
+.work-experience {
+    margin-top: 40px;
+}
+
+.work-experience h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.job {
+    margin-bottom: 30px;
+}
+
+.job h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.job p {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.job ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.job ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Resume Page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.work-experience, .skills {
+    margin-top: 40px;
+}
+
+.work-experience h2, .skills h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.job {
+    margin-bottom: 30px;
+}
+
+.job h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.job p {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.job ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.job ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.skills ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.skills ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
 }
 
 /* Media Queries */
