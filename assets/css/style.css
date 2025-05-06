@@ -1,5 +1,5 @@
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* CSS Variables */
 :root {
@@ -7,6 +7,13 @@
     --primary-color: #171522;
     --secondary-color: #70a8c9;
     --tertiary-color: #f4f4f4;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --text-secondary-color: #555;
+    --text-muted-color: #666;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #699ab6;
 
     /* Fonts */
     --font-family: 'Arial', sans-serif;
@@ -18,6 +25,28 @@
     /* Footer */
     --footercircles: 2rem;
     --footercircles-fontsize: calc(var(--footercircles) / 2);
+
+    /* Font Families */
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+    --font-monospace: 'Space Mono', monospace;
+
+    /* Font Sizes */
+    --font-size-h1: 3rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+    --font-size-body: 1rem;
+    --font-size-small: 0.875rem;
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Line Heights */
+    --line-height-normal: 1.5;
+    --line-height-heading: 1.2;
 }
 
 /* Global Styles */
@@ -35,10 +64,58 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--text-color);
+}
+
+p {
+    margin: 0.5rem 0;
+    color: var(--text-muted-color);
+}
+
+ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+}
+
+.time {
+    font-style: italic;
+    color: var(--text-muted-color);
 }
 
 /* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
 main {
     flex: 1;
     margin-top: 5rem;
@@ -51,9 +128,9 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: var(--z-fixed);
-    background-color: #fff;
-    box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
+    z-index: 1000;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 /* Navigation */
@@ -61,12 +138,12 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--tertiary-color);
     padding: 1rem;
     border-radius: 15px;
     margin: 1rem auto;
     width: calc(100% - var(--navsidepadding));
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px var(--shadow-color);
 }
 
 .nav-left {
@@ -76,7 +153,6 @@ nav {
 .logo {
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    font-style: normal;
     font-size: var(--logo-fontsize);
     white-space: nowrap;
 }
@@ -91,11 +167,9 @@ nav {
     display: flex;
     gap: 1rem;
     align-items: center;
-    max-width: 30%;
 }
 
 .nav-right a {
-    display: inline-flex;
     font-size: 1.5rem;
     color: var(--primary-color);
     text-decoration: none;
@@ -116,10 +190,7 @@ nav ul {
 
 nav a {
     font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 700;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
     font-size: 1.1rem;
     color: var(--primary-color);
     text-decoration: none;
@@ -145,18 +216,17 @@ nav a:hover {
 
 /* Footer */
 footer {
-    background: #f4f4f4;
+    background: var(--background-color);
     color: var(--primary-color);
     text-align: center;
     padding: 2rem 0;
     margin-top: 2rem;
-    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -1px 4px var(--shadow-color);
 }
 
 .footer-socials {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -167,7 +237,7 @@ footer {
     align-items: center;
     width: var(--footercircles);
     height: var(--footercircles);
-    background-color: #e0e0e0;
+    background-color: var(--border-color);
     border-radius: 50%;
     color: var(--primary-color);
     font-size: var(--footercircles-fontsize);
@@ -184,6 +254,31 @@ footer {
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
     color: var(--primary-color);
+}
+
+/* Pages */
+
+/* Resume Page */
+.work-experience, .skills {
+    margin-top: 40px;
+}
+
+.job {
+    margin-bottom: 30px;
+}
+
+.job ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.skills ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: bold;
 }
 
 /* Contact Page */
@@ -211,9 +306,9 @@ footer {
 
 .contact-form {
     flex: 1 1 50%;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
     padding: 20px;
 }
 
@@ -227,6 +322,7 @@ footer {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-variation-settings: "wdth" 100;
+    color: var(--primary-color);
 }
 
 .list-unstyled {
@@ -242,12 +338,12 @@ footer {
 .social-links a {
     font-size: 24px;
     margin-right: 15px;
-    color: #333;
+    color: var(--text-color);
     transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: #007bff;
+    color: var(--secondary-color);
 }
 
 .form-group {
@@ -258,15 +354,18 @@ footer {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--primary-color);
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--tertiary-color);
 }
 
 .form-group textarea {
@@ -277,7 +376,7 @@ footer {
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--secondary-color);
-    color: #fff;
+    color: var(--tertiary-color);
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -286,19 +385,20 @@ footer {
 }
 
 .btn:hover {
-    background-color: #699ab6;
+    background-color: var(--hover-color);
 }
 
 .contact-form input,
 .contact-form textarea {
-    font-family: "space-mono", monospace;
+    font-family: "Space Mono", monospace;
     font-size: 16px;
-    color: #333;
+    color: var(--text-color);
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
+    background-color: var(--tertiary-color);
 }
 
 .contact-form textarea {
@@ -331,121 +431,9 @@ footer {
 .contact-header p {
     font-family: "Roboto", sans-serif;
     font-size: 1.2rem;
-    color: #555;
+    color: var(--text-secondary-color);
     margin: 0;
     text-align: left;
-}
-/* Work Experience Section */
-.work-experience {
-    margin-top: 40px;
-}
-
-.work-experience h2 {
-    font-family: "Poppins", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.job {
-    margin-bottom: 30px;
-}
-
-.job h3 {
-    font-family: "Poppins", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--secondary-color);
-    margin-bottom: 5px;
-}
-
-.job p {
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    color: #555;
-    margin: 5px 0;
-}
-
-.job ul {
-    list-style: disc;
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.job ul li {
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-/* Resume Page */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.work-experience, .skills {
-    margin-top: 40px;
-}
-
-.work-experience h2, .skills h2 {
-    font-family: "Poppins", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.job {
-    margin-bottom: 30px;
-}
-
-.job h3 {
-    font-family: "Poppins", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--secondary-color);
-    margin-bottom: 5px;
-}
-
-.job p {
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    color: #555;
-    margin: 5px 0;
-}
-
-.job ul {
-    list-style: disc;
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.job ul li {
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.skills ul {
-    list-style: disc;
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.skills ul li {
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 5px;
 }
 
 /* Media Queries */
@@ -490,8 +478,8 @@ footer {
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - var(--navsidepadding) * 4);
-        background-color: #fff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: var(--tertiary-color);
+        box-shadow: 0 4px 6px var(--shadow-color);
         border-radius: 8px;
         opacity: 0;
         transition: opacity 0.2s ease;
@@ -500,62 +488,6 @@ footer {
     .nav-items.active {
         visibility: visible;
         opacity: 1;
-    }
-
-    /* Contact Wrapper */
-    .contact-wrapper {
-        flex-direction: row;
-        gap: 20px;
-    }
-
-    .contact-info, .contact-form {
-        flex: 1 1 50%;
-        padding: 20px;
-    }
-
-    /* Contact Header */
-    .contact-header h1 {
-        font-size: 2rem;
-        text-align: center;
-    }
-
-    .contact-header p {
-        font-size: 1.1rem;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Contact Info */
-    .contact-info h3 {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-    }
-
-    .list-unstyled li {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-
-    /* Contact Form */
-    .contact-form h3 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 1rem;
-        padding: 10px;
-    }
-
-    .btn {
-        font-size: 1.1rem;
-        padding: 12px 20px;
-        width: auto;
     }
 }
 
@@ -586,8 +518,8 @@ footer {
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - var(--navsidepadding) * 4);
-        background-color: #fff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: var(--tertiary-color);
+        box-shadow: 0 4px 6px var(--shadow-color);
         border-radius: 8px;
         opacity: 0;
         transition: opacity 0.2s ease;
@@ -596,68 +528,5 @@ footer {
     .nav-items.active {
         visibility: visible;
         opacity: 1;
-    }
-
-    /* Contact Page */
-    .container {
-        padding-top: 0;
-    }
-
-    .contact-wrapper {
-        flex-direction: column;
-        gap: 20px;
-        margin-top: 0;
-    }
-
-    .contact-header {
-        margin-top:0;
-        padding-top: 0;
-    }
-
-    .contact-info, .contact-form {
-        flex: 1 1 100%;
-        padding: 15px;
-    }
-
-    .contact-header h1 {
-        font-size: 1.8rem;
-        text-align: center;
-    }
-
-    .contact-header p {
-        font-size: 1rem;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .contact-info h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-
-    .list-unstyled li {
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-
-    .contact-form h3 {
-        font-size: 1.3rem;
-        text-align: center;
-    }
-
-    .form-group {
-        margin-bottom: 12px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    .btn {
-        font-size: 1rem;
-        padding: 10px 15px;
-        width: 100%;
     }
 }
