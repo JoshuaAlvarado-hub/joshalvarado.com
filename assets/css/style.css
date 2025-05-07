@@ -258,6 +258,39 @@ footer {
 
 /* Pages */
 
+/* Home Page */
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 60vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.home-content {
+    max-width: 650px;
+}
+
+.home-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.home-subtitle {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-secondary-color);
+    line-height: var(--line-height-normal);
+    text-align: left;
+}
+
 /* Resume Page */
 .work-experience, .skills {
     margin-top: 40px;
