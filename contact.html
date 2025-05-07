@@ -28,7 +28,8 @@ permalink: /contact/
         <!-- Contact Form -->
         <div class="contact-form">
             <h3>Send a Message</h3>
-            <form>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="apikey" value="221916d8-ba3a-42c8-b5f6-521d038a08a1">
                 <div class="form-group">
                     <input type="text" placeholder="Your Name" id="name" name="name" required>
                 </div>
@@ -41,7 +42,9 @@ permalink: /contact/
                 <div class="form-group">
                     <textarea id="message" placeholder="Your Message" name="message" rows="3" required></textarea>
                 </div>
-                <button type="button" class="btn">Send Message</button>
+                <!-- Hidden field to prevent spam bots-->
+                <input type="checkbox" name="hidden_field_123" class="hidden" style="display: none;">
+                <button type="submit" class="btn">Send Message</button>
             </form>
         </div>
     </div>
