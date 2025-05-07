@@ -194,6 +194,7 @@ nav {
 
 .nav-right a:hover {
     color: var(--secondary-color);
+    transition: color 0.3s ease;
 }
 
 nav ul {
@@ -264,6 +265,7 @@ footer {
 .footer-socials a:hover {
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .footer-text {
@@ -441,17 +443,6 @@ footer {
 .list-unstyled li {
     margin-bottom: var(--margin-small);
     color: var(--primary-color);
-}
-
-.social-links a {
-    font-size: var(--font-size-h2);
-    margin-right: var(--margin-small);
-    color: var(--text-color);
-    transition: color 0.3s;
-}
-
-.social-links a:hover {
-    color: var(--secondary-color);
 }
 
 .form-group {
