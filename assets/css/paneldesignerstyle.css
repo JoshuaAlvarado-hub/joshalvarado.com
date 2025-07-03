@@ -55,8 +55,21 @@
     margin: 0 auto;
 }
 
-.paneldesigner-container .color-picker {
+.paneldesigner-container .color-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     margin-top: 16px;
+}
+
+.paneldesigner-container .color-picker-label {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    color: #333;
+}
+
+.paneldesigner-container .color-picker {
     width: 48px;
     height: 48px;
     border: none;

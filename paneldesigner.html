@@ -7,6 +7,8 @@ permalink: /paneldesigner/
 
 <div class="paneldesigner-container">
     <h1>Panel Designer</h1>
+
+    <!-- Number Input -->
     <input
         id="number-box"
         type="text"
@@ -14,21 +16,30 @@ permalink: /paneldesigner/
         class="number-box"
         oninput="updateSquareText()"
     />
+
+    <!-- Font Selector -->
     <select id="font-selector" class="font-selector" onchange="updateFont()">
         <option value="arial-bold" selected>Arial Bold</option>
         <option value="arial-bold-italic">Arial Bold Italic</option>
     </select>
+
+    <!-- Color Picker -->
+    <div class="color-picker-container">
+        <label for="color-picker" class="color-picker-label">Background Color:</label>
+        <input
+            type="color"
+            id="color-picker"
+            value="#70a8c9"
+            class="color-picker"
+            onchange="pickColor()"
+            aria-label="Pick background color"
+        />
+    </div>
+
+    <!-- Panel Background -->
     <div id="panel-background" class="panel-background">
         <span id="panel-foreground" class="panel-foreground">312</span>
     </div>
-    <input
-        type="color"
-        id="color-picker"
-        value="#70a8c9"
-        class="color-picker"
-        onchange="pickColor()"
-        aria-label="Pick panel color"
-    />
 </div>
 
 <script>
