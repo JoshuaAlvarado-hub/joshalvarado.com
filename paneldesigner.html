@@ -1,0 +1,73 @@
+---
+layout: default
+title: Panel Designer
+permalink: /paneldesigner/
+---
+<div class="container" style="text-align:center; margin-top:40px;">
+    <h1>Panel Designer</h1>
+    <input
+        id="number-box"
+        type="text"
+        value="312"
+        style="width:200px; height:40px; margin-bottom:24px; background:#fff; color:#333; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.08); font-family:Arial, sans-serif; font-size:1rem; text-align:center; border:1px solid #ddd;"
+        oninput="updateSquareText()"
+    />
+    <select id="font-selector" style="margin-bottom:24px; height:40px; font-size:1rem;" onchange="updateFont()">
+        <option value="arial-bold" selected>Arial Bold</option>
+        <option value="arial-bold-italic">Arial Bold Italic</option>
+    </select>
+    <div id="panel-background" style="width:360px; height:240px; background:#70a8c9; margin:24px auto; border-radius:16px; transition:background 0.3s; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <span id="panel-foreground" style="
+            color:#fff;
+            font-family:Arial, sans-serif;
+            font-weight:bold;
+            font-style:normal;
+            display:block;
+            height:200px;
+            width:320px;
+            max-width:320px;
+            font-size:200px;
+            line-height:1;
+            text-align:center;
+            user-select:none;
+            overflow:hidden;
+            white-space:nowrap;
+            margin:0 auto;
+            transition:transform 0.1s;
+        ">312</span>
+    </div>
+    <input
+        type="color"
+        id="color-picker"
+        value="#70a8c9"
+        style="margin-top:16px; width:48px; height:48px; border:none; background:none; cursor:pointer;"
+        onchange="pickColor()"
+        aria-label="Pick panel color"
+    />
+</div>
+<script>
+function pickColor() {
+    const color = document.getElementById('color-picker').value;
+    document.getElementById('panel-background').style.background = color;
+}
+
+function updateSquareText() {
+    const input = document.getElementById('number-box').value;
+    const panelText = document.getElementById('panel-foreground');
+    panelText.textContent = input;
+}
+
+function updateFont() {
+    const fontSelect = document.getElementById('font-selector').value;
+    const panelText = document.getElementById('panel-foreground');
+    if (fontSelect === "arial-bold") {
+        panelText.style.fontFamily = "Arial, sans-serif";
+        panelText.style.fontWeight = "bold";
+        panelText.style.fontStyle = "normal";
+    } else if (fontSelect === "arial-bold-italic") {
+        panelText.style.fontFamily = "Arial, sans-serif";
+        panelText.style.fontWeight = "bold";
+        panelText.style.fontStyle = "italic";
+    }
+}
+</script>
