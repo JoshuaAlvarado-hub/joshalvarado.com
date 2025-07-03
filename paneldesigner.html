@@ -25,6 +25,7 @@ permalink: /paneldesigner/
         value="Your Car Number Here"
         class="number-box"
         oninput="updateSquareText()"
+        onfocus="this.select()"
     />
 
     <!-- Font Selector -->
@@ -62,9 +63,20 @@ permalink: /paneldesigner/
         </div>
     </div>
 
+    <!-- 1" Text Input -->
+    <input
+        id="one-inch-text"
+        type="text"
+        class="one-inch-text-box"
+        placeholder='Optional 1" text (leave blank for none)'
+        oninput="updateOneInchText()"
+        style="margin-bottom: 16px; width: 240px;"
+    />
+
     <!-- Panel Background -->
     <div id="panel-background" class="panel-background">
         <span id="panel-number" class="panel-number">312</span>
+        <span id="one-inch-display" class="one-inch-display"></span>
     </div>
 </div>
 
@@ -108,5 +120,11 @@ function updateMaterialType() {
         panelBg.style.borderRadius = "16px";
     }
     console.log(`Material Type selected: ${materialType}`);
+}
+
+// Add this function:
+function updateOneInchText() {
+    const text = document.getElementById('one-inch-text').value;
+    document.getElementById('one-inch-display').textContent = text;
 }
 </script>
