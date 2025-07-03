@@ -8,6 +8,16 @@ permalink: /paneldesigner/
 <div class="paneldesigner-container">
     <h1>Panel Designer</h1>
 
+    <!-- Material Type -->
+    <div class="material-type-container">
+        <label for="material-type-selector" class="material-type-label">Material Type:</label>
+        <select id="material-type-selector" class="material-type-selector" onchange="updateMaterialType()">
+            <option value="single-use" selected>Single Use</option>
+            <option value="reusable">Reusable (add $9.99)</option>
+            <option value="magnetic">Magnetic (add $49.99)</option>
+        </select>
+    </div>
+
     <!-- Number Input -->
     <input
         id="number-box"
@@ -23,35 +33,38 @@ permalink: /paneldesigner/
         <option value="arial-bold-italic">Arial Bold Italic</option>
     </select>
 
-    <!-- Background Color Picker -->
-    <div class="color-picker-container">
-        <label for="background-color-picker" class="color-picker-label">Background Color:</label>
-        <input
-            type="color"
-            id="background-color-picker"
-            value="#70a8c9"
-            class="color-picker"
-            onchange="pickBackgroundColor()"
-            aria-label="Pick background color"
-        />
-    </div>
+    <!-- Color Pickers -->
+    <div class="color-pickers-container">
+        <!-- Number Color Picker -->
+        <div class="color-picker-container">
+            <label for="number-color-picker" class="color-picker-label">Number Color:</label>
+            <input
+                type="color"
+                id="number-color-picker"
+                value="#ffffff"
+                class="color-picker"
+                onchange="pickNumberColor()"
+                aria-label="Pick number color"
+            />
+        </div>
 
-    <!-- Foreground Color Picker -->
-    <div class="color-picker-container">
-        <label for="foreground-color-picker" class="color-picker-label">Foreground Color:</label>
-        <input
-            type="color"
-            id="foreground-color-picker"
-            value="#ffffff"
-            class="color-picker"
-            onchange="pickForegroundColor()"
-            aria-label="Pick foreground color"
-        />
+        <!-- Background Color Picker -->
+        <div class="color-picker-container">
+            <label for="background-color-picker" class="color-picker-label">Background Color:</label>
+            <input
+                type="color"
+                id="background-color-picker"
+                value="#70a8c9"
+                class="color-picker"
+                onchange="pickBackgroundColor()"
+                aria-label="Pick background color"
+            />
+        </div>
     </div>
 
     <!-- Panel Background -->
     <div id="panel-background" class="panel-background">
-        <span id="panel-foreground" class="panel-foreground">312</span>
+        <span id="panel-number" class="panel-number">312</span>
     </div>
 </div>
 
@@ -61,20 +74,20 @@ function pickBackgroundColor() {
     document.getElementById('panel-background').style.background = color;
 }
 
-function pickForegroundColor() {
-    const color = document.getElementById('foreground-color-picker').value;
-    document.getElementById('panel-foreground').style.color = color;
+function pickNumberColor() {
+    const color = document.getElementById('number-color-picker').value;
+    document.getElementById('panel-number').style.color = color;
 }
 
 function updateSquareText() {
     const input = document.getElementById('number-box').value;
-    const panelText = document.getElementById('panel-foreground');
+    const panelText = document.getElementById('panel-number');
     panelText.textContent = input;
 }
 
 function updateFont() {
     const fontSelect = document.getElementById('font-selector').value;
-    const panelText = document.getElementById('panel-foreground');
+    const panelText = document.getElementById('panel-number');
     if (fontSelect === "arial-bold") {
         panelText.style.fontFamily = "Arial, sans-serif";
         panelText.style.fontWeight = "bold";
@@ -84,5 +97,16 @@ function updateFont() {
         panelText.style.fontWeight = "bold";
         panelText.style.fontStyle = "italic";
     }
+}
+
+function updateMaterialType() {
+    const materialType = document.getElementById('material-type-selector').value;
+    const panelBg = document.getElementById('panel-background');
+    if (materialType === "reusable") {
+        panelBg.style.borderRadius = "0";
+    } else {
+        panelBg.style.borderRadius = "16px";
+    }
+    console.log(`Material Type selected: ${materialType}`);
 }
 </script>

@@ -2,6 +2,7 @@
     text-align: center;
     margin-top: 40px;
     min-width: 360px;
+    margin-bottom: 0;
 }
 
 .paneldesigner-container h1 {
@@ -9,34 +10,61 @@
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
     color: var(--primary-color);
-    margin-bottom: var(--margin-medium);
+    margin-bottom: 32px;
 }
 
-.paneldesigner-container .number-box {
+.material-type-container {
+    margin-top: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.material-type-label {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    color: #333;
+}
+
+.material-type-selector {
+    height: 40px;
+    font-size: 1rem;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    font-family: var(--font-secondary);
+    cursor: pointer;
+}
+
+.number-box {
     width: 200px;
     height: 40px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     background: #fff;
     color: #333;
     border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     font-family: var(--font-secondary);
     font-size: 1rem;
     text-align: center;
     border: 1px solid #ddd;
 }
 
-.paneldesigner-container .font-selector {
+.font-selector {
     margin-bottom: 24px;
     height: 40px;
     font-size: 1rem;
 }
 
-.paneldesigner-container .panel-background {
+.panel-background {
     width: 360px;
     height: 240px;
     background: #70a8c9;
-    margin: 24px auto;
+    margin: 32px auto;
     border-radius: 16px;
     transition: background 0.3s;
     display: flex;
@@ -44,7 +72,7 @@
     justify-content: center;
 }
 
-.paneldesigner-container .panel-foreground {
+.panel-number {
     color: #fff;
     font-family: Arial, sans-serif;
     font-weight: bold;
@@ -64,31 +92,18 @@
     transition: color 0.3s ease;
 }
 
-.paneldesigner-container .panel-foreground {
-    color: #fff;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-style: normal;
+.color-pickers-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 200px;
-    width: 320px;
-    font-size: 140px;
-    line-height: 1;
-    text-align: center;
-    user-select: none;
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
 }
 
 .color-picker-container {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    margin-top: 16px;
 }
 
 .color-picker-label {
