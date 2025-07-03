@@ -4,6 +4,14 @@
     min-width: 360px;
 }
 
+.paneldesigner-container h1 {
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+    margin-bottom: var(--margin-medium);
+}
+
 .paneldesigner-container .number-box {
     width: 200px;
     height: 40px;
@@ -53,9 +61,29 @@
     overflow: hidden;
     white-space: nowrap;
     margin: 0 auto;
+    transition: color 0.3s ease;
 }
 
-.paneldesigner-container .color-picker-container {
+.paneldesigner-container .panel-foreground {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 320px;
+    font-size: 140px;
+    line-height: 1;
+    text-align: center;
+    user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+
+.color-picker-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,13 +91,13 @@
     margin-top: 16px;
 }
 
-.paneldesigner-container .color-picker-label {
+.color-picker-label {
     font-family: var(--font-secondary);
     font-size: 1rem;
     color: #333;
 }
 
-.paneldesigner-container .color-picker {
+.color-picker {
     width: 48px;
     height: 48px;
     border: none;

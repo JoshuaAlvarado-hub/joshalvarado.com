@@ -23,16 +23,29 @@ permalink: /paneldesigner/
         <option value="arial-bold-italic">Arial Bold Italic</option>
     </select>
 
-    <!-- Color Picker -->
+    <!-- Background Color Picker -->
     <div class="color-picker-container">
-        <label for="color-picker" class="color-picker-label">Background Color:</label>
+        <label for="background-color-picker" class="color-picker-label">Background Color:</label>
         <input
             type="color"
-            id="color-picker"
+            id="background-color-picker"
             value="#70a8c9"
             class="color-picker"
-            onchange="pickColor()"
+            onchange="pickBackgroundColor()"
             aria-label="Pick background color"
+        />
+    </div>
+
+    <!-- Foreground Color Picker -->
+    <div class="color-picker-container">
+        <label for="foreground-color-picker" class="color-picker-label">Foreground Color:</label>
+        <input
+            type="color"
+            id="foreground-color-picker"
+            value="#ffffff"
+            class="color-picker"
+            onchange="pickForegroundColor()"
+            aria-label="Pick foreground color"
         />
     </div>
 
@@ -43,9 +56,14 @@ permalink: /paneldesigner/
 </div>
 
 <script>
-function pickColor() {
-    const color = document.getElementById('color-picker').value;
+function pickBackgroundColor() {
+    const color = document.getElementById('background-color-picker').value;
     document.getElementById('panel-background').style.background = color;
+}
+
+function pickForegroundColor() {
+    const color = document.getElementById('foreground-color-picker').value;
+    document.getElementById('panel-foreground').style.color = color;
 }
 
 function updateSquareText() {
