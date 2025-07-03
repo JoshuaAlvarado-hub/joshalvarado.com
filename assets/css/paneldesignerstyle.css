@@ -134,4 +134,5 @@
     pointer-events: none;
     font-family: Arial, sans-serif;
     letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
