@@ -3,19 +3,26 @@ function setTransparentBackground() {
     panel.style.background = "";
     panel.classList.add('transparent-texture');
     document.getElementById('background-color-picker').value = "#70a8c9";
-    // Show dropdown, hide color picker
     document.getElementById('number-color-picker').style.display = "none";
     document.getElementById('number-color-dropdown').style.display = "inline-block";
+    // Change button to "Add Background" and update onclick
+    const btn = document.getElementById('transparent-bg-btn');
+    btn.textContent = "Add Background";
+    btn.onclick = addBackground;
 }
 
-function pickBackgroundColor() {
+function addBackground() {
+    // Restore the background color from the color picker
     const color = document.getElementById('background-color-picker').value;
     const panel = document.getElementById('panel-background');
     panel.classList.remove('transparent-texture');
     panel.style.background = color;
-    // Show color picker, hide dropdown
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
+    // Change button to "No Background" and update onclick
+    const btn = document.getElementById('transparent-bg-btn');
+    btn.textContent = "No Background";
+    btn.onclick = setTransparentBackground;
 }
 
 function pickNumberColor() {
