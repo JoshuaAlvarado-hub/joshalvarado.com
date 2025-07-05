@@ -73,6 +73,19 @@ permalink: /paneldesigner/
         </div>
     </div>
 
+    <!-- Special Backgrounds -->
+    <div class="color-pickers-container">
+        <div class="color-picker-container">
+            <label for="special-backgrounds-selector" class="color-picker-label">Special Backgrounds:</label>
+            <select id="special-backgrounds-selector" class="font-selector" onchange="updateSpecialBackground()">
+            <option value="">None</option>
+            <option value="carbon">Carbon Fiber</option>
+            <option value="checker">Checkerboard</option>
+            <option value="camouflage">Camouflage</option>
+            </select>
+        </div>
+    </div>
+
     <!-- 1" Text -->
     <input
         id="one-inch-text"
@@ -89,5 +102,3 @@ permalink: /paneldesigner/
         <span id="one-inch-display" class="one-inch-display"></span>
     </div>
 </div>
-
-<script src="{{ '/assets/js/paneldesigner.js' | relative_url }}"></script>

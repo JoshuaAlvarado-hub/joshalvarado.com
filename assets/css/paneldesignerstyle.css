@@ -3,66 +3,25 @@
 
 /* CSS Variables */
 :root {
-    /* Colors */
-    --primary-color: #00003D;
-    --secondary-color: #92BCEA;
-    --tertiary-color: #F4F4F4;
-    --background-color: #F4F4F4;
-    --text-color: #333;
-    --text-secondary-color: #555;
-    --text-muted-color: #666;
-    --border-color: #ddd;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --hover-color: #699ab6;
+  /* Core Colors */
+  --primary-color: #00003D;
+  --secondary-color: #92BCEA;
+  --tertiary-color: #F4F4F4;
+  --background-color: #F4F4F4;
+  --text-color: #333;
+  --text-secondary-color: #555;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-color: #699ab6;
 
-    /* Fonts */
-    --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Roboto', sans-serif;
-    --font-monospace: 'Space Mono', monospace;
+  /* Fonts */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  --font-weight-bold: 700;
 
-    /* Font Sizes */
-    --font-size-nav-items: 1.2rem;
-    --font-size-h1: 3rem;
-    --font-size-h2: 2rem;
-    --font-size-h3: 1.5rem;
-    --font-size-body: 1rem;
-    --font-size-small: 0.875rem;
-
-    /* Font Weights */
-    --font-weight-light: 300;
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-bold: 700;
-
-    /* Line Heights */
-    --line-height-normal: 1.5;
-    --line-height-heading: 1.2;
-
-    /* Spacing */
-    --gap-small: 10px;
-    --gap-medium: 20px;
-    --gap-large: 40px;
-
-    /* Margins */
-    --margin-small: 10px;
-    --margin-medium: 20px;
-    --margin-large: 40px;
-
-    /* Padding */
-    --padding-small: 10px;
-    --padding-medium: 20px;
-    --padding-large: 40px;
-
-    /* Border Radius */
-    --border-radius: 8px;
-
-    /* Navigation */
-    --logo-fontsize: 1.5rem;
-    --navsidepadding: clamp(1rem, 5vw, 5rem);
-
-    /* Footer */
-    --footercircles: 2rem;
-    --footercircles-fontsize: calc(var(--footercircles) / 2);
+  /* Layout */
+  --border-radius: 8px;
+  --gap-medium: 20px;
 }
 
 .paneldesigner-container {
@@ -134,7 +93,7 @@
     margin: 32px auto;
     border: #333 1px solid;
     border-radius: 16px;
-    transition: background 0.3s;
+    transition: background 0.3s, background-image 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;

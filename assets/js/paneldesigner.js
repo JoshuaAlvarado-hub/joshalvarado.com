@@ -1,3 +1,12 @@
+function pickBackgroundColor() {
+    const color = document.getElementById('background-color-picker').value;
+    const panel = document.getElementById('panel-background');
+
+    panel.style.background = color;
+    panel.style.backgroundImage = "";
+    panel.classList.remove('transparent-texture');
+}
+
 function setTransparentBackground() {
     const panel = document.getElementById('panel-background');
     panel.style.background = "";
@@ -12,14 +21,27 @@ function setTransparentBackground() {
 }
 
 function addBackground() {
-    // Restore the background color from the color picker
-    const color = document.getElementById('background-color-picker').value;
     const panel = document.getElementById('panel-background');
+    const specialBgValue = document.getElementById('special-backgrounds-selector').value;
+
     panel.classList.remove('transparent-texture');
-    panel.style.background = color;
+
+    if (specialBgValue) {
+        // A special background is selected — apply it again
+        updateSpecialBackground();
+    } else {
+        // No special background — restore solid color
+        const color = document.getElementById('background-color-picker').value;
+        panel.style.background = color;
+        panel.style.backgroundImage = "";
+        panel.style.backgroundSize = "";
+        panel.style.backgroundPosition = "";
+        panel.style.backgroundRepeat = "";
+    }
+
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
-    // Change button to "No Background" and update onclick
+
     const btn = document.getElementById('transparent-bg-btn');
     btn.textContent = "No Background";
     btn.onclick = setTransparentBackground;
@@ -85,4 +107,32 @@ function updateMaterialType() {
 function updateOneInchText() {
     const text = document.getElementById('one-inch-text').value;
     document.getElementById('one-inch-display').textContent = text;
+}
+
+function updateSpecialBackground() {
+    const selector = document.getElementById('special-backgrounds-selector');
+    const value = selector.value;
+    const panel = document.getElementById('panel-background');
+
+    if (value === "") {
+        // If "None" selected, restore color background
+        const color = document.getElementById('background-color-picker').value;
+        panel.style.background = color;
+        panel.style.backgroundImage = "";
+        panel.style.backgroundSize = "";
+        panel.style.backgroundPosition = "";
+        panel.style.backgroundRepeat = "";
+    } else {
+        let imageUrl = "";
+        if (value === "carbon") {
+            imageUrl = "/joshalvarado.com/assets/images/carbon-fiber.jpg";
+
+        }
+
+        panel.style.background = "none";
+        panel.style.backgroundImage = `url('${imageUrl}')`;
+        panel.style.backgroundSize = "cover";
+        panel.style.backgroundPosition = "center";
+        panel.style.backgroundRepeat = "no-repeat";
+    }
 }
