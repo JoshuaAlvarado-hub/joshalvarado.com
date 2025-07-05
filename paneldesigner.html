@@ -4,6 +4,7 @@ title: Panel Designer
 permalink: /paneldesigner/
 ---
 <link rel="stylesheet" href="{{ '/assets/css/paneldesignerstyle.css' | relative_url }}">
+<script src="{{ '/assets/js/paneldesigner.js' | relative_url }}"></script>
 
 <div class="paneldesigner-container">
     <h1>Panel Designer</h1>
@@ -38,7 +39,7 @@ permalink: /paneldesigner/
     <div class="color-pickers-container">
         <!-- Number Color Picker -->
         <div class="color-picker-container">
-            <label for="number-color-picker" class="color-picker-label">Number Color:</label>
+            <label for="number-color-dropdown" class="color-picker-label">Number Color:</label>
             <input
                 type="color"
                 id="number-color-picker"
@@ -46,7 +47,15 @@ permalink: /paneldesigner/
                 class="color-picker"
                 onchange="pickNumberColor()"
                 aria-label="Pick number color"
+                style="display:inline-block;"
             />
+            <select id="number-color-dropdown" class="font-selector" style="display:none;" onchange="pickNumberDropdownColor()">
+                <option value="#ffffff">White</option>
+                <option value="#000000">Black</option>
+                <option value="#FFD700">Yellow</option>
+                <option value="#FF0000">Red</option>
+                <option value="#00BFFF">Blue</option>
+            </select>
         </div>
 
         <!-- Background Color Picker -->
@@ -60,10 +69,11 @@ permalink: /paneldesigner/
                 onchange="pickBackgroundColor()"
                 aria-label="Pick background color"
             />
+            <button type="button" id="transparent-bg-btn" style="margin-left:8px;" onclick="setTransparentBackground()">No Background</button>
         </div>
     </div>
 
-    <!-- 1" Text Input -->
+    <!-- 1" Text -->
     <input
         id="one-inch-text"
         type="text"
@@ -80,51 +90,4 @@ permalink: /paneldesigner/
     </div>
 </div>
 
-<script>
-function pickBackgroundColor() {
-    const color = document.getElementById('background-color-picker').value;
-    document.getElementById('panel-background').style.background = color;
-}
-
-function pickNumberColor() {
-    const color = document.getElementById('number-color-picker').value;
-    document.getElementById('panel-number').style.color = color;
-    document.getElementById('one-inch-display').style.color = color;
-}
-
-function updateSquareText() {
-    const input = document.getElementById('number-box').value;
-    const panelText = document.getElementById('panel-number');
-    panelText.textContent = input;
-}
-
-function updateFont() {
-    const fontSelect = document.getElementById('font-selector').value;
-    const panelText = document.getElementById('panel-number');
-    if (fontSelect === "arial-bold") {
-        panelText.style.fontFamily = "Arial, sans-serif";
-        panelText.style.fontWeight = "bold";
-        panelText.style.fontStyle = "normal";
-    } else if (fontSelect === "arial-bold-italic") {
-        panelText.style.fontFamily = "Arial, sans-serif";
-        panelText.style.fontWeight = "bold";
-        panelText.style.fontStyle = "italic";
-    }
-}
-
-function updateMaterialType() {
-    const materialType = document.getElementById('material-type-selector').value;
-    const panelBg = document.getElementById('panel-background');
-    if (materialType === "reusable") {
-        panelBg.style.borderRadius = "0";
-    } else {
-        panelBg.style.borderRadius = "16px";
-    }
-    console.log(`Material Type selected: ${materialType}`);
-}
-
-function updateOneInchText() {
-    const text = document.getElementById('one-inch-text').value;
-    document.getElementById('one-inch-display').textContent = text;
-}
-</script>
+<script src="{{ '/assets/js/paneldesigner.js' | relative_url }}"></script>
