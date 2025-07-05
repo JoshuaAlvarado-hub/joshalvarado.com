@@ -1,28 +1,64 @@
 function pickBackgroundColor() {
     const color = document.getElementById('background-color-picker').value;
     const panel = document.getElementById('panel-background');
+    const btn = document.getElementById('transparent-bg-btn');
 
+    // Remove transparency if active
+    panel.classList.remove('transparent-texture');
+
+    // Set solid color and clear any background image
     panel.style.background = color;
     panel.style.backgroundImage = "";
-    panel.classList.remove('transparent-texture');
+    panel.style.backgroundSize = "";
+    panel.style.backgroundPosition = "";
+    panel.style.backgroundRepeat = "";
+
+    // Reset the special backgrounds dropdown to "None"
+    document.getElementById('special-backgrounds-selector').value = "";
+
+    // Reset toggle button to "No Background"
+    btn.textContent = "No Background";
+    btn.onclick = setTransparentBackground;
+
+    // Restore number color picker mode
+    document.getElementById('number-color-picker').style.display = "inline-block";
+    document.getElementById('number-color-dropdown').style.display = "none";
 }
 
 function setTransparentBackground() {
     const panel = document.getElementById('panel-background');
+    const btn = document.getElementById('transparent-bg-btn');
+
+    // Remove any color or image
     panel.style.background = "";
+    panel.style.backgroundImage = "";
+    panel.style.backgroundSize = "";
+    panel.style.backgroundPosition = "";
+    panel.style.backgroundRepeat = "";
+
+    // Apply the transparent checker pattern
     panel.classList.add('transparent-texture');
+
+    // Reset special backgrounds dropdown to "None"
+    document.getElementById('special-backgrounds-selector').value = "";
+
+    // Optionally reset color picker to default color
     document.getElementById('background-color-picker').value = "#70a8c9";
+
+    // Show dropdown for number color, hide color picker
     document.getElementById('number-color-picker').style.display = "none";
     document.getElementById('number-color-dropdown').style.display = "inline-block";
-    // Change button to "Add Background" and update onclick
-    const btn = document.getElementById('transparent-bg-btn');
+
+    // Update the toggle button text and behavior
     btn.textContent = "Add Background";
     btn.onclick = addBackground;
 }
 
+
 function addBackground() {
     const panel = document.getElementById('panel-background');
     const specialBgValue = document.getElementById('special-backgrounds-selector').value;
+    const btn = document.getElementById('transparent-bg-btn');
 
     panel.classList.remove('transparent-texture');
 
@@ -39,10 +75,12 @@ function addBackground() {
         panel.style.backgroundRepeat = "";
     }
 
+    // Reset the special backgrounds dropdown to "None"
+    document.getElementById('special-backgrounds-selector').value = "";
+
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
 
-    const btn = document.getElementById('transparent-bg-btn');
     btn.textContent = "No Background";
     btn.onclick = setTransparentBackground;
 }
@@ -113,9 +151,13 @@ function updateSpecialBackground() {
     const selector = document.getElementById('special-backgrounds-selector');
     const value = selector.value;
     const panel = document.getElementById('panel-background');
+    const btn = document.getElementById('transparent-bg-btn');
+
+    // Always remove transparency when a special background is picked
+    panel.classList.remove('transparent-texture');
 
     if (value === "") {
-        // If "None" selected, restore color background
+        // Restore solid color background
         const color = document.getElementById('background-color-picker').value;
         panel.style.background = color;
         panel.style.backgroundImage = "";
@@ -126,7 +168,10 @@ function updateSpecialBackground() {
         let imageUrl = "";
         if (value === "carbon") {
             imageUrl = "/joshalvarado.com/assets/images/carbon-fiber.jpg";
-
+        } else if (value === "checkerboard") {
+            imageUrl = "/joshalvarado.com/assets/images/checkerboard.jpg";
+        } else if (value === "camouflage") {
+            imageUrl = "/joshalvarado.com/assets/images/camouflage.jpg";
         }
 
         panel.style.background = "none";
@@ -135,4 +180,12 @@ function updateSpecialBackground() {
         panel.style.backgroundPosition = "center";
         panel.style.backgroundRepeat = "no-repeat";
     }
+
+    // Reset button back to "No Background" mode
+    btn.textContent = "No Background";
+    btn.onclick = setTransparentBackground;
+
+    // Make sure number color pickers are visible again
+    document.getElementById('number-color-picker').style.display = "inline-block";
+    document.getElementById('number-color-dropdown').style.display = "none";
 }
