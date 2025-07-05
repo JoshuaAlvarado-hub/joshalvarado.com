@@ -39,14 +39,28 @@ function updateSquareText() {
 function updateFont() {
     const fontSelect = document.getElementById('font-selector').value;
     const panelText = document.getElementById('panel-number');
+    const oneInchText = document.getElementById('one-inch-display');
     if (fontSelect === "arial-bold") {
         panelText.style.fontFamily = "Arial, sans-serif";
         panelText.style.fontWeight = "bold";
         panelText.style.fontStyle = "normal";
+        oneInchText.style.fontFamily = "Arial, sans-serif";
+        oneInchText.style.fontWeight = "bold";
+        oneInchText.style.fontStyle = "normal";
     } else if (fontSelect === "arial-bold-italic") {
         panelText.style.fontFamily = "Arial, sans-serif";
         panelText.style.fontWeight = "bold";
         panelText.style.fontStyle = "italic";
+        oneInchText.style.fontFamily = "Arial, sans-serif";
+        oneInchText.style.fontWeight = "bold";
+        oneInchText.style.fontStyle = "italic";
+    } else if (fontSelect === "amboy") {
+        panelText.style.fontFamily = "'Amboy', Arial, sans-serif";
+        panelText.style.fontWeight = "normal";
+        panelText.style.fontStyle = "normal";
+        oneInchText.style.fontFamily = "'Amboy', Arial, sans-serif";
+        oneInchText.style.fontWeight = "normal";
+        oneInchText.style.fontStyle = "normal";
     }
 }
 
