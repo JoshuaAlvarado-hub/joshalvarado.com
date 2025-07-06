@@ -153,11 +153,9 @@ function updateSpecialBackground() {
     const panel = document.getElementById('panel-background');
     const btn = document.getElementById('transparent-bg-btn');
 
-    // Always remove transparency when a special background is picked
     panel.classList.remove('transparent-texture');
 
     if (value === "") {
-        // Restore solid color background
         const color = document.getElementById('background-color-picker').value;
         panel.style.background = color;
         panel.style.backgroundImage = "";
@@ -165,27 +163,16 @@ function updateSpecialBackground() {
         panel.style.backgroundPosition = "";
         panel.style.backgroundRepeat = "";
     } else {
-        let imageUrl = "";
-        if (value === "carbon") {
-            imageUrl = "/joshalvarado.com/assets/images/carbon-fiber.jpg";
-        } else if (value === "checkerboard") {
-            imageUrl = "/joshalvarado.com/assets/images/checkerboard.jpg";
-        } else if (value === "camouflage") {
-            imageUrl = "/joshalvarado.com/assets/images/camouflage.jpg";
-        }
-
         panel.style.background = "none";
-        panel.style.backgroundImage = `url('${imageUrl}')`;
+        panel.style.backgroundImage = `url('${value}')`;
         panel.style.backgroundSize = "cover";
         panel.style.backgroundPosition = "center";
         panel.style.backgroundRepeat = "no-repeat";
     }
 
-    // Reset button back to "No Background" mode
     btn.textContent = "No Background";
     btn.onclick = setTransparentBackground;
 
-    // Make sure number color pickers are visible again
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
 }
