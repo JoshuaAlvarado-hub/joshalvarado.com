@@ -5,6 +5,7 @@ permalink: /paneldesigner/
 ---
 <link rel="stylesheet" href="{{ '/assets/css/paneldesignerstyle.css' | relative_url }}">
 <script src="{{ '/assets/js/paneldesigner.js' | relative_url }}"></script>
+<base href="/">
 
 <div class="paneldesigner-container">
     <h1>Panel Designer</h1>
@@ -79,10 +80,11 @@ permalink: /paneldesigner/
             <label for="special-backgrounds-selector" class="color-picker-label">Special Backgrounds:</label>
             <select id="special-backgrounds-selector" class="font-selector" onchange="updateSpecialBackground()">
                 <option value="">None</option>
-                <option value="/joshalvarado.com/assets/images/carbon-fiber.jpg">Carbon Fiber</option>
-                <option value="/joshalvarado.com/assets/images/checkerboard.jpg">Checkerboard</option>
-                <option value="/joshalvarado.com/assets/images/camouflage.jpg">Camouflage</option>
+                <option value="{{ '/assets/images/carbon-fiber.jpg' | relative_url }}">Carbon Fiber</option>
+                <option value="{{ '/assets/images/checkerboard.jpg' | relative_url }}">Checkerboard</option>
+                <option value="{{ '/assets/images/camouflage.jpg' | relative_url }}">Camouflage</option>
             </select>
+
         </div>
     </div>
 
