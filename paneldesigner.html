@@ -8,131 +8,138 @@ permalink: /paneldesigner/
 <base href="/">
 
 <div class="paneldesigner-container">
-    <h1>Panel Designer</h1>
+  <h1>Panel Designer</h1>
 
-    <!-- Material Type -->
-    <div class="material-type-container">
-        <label for="material-type-selector" class="material-type-label">Material Type:</label>
-        <select id="material-type-selector" class="material-type-selector" onchange="updateMaterialType()">
-            <option value="single-use" selected>Single Use</option>
-            <option value="reusable">Reusable (add $9.99)</option>
-            <option value="magnetic">Magnetic (add $49.99)</option>
-        </select>
+  <div class="content-wrapper">
+    <div class="panel-wrapper">
+      <!-- Panel Background -->
+      <div id="panel-background" class="panel-background">
+        <svg
+          id="panel-svg"
+          viewBox="0 0 18 12"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            id="panel-number"
+            x="9"
+            y="6"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-size="10"
+            font-family="Arial, sans-serif"
+            fill="#ffffff"
+            stroke="#000000"
+            stroke-width="1.5"
+            vector-effect="non-scaling-stroke"
+          >
+            312
+          </text>
+          <text
+            id="one-inch-display"
+            x="9"
+            y="11"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-size="1"
+            font-family="Arial, sans-serif"
+            fill="#ffffff"
+            stroke="#000000"
+            stroke-width="2"
+            vector-effect="non-scaling-stroke"
+          ></text>
+        </svg>
+      </div>
     </div>
 
-    <!-- Number Input -->
-    <input
+    <div class="settings-wrapper">
+      <!-- All controls go here, moved inside settings-wrapper -->
+
+      <!-- Material Type -->
+      <div class="material-type-container">
+        <label for="material-type-selector" class="material-type-label">Material Type:</label>
+        <select id="material-type-selector" class="material-type-selector" onchange="updateMaterialType()">
+          <option value="single-use" selected>Single Use</option>
+          <option value="reusable">Reusable (add $9.99)</option>
+          <option value="magnetic">Magnetic (add $49.99)</option>
+        </select>
+      </div>
+
+      <!-- Number Input -->
+      <input
         id="number-box"
         type="text"
         placeholder="Your Car Number Here"
         class="number-box"
         oninput="updatePanelText()"
         onfocus="this.select()"
-    />
+      />
 
-    <!-- Font Selector -->
-    <select id="font-selector" class="font-selector" onchange="updateFont()">
+      <!-- Font Selector -->
+      <select id="font-selector" class="font-selector" onchange="updateFont()">
         <option value="arial-bold" selected>Arial Bold</option>
         <option value="arial-bold-italic">Arial Bold Italic</option>
-    </select>
+      </select>
 
-    <!-- Color Pickers -->
-    <div class="color-pickers-container">
+      <!-- Color Pickers -->
+      <div class="color-pickers-container">
         <!-- Number Color Picker -->
         <div class="color-picker-container">
-            <label for="number-color-dropdown" class="color-picker-label">Number Color:</label>
-            <input
-                type="color"
-                id="number-color-picker"
-                value="#ffffff"
-                class="color-picker"
-                onchange="pickNumberColor()"
-                aria-label="Pick number color"
-                style="display:inline-block;"
-            />
-            <select id="number-color-dropdown" class="font-selector" style="display:none;" onchange="pickNumberDropdownColor()">
-                <option value="#ffffff">White</option>
-                <option value="#000000">Black</option>
-                <option value="#FFD700">Yellow</option>
-                <option value="#FF0000">Red</option>
-                <option value="#00BFFF">Blue</option>
-            </select>
+          <label for="number-color-dropdown" class="color-picker-label">Number Color:</label>
+          <input
+            type="color"
+            id="number-color-picker"
+            value="#ffffff"
+            class="color-picker"
+            onchange="pickNumberColor()"
+            aria-label="Pick number color"
+            style="display:inline-block;"
+          />
+          <select id="number-color-dropdown" class="font-selector" style="display:none;" onchange="pickNumberDropdownColor()">
+            <option value="#ffffff">White</option>
+            <option value="#000000">Black</option>
+            <option value="#FFD700">Yellow</option>
+            <option value="#FF0000">Red</option>
+            <option value="#00BFFF">Blue</option>
+          </select>
         </div>
 
         <!-- Background Color Picker -->
         <div class="color-picker-container">
-            <label for="background-color-picker" class="color-picker-label">Background Color:</label>
-            <input
-                type="color"
-                id="background-color-picker"
-                value="#70a8c9"
-                class="color-picker"
-                onchange="pickBackgroundColor()"
-                aria-label="Pick background color"
-            />
-            <button type="button" id="transparent-bg-btn" onclick="setTransparentBackground()">No Background</button>
+          <label for="background-color-picker" class="color-picker-label">Background Color:</label>
+          <input
+            type="color"
+            id="background-color-picker"
+            value="#70a8c9"
+            class="color-picker"
+            onchange="pickBackgroundColor()"
+            aria-label="Pick background color"
+          />
+          <button type="button" id="transparent-bg-btn" onclick="setTransparentBackground()">No Background</button>
         </div>
-    </div>
+      </div>
 
-    <!-- Special Backgrounds -->
-    <div class="color-pickers-container">
+      <!-- Special Backgrounds -->
+      <div class="color-pickers-container">
         <div class="color-picker-container">
-            <label for="special-backgrounds-selector" class="color-picker-label">Special Backgrounds:</label>
-            <select id="special-backgrounds-selector" class="font-selector" onchange="updateSpecialBackground()">
-                <option value="">None</option>
-                <option value="{{ '/assets/images/carbon-fiber.jpg' | relative_url }}">Carbon Fiber</option>
-                <option value="{{ '/assets/images/checkerboard.jpg' | relative_url }}">Checkerboard</option>
-                <option value="{{ '/assets/images/camouflage.jpg' | relative_url }}">Camouflage</option>
-            </select>
-
+          <label for="special-backgrounds-selector" class="color-picker-label">Special Backgrounds:</label>
+          <select id="special-backgrounds-selector" class="font-selector" onchange="updateSpecialBackground()">
+            <option value="">None</option>
+            <option value="{{ '/assets/images/carbon-fiber.jpg' | relative_url }}">Carbon Fiber</option>
+            <option value="{{ '/assets/images/checkerboard.jpg' | relative_url }}">Checkerboard</option>
+            <option value="{{ '/assets/images/camouflage.jpg' | relative_url }}">Camouflage</option>
+          </select>
         </div>
-    </div>
+      </div>
 
-    <!-- 1" Text -->
-    <input
+      <!-- 1" Text -->
+      <input
         id="one-inch-text"
         type="text"
         class="one-inch-text-box"
         placeholder='Optional 1" text (leave blank for none)'
         oninput="updateOneInchText()"
         style="margin-bottom: 16px; width: 240px;"
-    />
-
-    <!-- Panel Background -->
-    <div id="panel-background" class="panel-background">
-        <svg
-            id="panel-svg"
-            viewBox="0 0 18 12"
-            preserveAspectRatio="xMidYMid meet"
-        >
-            <text
-                id="panel-number"
-                x="9"
-                y="6"
-                dominant-baseline="middle"
-                text-anchor="middle"
-                font-size="10"
-                font-family="Arial, sans-serif"
-                fill="#ffffff"
-                stroke="#000000"
-                stroke-width="0.5"
-                vector-effect="non-scaling-stroke"
-            >
-            312
-            </text>
-            <text
-                id="one-inch-display"
-                x="9"
-                y="11"
-                dominant-baseline="middle"
-                text-anchor="middle"
-                font-size="1"
-                font-family="Arial, sans-serif"
-                fill="#ffffff"
-                stroke="#000000"
-                stroke-width="0.2"
-                vector-effect="non-scaling-stroke"
-            ></text>
-        </svg>
+      />
     </div>
+  </div>
 </div>

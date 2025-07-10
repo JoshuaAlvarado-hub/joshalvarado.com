@@ -4,6 +4,15 @@ window.onload = function() {
   pickBackgroundColor();
 };
 
+function getOutlineStyles() {
+  const rootStyles = getComputedStyle(document.documentElement);
+  return {
+    color: rootStyles.getPropertyValue('--outline-color').trim(),
+    widthNumber: rootStyles.getPropertyValue('--outline-width-number').trim(),
+    widthText: rootStyles.getPropertyValue('--outline-width-text').trim()
+  };
+}
+
 function pickBackgroundColor() {
     const color = document.getElementById('background-color-picker').value;
     const panel = document.getElementById('panel-background');
@@ -159,44 +168,49 @@ function updateOneInchText() {
 }
 
 function updateSpecialBackground() {
-    const selector = document.getElementById('special-backgrounds-selector');
-    const value = selector.value;
-    const panel = document.getElementById('panel-background');
-    const btn = document.getElementById('transparent-bg-btn');
-    const numberElement = document.getElementById('panel-number');
-    const oneInchText = document.getElementById('one-inch-display');
+  const selector = document.getElementById('special-backgrounds-selector');
+  const value = selector.value;
+  const panel = document.getElementById('panel-background');
+  const btn = document.getElementById('transparent-bg-btn');
+  const numberElement = document.getElementById('panel-number');
+  const oneInchText = document.getElementById('one-inch-display');
 
-    panel.classList.remove('transparent-texture');
+  const { color: outlineColor, widthNumber, widthText } = getOutlineStyles();
 
-    if (value === "") {
-        const color = document.getElementById('background-color-picker').value;
-        panel.style.background = color;
-        panel.style.backgroundImage = "";
-        panel.style.backgroundSize = "";
-        panel.style.backgroundPosition = "";
-        panel.style.backgroundRepeat = "";
-    } else {
-        panel.style.background = "none";
-        panel.style.backgroundImage = `url('${value}')`;
-        panel.style.backgroundSize = "cover";
-        panel.style.backgroundPosition = "center";
-        panel.style.backgroundRepeat = "no-repeat";
-    }
+  panel.classList.remove('transparent-texture');
 
-    btn.textContent = "No Background";
-    btn.onclick = setTransparentBackground;
+  if (value === "") {
+    const color = document.getElementById('background-color-picker').value;
+    panel.style.background = color;
+    panel.style.backgroundImage = "";
+    panel.style.backgroundSize = "";
+    panel.style.backgroundPosition = "";
+    panel.style.backgroundRepeat = "";
+  } else {
+    panel.style.background = "none";
+    panel.style.backgroundImage = `url('${value}')`;
+    panel.style.backgroundSize = "cover";
+    panel.style.backgroundPosition = "center";
+    panel.style.backgroundRepeat = "no-repeat";
+  }
 
-    document.getElementById('number-color-picker').style.display = "inline-block";
-    document.getElementById('number-color-dropdown').style.display = "none";
+  btn.textContent = "No Background";
+  btn.onclick = setTransparentBackground;
 
-    if (value !== "") {
-        // Special background selected — always show outline
-        numberElement.setAttribute("stroke", "#000");
-        numberElement.setAttribute("stroke-width", "0.5");
-        oneInchText.setAttribute("stroke", "#000");
-        oneInchText.setAttribute("stroke-width", "0.2");
-        return;
-    }
+  document.getElementById('number-color-picker').style.display = "inline-block";
+  document.getElementById('number-color-dropdown').style.display = "none";
+
+  if (value !== "") {
+    // Special background selected — always show outline
+    numberElement.setAttribute("stroke", outlineColor);
+    numberElement.setAttribute("stroke-width", widthNumber);
+    oneInchText.setAttribute("stroke", outlineColor);
+    oneInchText.setAttribute("stroke-width", widthText);
+    return;
+  }
+
+  // Update contrast for regular backgrounds
+  updateContrastOutline();
 }
 
 function hexToRgb(hex) {
@@ -235,17 +249,14 @@ function updateContrastOutline() {
   const oneInchText = document.getElementById('one-inch-display');
   const specialBg = document.getElementById('special-backgrounds-selector').value;
 
-  const rootStyles = getComputedStyle(document.documentElement);
-  const outlineColor = rootStyles.getPropertyValue('--outline-color').trim();
-  const outlineWidthNumber = rootStyles.getPropertyValue('--outline-width-number').trim();
-  const outlineWidthText = rootStyles.getPropertyValue('--outline-width-text').trim();
+  const { color: outlineColor, widthNumber, widthText } = getOutlineStyles();
 
   if (specialBg) {
     // Always show outline for special backgrounds
-    numberText.setAttribute("stroke", "#000");
-    numberText.setAttribute("stroke-width", outlineWidthNumber);
-    oneInchText.setAttribute("stroke", "#000");
-    oneInchText.setAttribute("stroke-width", outlineWidthText);
+    numberText.setAttribute("stroke", outlineColor);
+    numberText.setAttribute("stroke-width", widthNumber);
+    oneInchText.setAttribute("stroke", outlineColor);
+    oneInchText.setAttribute("stroke-width", widthText);
     return;
   }
 
@@ -257,11 +268,11 @@ function updateContrastOutline() {
   const ratio = contrast(numberRgb, bgRgb);
 
   if (ratio < 4.5) {
-    // Low contrast: show stroke
-    numberText.setAttribute("stroke", "#000");
-    numberText.setAttribute("stroke-width", outlineWidthNumber);
-    oneInchText.setAttribute("stroke", "#000");
-    oneInchText.setAttribute("stroke-width", outlineWidthText);
+    // Low contrast: show outline
+    numberText.setAttribute("stroke", outlineColor);
+    numberText.setAttribute("stroke-width", widthNumber);
+    oneInchText.setAttribute("stroke", outlineColor);
+    oneInchText.setAttribute("stroke-width", widthText);
   } else {
     // High contrast: remove stroke
     numberText.setAttribute("stroke", "none");

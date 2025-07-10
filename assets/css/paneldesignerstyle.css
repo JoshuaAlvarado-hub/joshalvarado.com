@@ -24,8 +24,8 @@
   --gap-medium: 20px;
 
   --outline-color: #000;
-  --outline-width-number: 3px;
-  --outline-width-text: 2px;
+  --outline-width-number: 4px;
+  --outline-width-text: 1px;
 }
 
 .paneldesigner-container {
@@ -91,13 +91,13 @@
 }
 
 .panel-background {
-    width: 60vw;
-    max-width: 900px;
-    margin: 32px auto;
-    border: #333 1px solid;
-    border-radius: 16px;
-    transition: background 0.3s, background-image 0.3s;
-    display: block;
+  width: 100%;
+  margin: 0 auto;
+  border: #333 1px solid;
+  border-radius: 16px;
+  background-color: #70a8c9;
+  transition: background 0.3s, background-image 0.3s;
+  display: block;
 }
 
 .color-pickers-container {
@@ -143,4 +143,41 @@
   width: 100%;
   max-width: 1200px;
   height: auto;
+}
+
+.paneldesigner-container {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 16px;
+}
+
+.paneldesigner-container > h1 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Wrap panel and settings horizontally on desktop */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Desktop layout: side-by-side */
+@media (min-width: 900px) {
+  .content-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 60px;
+  }
+
+  .panel-wrapper {
+    flex: 0 0 55%;
+    max-width: 800px;
+  }
+
+  .settings-wrapper {
+    flex: 0 0 35%;
+  }
 }
