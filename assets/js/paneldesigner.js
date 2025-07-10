@@ -1,3 +1,8 @@
+window.onload = function() {
+  updateFont();
+  updateContrastOutline();
+};
+
 function pickBackgroundColor() {
     const color = document.getElementById('background-color-picker').value;
     const panel = document.getElementById('panel-background');
@@ -23,6 +28,8 @@ function pickBackgroundColor() {
     // Restore number color picker mode
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
+
+    updateContrastOutline();
 }
 
 function setTransparentBackground() {
@@ -83,12 +90,19 @@ function addBackground() {
 
     btn.textContent = "No Background";
     btn.onclick = setTransparentBackground;
+
+    updateContrastOutline();
 }
 
 function pickNumberColor() {
     const color = document.getElementById('number-color-picker').value;
-    document.getElementById('panel-number').style.color = color;
-    document.getElementById('one-inch-display').style.color = color;
+    const numberText = document.getElementById('panel-number');
+    const oneInchText = document.getElementById('one-inch-display');
+
+    numberText.setAttribute("fill", color);
+    oneInchText.setAttribute("fill", color);
+
+    updateContrastOutline();
 }
 
 function pickNumberDropdownColor() {
@@ -104,32 +118,27 @@ function updateSquareText() {
 }
 
 function updateFont() {
-    const fontSelect = document.getElementById('font-selector').value;
-    const panelText = document.getElementById('panel-number');
-    const oneInchText = document.getElementById('one-inch-display');
-    if (fontSelect === "arial-bold") {
-        panelText.style.fontFamily = "Arial, sans-serif";
-        panelText.style.fontWeight = "bold";
-        panelText.style.fontStyle = "normal";
-        oneInchText.style.fontFamily = "Arial, sans-serif";
-        oneInchText.style.fontWeight = "bold";
-        oneInchText.style.fontStyle = "normal";
-    } else if (fontSelect === "arial-bold-italic") {
-        panelText.style.fontFamily = "Arial, sans-serif";
-        panelText.style.fontWeight = "bold";
-        panelText.style.fontStyle = "italic";
-        oneInchText.style.fontFamily = "Arial, sans-serif";
-        oneInchText.style.fontWeight = "bold";
-        oneInchText.style.fontStyle = "italic";
-    } else if (fontSelect === "amboy") {
-        panelText.style.fontFamily = "'Amboy', Arial, sans-serif";
-        panelText.style.fontWeight = "normal";
-        panelText.style.fontStyle = "normal";
-        oneInchText.style.fontFamily = "'Amboy', Arial, sans-serif";
-        oneInchText.style.fontWeight = "normal";
-        oneInchText.style.fontStyle = "normal";
-    }
+  const fontValue = document.getElementById('font-selector').value;
+  const numberText = document.getElementById('panel-number');
+  const oneInchText = document.getElementById('one-inch-display');
+
+  if (fontValue === "arial-bold") {
+    numberText.setAttribute("font-family", "Arial, sans-serif");
+    numberText.setAttribute("font-weight", "bold");
+    numberText.setAttribute("font-style", "normal");
+    oneInchText.setAttribute("font-family", "Arial, sans-serif");
+    oneInchText.setAttribute("font-weight", "bold");
+    oneInchText.setAttribute("font-style", "normal");
+  } else if (fontValue === "arial-bold-italic") {
+    numberText.setAttribute("font-family", "Arial, sans-serif");
+    numberText.setAttribute("font-weight", "bold");
+    numberText.setAttribute("font-style", "italic");
+    oneInchText.setAttribute("font-family", "Arial, sans-serif");
+    oneInchText.setAttribute("font-weight", "bold");
+    oneInchText.setAttribute("font-style", "italic");
+  }
 }
+
 
 function updateMaterialType() {
     const materialType = document.getElementById('material-type-selector').value;
@@ -175,4 +184,66 @@ function updateSpecialBackground() {
 
     document.getElementById('number-color-picker').style.display = "inline-block";
     document.getElementById('number-color-dropdown').style.display = "none";
+
+    if (value !== "") {
+    // Special background selected — always show outline
+    numberElement.style.textShadow = "2px 2px 2px #000, -2px -2px 2px #000";
+    oneInchText.style.textShadow = "2px 2px 2px #000, -2px -2px 2px #000";
+    return;
+}
+}
+
+// Convert hex to RGB
+function hexToRgb(hex) {
+    hex = hex.replace("#", "");
+    if (hex.length === 3) {
+        hex = hex.split("").map(c => c + c).join("");
+    }
+    const bigint = parseInt(hex, 16);
+    return [
+        (bigint >> 16) & 255,
+        (bigint >> 8) & 255,
+        bigint & 255
+    ];
+}
+
+// Calculate relative luminance
+function luminance(r, g, b) {
+    const a = [r, g, b].map(v => {
+        v = v / 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+}
+
+// Compute contrast ratio
+function contrast(rgb1, rgb2) {
+    const lum1 = luminance(...rgb1);
+    const lum2 = luminance(...rgb2);
+    const brightest = Math.max(lum1, lum2);
+    const darkest = Math.min(lum1, lum2);
+    return (brightest + 0.05) / (darkest + 0.05);
+}
+
+function updateContrastOutline() {
+    const numberColorHex = document.getElementById('number-color-picker').value;
+    const bgColorHex = document.getElementById('background-color-picker').value;
+    const numberText = document.getElementById('panel-number');
+    const oneInchText = document.getElementById('one-inch-display');
+
+    const numberRgb = hexToRgb(numberColorHex);
+    const bgRgb = hexToRgb(bgColorHex);
+    const ratio = contrast(numberRgb, bgRgb);
+
+    if (ratio < 4.5) {
+        numberText.setAttribute("stroke", "#000000");
+        numberText.setAttribute("stroke-width", "2");
+        oneInchText.setAttribute("stroke", "#000000");
+        oneInchText.setAttribute("stroke-width", "1");
+    } else {
+        numberText.setAttribute("stroke", "none");
+        numberText.setAttribute("stroke-width", "0");
+        oneInchText.setAttribute("stroke", "none");
+        oneInchText.setAttribute("stroke-width", "0");
+    }
 }
