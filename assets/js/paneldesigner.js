@@ -1,6 +1,7 @@
 window.onload = function() {
   updateFont();
   updateContrastOutline();
+  pickBackgroundColor();
 };
 
 function pickBackgroundColor() {
@@ -107,14 +108,14 @@ function pickNumberColor() {
 
 function pickNumberDropdownColor() {
     const color = document.getElementById('number-color-dropdown').value;
-    document.getElementById('panel-number').style.color = color;
-    document.getElementById('one-inch-display').style.color = color;
+    document.getElementById('panel-number').setAttribute('fill', color);
+    document.getElementById('one-inch-display').setAttribute('fill', color);
 }
 
-function updateSquareText() {
-    const input = document.getElementById('number-box').value;
+function updatePanelText() {
+    const input = document.getElementById('number-box').value.trim();
     const panelText = document.getElementById('panel-number');
-    panelText.textContent = input;
+    panelText.textContent = input === '' ? '312' : input;
 }
 
 function updateFont() {
@@ -137,6 +138,7 @@ function updateFont() {
     oneInchText.setAttribute("font-weight", "bold");
     oneInchText.setAttribute("font-style", "italic");
   }
+  updateContrastOutline();
 }
 
 
@@ -161,6 +163,8 @@ function updateSpecialBackground() {
     const value = selector.value;
     const panel = document.getElementById('panel-background');
     const btn = document.getElementById('transparent-bg-btn');
+    const numberElement = document.getElementById('panel-number');
+    const oneInchText = document.getElementById('one-inch-display');
 
     panel.classList.remove('transparent-texture');
 
@@ -186,14 +190,15 @@ function updateSpecialBackground() {
     document.getElementById('number-color-dropdown').style.display = "none";
 
     if (value !== "") {
-    // Special background selected — always show outline
-    numberElement.style.textShadow = "2px 2px 2px #000, -2px -2px 2px #000";
-    oneInchText.style.textShadow = "2px 2px 2px #000, -2px -2px 2px #000";
-    return;
-}
+        // Special background selected — always show outline
+        numberElement.setAttribute("stroke", "#000");
+        numberElement.setAttribute("stroke-width", "0.5");
+        oneInchText.setAttribute("stroke", "#000");
+        oneInchText.setAttribute("stroke-width", "0.2");
+        return;
+    }
 }
 
-// Convert hex to RGB
 function hexToRgb(hex) {
     hex = hex.replace("#", "");
     if (hex.length === 3) {
@@ -226,24 +231,42 @@ function contrast(rgb1, rgb2) {
 }
 
 function updateContrastOutline() {
-    const numberColorHex = document.getElementById('number-color-picker').value;
-    const bgColorHex = document.getElementById('background-color-picker').value;
-    const numberText = document.getElementById('panel-number');
-    const oneInchText = document.getElementById('one-inch-display');
+  const numberText = document.getElementById('panel-number');
+  const oneInchText = document.getElementById('one-inch-display');
+  const specialBg = document.getElementById('special-backgrounds-selector').value;
 
-    const numberRgb = hexToRgb(numberColorHex);
-    const bgRgb = hexToRgb(bgColorHex);
-    const ratio = contrast(numberRgb, bgRgb);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const outlineColor = rootStyles.getPropertyValue('--outline-color').trim();
+  const outlineWidthNumber = rootStyles.getPropertyValue('--outline-width-number').trim();
+  const outlineWidthText = rootStyles.getPropertyValue('--outline-width-text').trim();
 
-    if (ratio < 4.5) {
-        numberText.setAttribute("stroke", "#000000");
-        numberText.setAttribute("stroke-width", "2");
-        oneInchText.setAttribute("stroke", "#000000");
-        oneInchText.setAttribute("stroke-width", "1");
-    } else {
-        numberText.setAttribute("stroke", "none");
-        numberText.setAttribute("stroke-width", "0");
-        oneInchText.setAttribute("stroke", "none");
-        oneInchText.setAttribute("stroke-width", "0");
-    }
+  if (specialBg) {
+    // Always show outline for special backgrounds
+    numberText.setAttribute("stroke", "#000");
+    numberText.setAttribute("stroke-width", outlineWidthNumber);
+    oneInchText.setAttribute("stroke", "#000");
+    oneInchText.setAttribute("stroke-width", outlineWidthText);
+    return;
+  }
+
+  const numberColorHex = document.getElementById('number-color-picker').value;
+  const bgColorHex = document.getElementById('background-color-picker').value;
+
+  const numberRgb = hexToRgb(numberColorHex);
+  const bgRgb = hexToRgb(bgColorHex);
+  const ratio = contrast(numberRgb, bgRgb);
+
+  if (ratio < 4.5) {
+    // Low contrast: show stroke
+    numberText.setAttribute("stroke", "#000");
+    numberText.setAttribute("stroke-width", outlineWidthNumber);
+    oneInchText.setAttribute("stroke", "#000");
+    oneInchText.setAttribute("stroke-width", outlineWidthText);
+  } else {
+    // High contrast: remove stroke
+    numberText.setAttribute("stroke", "none");
+    numberText.removeAttribute("stroke-width");
+    oneInchText.setAttribute("stroke", "none");
+    oneInchText.removeAttribute("stroke-width");
+  }
 }

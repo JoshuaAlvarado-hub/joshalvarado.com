@@ -22,6 +22,10 @@
   /* Layout */
   --border-radius: 8px;
   --gap-medium: 20px;
+
+  --outline-color: #000;
+  --outline-width-number: 3px;
+  --outline-width-text: 2px;
 }
 
 .paneldesigner-container {
@@ -74,7 +78,7 @@
     color: #333;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-    font-family: var(arial);
+    font-family: var(--font-secondary);
     font-size: 1rem;
     text-align: center;
     border: 1px solid #ddd;
@@ -87,37 +91,13 @@
 }
 
 .panel-background {
-    width: 360px;
-    height: 240px;
-    background: #70a8c9;
+    width: 60vw;
+    max-width: 900px;
     margin: 32px auto;
     border: #333 1px solid;
     border-radius: 16px;
     transition: background 0.3s, background-image 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.panel-number {
-    color: #fff;
-    font-weight: bold;
-    font-style: normal;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    width: 320px;
-    font-size: 140px;
-    line-height: 1;
-    text-align: center;
-    user-select: none;
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
-    transition: color 0.3s ease;
-    font-family: Arial, sans-serif;
+    display: block;
 }
 
 .color-pickers-container {
@@ -148,22 +128,6 @@
     cursor: pointer;
 }
 
-.one-inch-display {
-    display: block;
-    width: 100%;
-    font-size: 1.2rem;
-    color: #fff;
-    text-align: center;
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
-    font-family: Arial, sans-serif;
-}
-
 .transparent-texture {
     background-color: transparent !important;
     background-image:
@@ -175,11 +139,8 @@
     background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
 }
 
-.transparent-texture .panel-number {
-    text-shadow: 2px 2px 8px #222, 0 0 4px #fff;
-}
-
-.transparent-texture .panel-number,
-.transparent-texture .one-inch-display {
-    text-shadow: 2px 2px 8px #222, 0 0 4px #fff;
+#panel-svg {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
 }
