@@ -80,10 +80,10 @@ function addBackground() {
     panel.classList.remove('transparent-texture');
 
     if (specialBgValue) {
-        // A special background is selected — apply it again
+        // A special background is selected, apply it again
         updateSpecialBackground();
     } else {
-        // No special background — restore solid color
+        // No special background, restore solid color
         const color = document.getElementById('background-color-picker').value;
         panel.style.background = color;
         panel.style.backgroundImage = "";
@@ -150,16 +150,36 @@ function updateFont() {
   updateContrastOutline();
 }
 
-
 function updateMaterialType() {
-    const materialType = document.getElementById('material-type-selector').value;
-    const panelBg = document.getElementById('panel-background');
-    if (materialType === "reusable") {
-        panelBg.style.borderRadius = "0";
-    } else {
-        panelBg.style.borderRadius = "16px";
+  const materialType = document.getElementById('material-type-selector').value;
+  const panelBg = document.getElementById('panel-background');
+  const noBgBtn = document.getElementById('transparent-bg-btn');
+
+  // Reusable and Magnetic require a background
+  const disallowsNoBg = materialType === "reusable" || materialType === "magnetic";
+
+  // Rounded corners
+  if (materialType === "reusable") {
+    panelBg.style.borderRadius = "0";
+  } else {
+    panelBg.style.borderRadius = "16px";
+  }
+
+  // Disable or enable No Background button
+  if (disallowsNoBg) {
+    noBgBtn.disabled = true;
+    noBgBtn.title = "No Background is not available for this material.";
+
+    // If transparent, restore solid color
+    if (panelBg.classList.contains('transparent-texture')) {
+      pickBackgroundColor();
     }
-    console.log(`Material Type selected: ${materialType}`);
+  } else {
+    noBgBtn.disabled = false;
+    noBgBtn.title = "";
+  }
+
+  console.log(`Material Type selected: ${materialType}`);
 }
 
 function updateOneInchText() {
@@ -201,7 +221,7 @@ function updateSpecialBackground() {
   document.getElementById('number-color-dropdown').style.display = "none";
 
   if (value !== "") {
-    // Special background selected — always show outline
+    // Special background selected, outline
     numberElement.setAttribute("stroke", outlineColor);
     numberElement.setAttribute("stroke-width", widthNumber);
     oneInchText.setAttribute("stroke", outlineColor);
@@ -226,7 +246,7 @@ function hexToRgb(hex) {
     ];
 }
 
-// Calculate relative luminance
+// Determine likeness of two RGB colors
 function luminance(r, g, b) {
     const a = [r, g, b].map(v => {
         v = v / 255;
