@@ -57,7 +57,7 @@ permalink: /paneldesigner/
       <!-- Material Type -->
       <div class="material-type-container">
         <label for="material-type-selector" class="material-type-label">Material Type:</label>
-        <select id="material-type-selector" class="material-type-selector" onchange="updateMaterialType()">
+        <select id="material-type-selector" class="material-type-selector">
           <option value="single-use" selected>Single Use</option>
           <option value="reusable">Reusable (add $9.99)</option>
           <option value="magnetic">Magnetic (add $49.99)</option>
@@ -71,12 +71,10 @@ permalink: /paneldesigner/
         placeholder="Your Car Number Here"
         class="number-box"
         maxlength="4"
-        oninput="updatePanelText()"
-        onfocus="this.select()"
       />
 
       <!-- Font Selector -->
-      <select id="font-selector" class="font-selector" onchange="updateFont()">
+      <select id="font-selector" class="font-selector">
         <option value="arial-bold" selected>Arial Bold</option>
         <option value="arial-bold-italic">Arial Bold Italic</option>
       </select>
@@ -91,11 +89,10 @@ permalink: /paneldesigner/
             id="number-color-picker"
             value="#ffffff"
             class="color-picker"
-            onchange="pickNumberColor()"
             aria-label="Pick number color"
             style="display:inline-block;"
           />
-          <select id="number-color-dropdown" class="font-selector" style="display:none;" onchange="pickNumberDropdownColor()">
+          <select id="number-color-dropdown" class="font-selector" style="display:none;">
             <option value="#ffffff">White</option>
             <option value="#000000">Black</option>
             <option value="#FFD700">Yellow</option>
@@ -112,10 +109,9 @@ permalink: /paneldesigner/
             id="background-color-picker"
             value="#A00B0B"
             class="color-picker"
-            onchange="pickBackgroundColor()"
             aria-label="Pick background color"
           />
-          <button type="button" id="transparent-bg-btn" onclick="setTransparentBackground()">No Background</button>
+          <button type="button" id="transparent-bg-btn">No Background</button>
         </div>
       </div>
 
@@ -123,7 +119,7 @@ permalink: /paneldesigner/
       <div class="color-pickers-container">
         <div class="color-picker-container">
           <label for="special-backgrounds-selector" class="color-picker-label">Special Backgrounds:</label>
-          <select id="special-backgrounds-selector" class="font-selector" onchange="updateSpecialBackground()">
+          <select id="special-backgrounds-selector" class="font-selector">
             <option value="">None</option>
             <option value="{{ '/assets/images/carbon-fiber.jpg' | relative_url }}">Carbon Fiber</option>
             <option value="{{ '/assets/images/checkerboard.jpg' | relative_url }}">Checkerboard</option>
@@ -138,7 +134,6 @@ permalink: /paneldesigner/
         type="text"
         class="one-inch-text-box"
         placeholder='Optional 1" text (leave blank for none)'
-        oninput="updateOneInchText()"
         style="margin-bottom: 16px; width: 240px;"
       />
     </div>

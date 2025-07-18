@@ -1,9 +1,42 @@
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function () {
   updateFont();
   updateContrastOutline();
   pickBackgroundColor();
   updateOneInchText();
-};
+
+  // Event listeners
+  document.getElementById('material-type-selector')
+    .addEventListener('change', updateMaterialType);
+
+  document.getElementById('number-box')
+    .addEventListener('input', updatePanelText);
+  document.getElementById('number-box')
+    .addEventListener('focus', function () {
+      this.select();
+    });
+
+  document.getElementById('font-selector')
+    .addEventListener('change', updateFont);
+
+  document.getElementById('number-color-picker')
+    .addEventListener('change', pickNumberColor);
+
+  document.getElementById('number-color-dropdown')
+    .addEventListener('change', pickNumberDropdownColor);
+
+  document.getElementById('background-color-picker')
+    .addEventListener('change', pickBackgroundColor);
+
+  document.getElementById('transparent-bg-btn')
+    .addEventListener('click', setTransparentBackground);
+
+  document.getElementById('special-backgrounds-selector')
+    .addEventListener('change', updateSpecialBackground);
+
+  document.getElementById('one-inch-text')
+    .addEventListener('input', updateOneInchText);
+});
+
 
 function getOutlineStyles() {
   const rootStyles = getComputedStyle(document.documentElement);
