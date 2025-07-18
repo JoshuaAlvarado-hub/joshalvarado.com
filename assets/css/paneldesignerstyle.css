@@ -156,11 +156,15 @@
   margin-bottom: 32px;
 }
 
-/* Wrap panel and settings horizontally on desktop */
+/* Wrap panel and settings horizontally */
 .content-wrapper {
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+
+.drop-shadow {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
 }
 
 /* Desktop layout: side-by-side */
