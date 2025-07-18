@@ -164,7 +164,7 @@
 }
 
 .drop-shadow {
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.75));
 }
 
 /* Desktop layout: side-by-side */
