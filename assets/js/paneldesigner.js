@@ -24,10 +24,7 @@ function pickBackgroundColor() {
 
     // Set solid color and clear any background image
     panel.style.background = color;
-    panel.style.backgroundImage = "";
-    panel.style.backgroundSize = "";
-    panel.style.backgroundPosition = "";
-    panel.style.backgroundRepeat = "";
+    clearPanelBackgroundImage(panel);
 
     // Reset the special backgrounds dropdown to "None"
     document.getElementById('special-backgrounds-selector').value = "";
@@ -49,10 +46,7 @@ function setTransparentBackground() {
 
     // Remove any color or image
     panel.style.background = "";
-    panel.style.backgroundImage = "";
-    panel.style.backgroundSize = "";
-    panel.style.backgroundPosition = "";
-    panel.style.backgroundRepeat = "";
+    clearPanelBackgroundImage(panel);
 
     // Apply the transparent checker pattern
     panel.classList.add('transparent-texture');
@@ -83,10 +77,7 @@ function addBackground() {
         // No special background, restore solid color
         const color = document.getElementById('background-color-picker').value;
         panel.style.background = color;
-        panel.style.backgroundImage = "";
-        panel.style.backgroundSize = "";
-        panel.style.backgroundPosition = "";
-        panel.style.backgroundRepeat = "";
+        clearPanelBackgroundImage(panel);
     }
 
     // Reset the special backgrounds dropdown to "None"
@@ -177,8 +168,6 @@ function updateMaterialType() {
     noBgBtn.disabled = false;
     noBgBtn.title = "";
   }
-
-  console.log(`Material Type selected: ${materialType}`);
 }
 
 function updateOneInchText() {
@@ -212,10 +201,7 @@ function updateSpecialBackground() {
   if (value === "") {
     const color = document.getElementById('background-color-picker').value;
     panel.style.background = color;
-    panel.style.backgroundImage = "";
-    panel.style.backgroundSize = "";
-    panel.style.backgroundPosition = "";
-    panel.style.backgroundRepeat = "";
+    clearPanelBackgroundImage(panel);
   } else {
     panel.style.background = "none";
     panel.style.backgroundImage = `url('${value}')`;
@@ -310,4 +296,11 @@ function updateContrastOutline() {
     oneInchText.setAttribute("stroke", "none");
     oneInchText.removeAttribute("stroke-width");
   }
+}
+
+function clearPanelBackgroundImage(panel) {
+  panel.style.backgroundImage = "";
+  panel.style.backgroundSize = "";
+  panel.style.backgroundPosition = "";
+  panel.style.backgroundRepeat = "";
 }
