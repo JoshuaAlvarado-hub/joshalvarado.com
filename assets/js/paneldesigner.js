@@ -2,6 +2,7 @@ window.onload = function() {
   updateFont();
   updateContrastOutline();
   pickBackgroundColor();
+  updateOneInchText();
 };
 
 function getOutlineStyles() {
@@ -59,9 +60,6 @@ function setTransparentBackground() {
     // Reset special backgrounds dropdown to "None"
     document.getElementById('special-backgrounds-selector').value = "";
 
-    // Optionally reset color picker to default color
-    document.getElementById('background-color-picker').value = "#70a8c9";
-
     // Show dropdown for number color, hide color picker
     document.getElementById('number-color-picker').style.display = "none";
     document.getElementById('number-color-dropdown').style.display = "inline-block";
@@ -70,7 +68,6 @@ function setTransparentBackground() {
     btn.textContent = "Add Background";
     btn.onclick = addBackground;
 }
-
 
 function addBackground() {
     const panel = document.getElementById('panel-background');
@@ -136,6 +133,7 @@ function updateFont() {
     numberText.setAttribute("font-family", "Arial, sans-serif");
     numberText.setAttribute("font-weight", "bold");
     numberText.setAttribute("font-style", "normal");
+
     oneInchText.setAttribute("font-family", "Arial, sans-serif");
     oneInchText.setAttribute("font-weight", "bold");
     oneInchText.setAttribute("font-style", "normal");
@@ -143,6 +141,7 @@ function updateFont() {
     numberText.setAttribute("font-family", "Arial, sans-serif");
     numberText.setAttribute("font-weight", "bold");
     numberText.setAttribute("font-style", "italic");
+
     oneInchText.setAttribute("font-family", "Arial, sans-serif");
     oneInchText.setAttribute("font-weight", "bold");
     oneInchText.setAttribute("font-style", "italic");
@@ -183,8 +182,19 @@ function updateMaterialType() {
 }
 
 function updateOneInchText() {
-    const text = document.getElementById('one-inch-text').value;
-    document.getElementById('one-inch-display').textContent = text;
+  const text = document.getElementById('one-inch-text').value.trim();
+  const oneInch = document.getElementById('one-inch-display');
+  const numberText = document.getElementById('panel-number');
+
+  oneInch.textContent = text;
+
+  if (text === "") {
+    // No optional text, center number vertically
+    numberText.setAttribute("y", "6.85");
+  } else {
+    // Optional text present, move number slightly up
+    numberText.setAttribute("y", "6");
+  }
 }
 
 function updateSpecialBackground() {

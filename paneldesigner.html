@@ -70,6 +70,7 @@ permalink: /paneldesigner/
         type="text"
         placeholder="Your Car Number Here"
         class="number-box"
+        maxlength="4"
         oninput="updatePanelText()"
         onfocus="this.select()"
       />
@@ -109,7 +110,7 @@ permalink: /paneldesigner/
           <input
             type="color"
             id="background-color-picker"
-            value="#70a8c9"
+            value="#A00B0B"
             class="color-picker"
             onchange="pickBackgroundColor()"
             aria-label="Pick background color"
