@@ -163,10 +163,6 @@
   gap: 40px;
 }
 
-.drop-shadow {
-  filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.75));
-}
-
 /* Desktop layout: side-by-side */
 @media (min-width: 900px) {
   .content-wrapper {

@@ -339,10 +339,10 @@ function updateDropShadow() {
   const oneInchText = document.getElementById('one-inch-display');
 
   if (panel.classList.contains('transparent-texture')) {
-    numberText.classList.add('drop-shadow');
-    oneInchText.classList.add('drop-shadow');
+    numberText.setAttribute('filter', 'url(#tight-shadow)');
+    oneInchText.setAttribute('filter', 'url(#tight-shadow)');
   } else {
-    numberText.classList.remove('drop-shadow');
-    oneInchText.classList.remove('drop-shadow');
+    numberText.removeAttribute('filter');
+    oneInchText.removeAttribute('filter');
   }
 }
