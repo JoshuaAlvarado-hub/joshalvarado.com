@@ -248,10 +248,7 @@ function updateSpecialBackground() {
 
   if (value !== "") {
     // Special background selected, add outline
-    numberElement.setAttribute("stroke", outlineColor);
-    numberElement.setAttribute("stroke-width", widthNumber);
-    oneInchText.setAttribute("stroke", outlineColor);
-    oneInchText.setAttribute("stroke-width", widthText);
+    addOutline();
     return;
   }
 
@@ -290,17 +287,10 @@ function contrast(rgb1, rgb2) {
 }
 
 function updateContrastOutline() {
-  const numberText = document.getElementById('panel-number');
-  const oneInchText = document.getElementById('one-inch-display');
   const specialBg = document.getElementById('special-backgrounds-selector').value;
 
-  const { color: outlineColor, widthNumber, widthText } = getOutlineStyles();
-
   if (specialBg) {
-    numberText.setAttribute("stroke", outlineColor);
-    numberText.setAttribute("stroke-width", widthNumber);
-    oneInchText.setAttribute("stroke", outlineColor);
-    oneInchText.setAttribute("stroke-width", widthText);
+    toggleOutline(true);
     return;
   }
 
@@ -312,13 +302,25 @@ function updateContrastOutline() {
   const ratio = contrast(numberRgb, bgRgb);
 
   if (ratio < 4.5) {
-    // Low contrast: show outline
+    // Low contrast: outline
+    toggleOutline(true);
+  } else {
+    // High contrast: no outline
+    toggleOutline(false);
+  }
+}
+
+function toggleOutline(enable) {
+  const numberText = document.getElementById('panel-number');
+  const oneInchText = document.getElementById('one-inch-display');
+  const { color: outlineColor, widthNumber, widthText } = getOutlineStyles();
+
+  if (enable) {
     numberText.setAttribute("stroke", outlineColor);
     numberText.setAttribute("stroke-width", widthNumber);
     oneInchText.setAttribute("stroke", outlineColor);
     oneInchText.setAttribute("stroke-width", widthText);
   } else {
-    // High contrast: remove stroke
     numberText.setAttribute("stroke", "none");
     numberText.removeAttribute("stroke-width");
     oneInchText.setAttribute("stroke", "none");
@@ -339,10 +341,10 @@ function updateDropShadow() {
   const oneInchText = document.getElementById('one-inch-display');
 
   if (panel.classList.contains('transparent-texture')) {
-    numberText.setAttribute('filter', 'url(#tight-shadow)');
-    oneInchText.setAttribute('filter', 'url(#tight-shadow)');
+    numberText.classList.add('drop-shadow-number');
+    oneInchText.classList.add('drop-shadow-text');
   } else {
-    numberText.removeAttribute('filter');
-    oneInchText.removeAttribute('filter');
+    numberText.classList.remove('drop-shadow-number');
+    oneInchText.classList.remove('drop-shadow-text');
   }
 }

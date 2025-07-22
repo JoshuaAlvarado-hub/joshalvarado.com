@@ -163,6 +163,15 @@
   gap: 40px;
 }
 
+.drop-shadow-number {
+  filter: url(#drop-shadow-number);
+}
+
+.drop-shadow-text {
+  filter: url(#drop-shadow-text);
+}
+
+
 /* Desktop layout: side-by-side */
 @media (min-width: 900px) {
   .content-wrapper {
