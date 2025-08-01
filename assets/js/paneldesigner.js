@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   specialBgSelector.addEventListener('change', updateSpecialBackground);
   document.getElementById('one-inch-text').addEventListener('input', updateOneInchText);
+
+  updateNumberSize();
 });
 
 function getOutlineStyles() {
@@ -129,6 +131,8 @@ function updatePanelText() {
   } else {
     numberText.textContent = input;
   }
+
+  updateNumberSize();
 }
 
 function updateFont() {
@@ -290,4 +294,31 @@ function updateDropShadow() {
     numberText.classList.remove('drop-shadow-number');
     oneInchText.classList.remove('drop-shadow-text');
   }
+}
+
+function updateNumberSize() {
+  const textElement = document.getElementById("panel-number");9
+
+  textElement.setAttribute("transform", "");
+
+  const bbox = textElement.getBBox();
+  const maxWidth = 16;
+  const targetHeight = 10;
+
+  const scaleY = targetHeight / bbox.height;
+
+  const scaledWidth = bbox.width * scaleY;
+
+  let scaleX = scaleY;
+  if (scaledWidth > maxWidth) {
+    scaleX = (maxWidth / scaledWidth) * scaleY;
+  }
+
+  const centerX = bbox.x + bbox.width / 2;
+  const centerY = bbox.y + bbox.height / 2;
+
+  textElement.setAttribute(
+    "transform",
+    `translate(${centerX}, ${centerY}) scale(${scaleX}, ${scaleY}) translate(${-centerX}, ${-centerY})`
+  );
 }
