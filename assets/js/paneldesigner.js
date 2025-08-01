@@ -124,7 +124,11 @@ function pickNumberDropdownColor() {
 
 function updatePanelText() {
   const input = document.getElementById('number-box').value.trim();
-  numberText.textContent = input === '' ? '312' : input;
+  if (input === '') {
+    numberText.textContent = '312';
+  } else {
+    numberText.textContent = input;
+  }
 }
 
 function updateFont() {
@@ -149,10 +153,13 @@ function setFont(family, weight, style) {
 
 function updateMaterialType() {
   const materialType = document.getElementById('material-type-selector').value;
-
   const disallowsNoBg = materialType === "reusable" || materialType === "magnetic";
 
-  panelBackground.style.borderRadius = materialType === "reusable" ? "0" : "16px";
+  if (materialType === "reusable") {
+    panelBackground.style.borderRadius = "0";
+  } else {
+    panelBackground.style.borderRadius = "16px";
+  }
 
   if (disallowsNoBg) {
     transparentBgBtn.disabled = true;
@@ -171,7 +178,11 @@ function updateOneInchText() {
   oneInchText.textContent = text;
 
   // Moves number up if there is optional text
-  numberText.setAttribute("y", text === "" ? "6.85" : "6");
+  if (text === "") {
+    numberText.setAttribute("y", "6.85");
+  } else {
+    numberText.setAttribute("y", "6");
+  }
 }
 
 function updateSpecialBackground() {
@@ -220,7 +231,11 @@ function hexToRgb(hex) {
 function luminance(r, g, b) {
   const a = [r, g, b].map(v => {
     v = v / 255;
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    if (v <= 0.03928) {
+      return v / 12.92;
+    } else {
+      return Math.pow((v + 0.055) / 1.055, 2.4);
+    }
   });
   return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
 }
