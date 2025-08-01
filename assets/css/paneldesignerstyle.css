@@ -94,7 +94,7 @@
   width: 100%;
   margin: 0 auto;
   border: #333 1px solid;
-  border-radius: 16px;
+  border-radius: 32px;
   background-color: #A00B0B;
   transition: background 0.3s, background-image 0.3s;
   display: block;

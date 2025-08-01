@@ -163,7 +163,7 @@ function updateMaterialType() {
   if (materialType === "reusable") {
     panelBackground.style.borderRadius = "0";
   } else {
-    panelBackground.style.borderRadius = "16px";
+    panelBackground.style.borderRadius = "32px";
   }
 
   if (disallowsNoBg) {
