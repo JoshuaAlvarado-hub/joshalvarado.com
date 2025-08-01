@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('one-inch-text').addEventListener('input', updateOneInchText);
 
   updateNumberSize();
+  updateOneInchSize();
 });
 
 function getOutlineStyles() {
@@ -187,6 +188,8 @@ function updateOneInchText() {
   } else {
     numberText.setAttribute("y", "6");
   }
+
+  updateOneInchSize();
 }
 
 function updateSpecialBackground() {
@@ -304,6 +307,33 @@ function updateNumberSize() {
   const bbox = textElement.getBBox();
   const maxWidth = 16;
   const targetHeight = 10;
+
+  const scaleY = targetHeight / bbox.height;
+
+  const scaledWidth = bbox.width * scaleY;
+
+  let scaleX = scaleY;
+  if (scaledWidth > maxWidth) {
+    scaleX = (maxWidth / scaledWidth) * scaleY;
+  }
+
+  const centerX = bbox.x + bbox.width / 2;
+  const centerY = bbox.y + bbox.height / 2;
+
+  textElement.setAttribute(
+    "transform",
+    `translate(${centerX}, ${centerY}) scale(${scaleX}, ${scaleY}) translate(${-centerX}, ${-centerY})`
+  );
+}
+
+function updateOneInchSize() {
+  const textElement = document.getElementById("one-inch-display");
+
+  textElement.setAttribute("transform", "");
+
+  const bbox = textElement.getBBox();
+  const maxWidth = 16;
+  const targetHeight = 1;
 
   const scaleY = targetHeight / bbox.height;
 
