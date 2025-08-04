@@ -1,0 +1,61 @@
+---
+layout: default
+title: Todo List
+permalink: /todo/
+---
+<div class="container">
+    <div class="page-header">
+        <h1>Todo List</h1>
+        <p>Manage your tasks efficiently with this simple todo list application.</p>
+    </div>
+
+    <div class="todo-wrapper">
+        <input type="text" id="todo-input" placeholder="Add a new task..." />
+        <button id="add-todo-btn">Add Task</button>
+    </div>
+
+    <ul id="todo-list">
+        <!-- Todo items will be dynamically added here -->
+    </ul>
+</div>
+<script>
+    // Load todos from localStorage
+    function loadTodos() {
+        const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+        const todoList = document.getElementById('todo-list');
+        todoList.innerHTML = '';
+        todos.forEach((todo, idx) => {
+            const li = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'task' + idx;
+            checkbox.checked = todo.completed;
+            checkbox.addEventListener('change', () => {
+                todos[idx].completed = checkbox.checked;
+                localStorage.setItem('todos', JSON.stringify(todos));
+            });
+            const label = document.createElement('label');
+            label.htmlFor = checkbox.id;
+            label.textContent = todo.text;
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            todoList.appendChild(li);
+        });
+    }
+
+    // Add new todo
+    document.getElementById('add-todo-btn').addEventListener('click', () => {
+        const input = document.getElementById('todo-input');
+        const text = input.value.trim();
+        if (text) {
+            const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+            todos.push({ text, completed: false });
+            localStorage.setItem('todos', JSON.stringify(todos));
+            input.value = '';
+            loadTodos();
+        }
+    });
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', loadTodos);
+</script>
