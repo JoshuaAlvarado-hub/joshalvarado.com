@@ -15,44 +15,73 @@ permalink: /todo/
     </div>
 
     <ul id="todo-list">
-        <!-- Todo items will be dynamically added here -->
+        <!-- Items dynamically added here -->
     </ul>
 </div>
 <script>
-    // Load todos from localStorage
+    // Load todos from API
     function loadTodos() {
-        const todos = JSON.parse(localStorage.getItem('todos') || '[]');
-        const todoList = document.getElementById('todo-list');
-        todoList.innerHTML = '';
-        todos.forEach((todo, idx) => {
-            const li = document.createElement('li');
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = 'task' + idx;
-            checkbox.checked = todo.completed;
-            checkbox.addEventListener('change', () => {
-                todos[idx].completed = checkbox.checked;
-                localStorage.setItem('todos', JSON.stringify(todos));
+        fetch('http://localhost:3001/api/todos')
+            .then(res => res.json())
+            .then(todos => {
+                const todoList = document.getElementById('todo-list');
+                todoList.innerHTML = '';
+                todos.forEach((todo, idx) => {
+                    const li = document.createElement('li');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = 'task' + idx;
+                    checkbox.checked = todo.completed;
+                    checkbox.addEventListener('change', () => {
+                        fetch(`http://localhost:3001/api/todos/${idx}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ completed: checkbox.checked })
+                        });
+                    });
+
+                    const label = document.createElement('input');
+                    label.type = 'text';
+                    label.value = todo.text;
+                    label.id = 'label' + idx;
+                    label.addEventListener('change', () => {
+                        fetch(`http://localhost:3001/api/todos/${idx}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: label.value })
+                        }).then(() => loadTodos());
+                    });
+
+                    // Delete button
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.addEventListener('click', () => {
+                        fetch(`http://localhost:3001/api/todos/${idx}`, {
+                            method: 'DELETE'
+                        }).then(() => loadTodos());
+                    });
+
+                    li.appendChild(checkbox);
+                    li.appendChild(label);
+                    li.appendChild(deleteBtn);
+                    todoList.appendChild(li);
+                });
             });
-            const label = document.createElement('label');
-            label.htmlFor = checkbox.id;
-            label.textContent = todo.text;
-            li.appendChild(checkbox);
-            li.appendChild(label);
-            todoList.appendChild(li);
-        });
     }
 
-    // Add new todo
+    // Add new todo via API
     document.getElementById('add-todo-btn').addEventListener('click', () => {
         const input = document.getElementById('todo-input');
         const text = input.value.trim();
         if (text) {
-            const todos = JSON.parse(localStorage.getItem('todos') || '[]');
-            todos.push({ text, completed: false });
-            localStorage.setItem('todos', JSON.stringify(todos));
-            input.value = '';
-            loadTodos();
+            fetch('http://localhost:3001/api/todos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, completed: false })
+            }).then(() => {
+                input.value = '';
+                loadTodos();
+            });
         }
     });
 
