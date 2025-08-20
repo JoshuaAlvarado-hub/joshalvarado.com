@@ -17,12 +17,48 @@ permalink: /todo/
     <ul id="todo-list">
         <!-- Items dynamically added here -->
     </ul>
+
+    <a href="https://joshalvarado.com/auth/google" id="login-btn">Sign in with Google</a>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <span id="user-info"></span>
 </div>
 <script>
+    function showAuthUI(user) {
+        if (user) {
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('logout-btn').style.display = 'inline-block';
+            document.getElementById('user-info').textContent = `Signed in as ${user.name} (${user.email})`;
+            document.querySelector('.todo-wrapper').style.display = '';
+            document.getElementById('todo-list').style.display = '';
+        } else {
+            document.getElementById('login-btn').style.display = 'inline-block';
+            document.getElementById('logout-btn').style.display = 'none';
+            document.getElementById('user-info').textContent = '';
+            document.querySelector('.todo-wrapper').style.display = 'none';
+            document.getElementById('todo-list').style.display = 'none';
+        }
+    }
+
+    // Check login status and load todos if logged in
+    function checkAuthAndLoadTodos() {
+        fetch('/api/user', { credentials: 'include' })
+            .then(res => res.json())
+            .then(data => {
+                showAuthUI(data.user);
+                if (data.user) loadTodos();
+            });
+    }
+
     // Load todos from API
     function loadTodos() {
-        fetch('http://localhost:3001/api/todos')
-            .then(res => res.json())
+        fetch('/api/todos', { credentials: 'include' })
+            .then(res => {
+                if (res.status === 401) {
+                    showAuthUI(null);
+                    return [];
+                }
+                return res.json();
+            })
             .then(todos => {
                 const todoList = document.getElementById('todo-list');
                 todoList.innerHTML = '';
@@ -33,11 +69,12 @@ permalink: /todo/
                     checkbox.id = 'task' + idx;
                     checkbox.checked = todo.completed;
                     checkbox.addEventListener('change', () => {
-                        fetch(`http://localhost:3001/api/todos/${idx}`, {
+                        fetch(`/api/todos/${idx}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ completed: checkbox.checked })
-                        });
+                            body: JSON.stringify({ completed: checkbox.checked }),
+                            credentials: 'include'
+                        }).then(() => loadTodos());
                     });
 
                     const label = document.createElement('input');
@@ -45,10 +82,11 @@ permalink: /todo/
                     label.value = todo.text;
                     label.id = 'label' + idx;
                     label.addEventListener('change', () => {
-                        fetch(`http://localhost:3001/api/todos/${idx}`, {
+                        fetch(`/api/todos/${idx}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: label.value })
+                            body: JSON.stringify({ text: label.value }),
+                            credentials: 'include'
                         }).then(() => loadTodos());
                     });
 
@@ -56,8 +94,9 @@ permalink: /todo/
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Delete';
                     deleteBtn.addEventListener('click', () => {
-                        fetch(`http://localhost:3001/api/todos/${idx}`, {
-                            method: 'DELETE'
+                        fetch(`/api/todos/${idx}`, {
+                            method: 'DELETE',
+                            credentials: 'include'
                         }).then(() => loadTodos());
                     });
 
@@ -74,10 +113,11 @@ permalink: /todo/
         const input = document.getElementById('todo-input');
         const text = input.value.trim();
         if (text) {
-            fetch('http://localhost:3001/api/todos', {
+            fetch('/api/todos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, completed: false })
+                body: JSON.stringify({ text, completed: false }),
+                credentials: 'include'
             }).then(() => {
                 input.value = '';
                 loadTodos();
@@ -85,6 +125,11 @@ permalink: /todo/
         }
     });
 
+    // Logout handler
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        fetch('/logout', { credentials: 'include' }).then(() => window.location.reload());
+    });
+
     // Initial load
-    window.addEventListener('DOMContentLoaded', loadTodos);
+    window.addEventListener('DOMContentLoaded', checkAuthAndLoadTodos);
 </script>
