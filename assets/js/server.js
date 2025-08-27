@@ -34,7 +34,7 @@ let todos = {};
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://joshalvarado.com/auth/google/callback'
+    callbackURL: 'https://joshalvarado-com.onrender.com/auth/google/callback'
 }, function(accessToken, refreshToken, profile, done) {
     profiles[profile.id] = {
         id: profile.id,
