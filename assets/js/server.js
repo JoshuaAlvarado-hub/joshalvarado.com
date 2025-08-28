@@ -10,10 +10,10 @@ const app = express();
 app.set('trust proxy', 1);
 
 app.use(cors({
-  origin: 'https://joshalvarado.com',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
+    origin: ['https://www.joshalvarado.com', 'https://joshalvarado.com'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
 }));
 
 app.use(express.json());
@@ -24,7 +24,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'none',
+        domain: 'joshalvarado.com',
+        sameSite: 'lax',
         secure: true
     }
 }));
@@ -40,7 +41,7 @@ let todos = {};
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://joshalvarado-com.onrender.com/auth/google/callback'
+    callbackURL: 'https://api.joshalvarado.com/auth/google/callback'
 }, function(accessToken, refreshToken, profile, done) {
     profiles[profile.id] = {
         id: profile.id,
