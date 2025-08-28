@@ -24,7 +24,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        domain: 'joshalvarado.com',
+        domain: '.joshalvarado.com',
         sameSite: 'lax',
         secure: true
     }
