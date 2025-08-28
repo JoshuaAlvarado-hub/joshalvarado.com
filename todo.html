@@ -133,9 +133,6 @@ permalink: /todo/
     document.getElementById('logout-btn').addEventListener('click', function() {
         fetch(`${API_BASE}/logout`, { credentials: 'include' }).then(() => window.location.reload());
     });
-
-    // Initial load
-    window.addEventListener('DOMContentLoaded', checkAuthAndLoadTodos);
 </script>
 
 <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff; padding: 15px; display: none; z-index: 999;">
