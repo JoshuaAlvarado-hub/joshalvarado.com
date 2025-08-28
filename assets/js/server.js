@@ -25,7 +25,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         domain: '.joshalvarado.com',
-        sameSite: 'lax',
+        path: '/',
+        sameSite: 'none',
         secure: true
     }
 }));
