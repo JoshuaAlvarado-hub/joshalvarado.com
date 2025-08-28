@@ -3,18 +3,22 @@ layout: default
 title: Todo List
 permalink: /todo/
 ---
+<script>
+  const API_BASE = 'https://joshalvarado-com.onrender.com';
+</script>
+
 <div class="container">
     <div class="page-header">
         <h1>Todo List</h1>
         <p>Manage your tasks efficiently with this simple todo list application.</p>
     </div>
 
-    <div class="todo-wrapper">
+    <div class="todo-wrapper" style="display:none;">
         <input type="text" id="todo-input" placeholder="Add a new task..." />
         <button id="add-todo-btn">Add Task</button>
     </div>
 
-    <ul id="todo-list">
+    <ul id="todo-list" style="display:none;">
         <!-- Items dynamically added here -->
     </ul>
 
@@ -41,7 +45,7 @@ permalink: /todo/
 
     // Check login status and load todos if logged in
     function checkAuthAndLoadTodos() {
-        fetch('/api/user', { credentials: 'include' })
+        fetch(`${API_BASE}/api/user`, { credentials: 'include' })
             .then(res => res.json())
             .then(data => {
                 showAuthUI(data.user);
@@ -51,7 +55,7 @@ permalink: /todo/
 
     // Load todos from API
     function loadTodos() {
-        fetch('/api/todos', { credentials: 'include' })
+        fetch(`${API_BASE}/api/todos`, { credentials: 'include' })
             .then(res => {
                 if (res.status === 401) {
                     showAuthUI(null);
@@ -69,7 +73,7 @@ permalink: /todo/
                     checkbox.id = 'task' + idx;
                     checkbox.checked = todo.completed;
                     checkbox.addEventListener('change', () => {
-                        fetch(`/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${idx}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ completed: checkbox.checked }),
@@ -82,7 +86,7 @@ permalink: /todo/
                     label.value = todo.text;
                     label.id = 'label' + idx;
                     label.addEventListener('change', () => {
-                        fetch(`/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${idx}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: label.value }),
@@ -94,7 +98,7 @@ permalink: /todo/
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Delete';
                     deleteBtn.addEventListener('click', () => {
-                        fetch(`/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${idx}`, {
                             method: 'DELETE',
                             credentials: 'include'
                         }).then(() => loadTodos());
@@ -113,7 +117,7 @@ permalink: /todo/
         const input = document.getElementById('todo-input');
         const text = input.value.trim();
         if (text) {
-            fetch('/api/todos', {
+            fetch(`${API_BASE}/api/todos`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text, completed: false }),
@@ -127,7 +131,7 @@ permalink: /todo/
 
     // Logout handler
     document.getElementById('logout-btn').addEventListener('click', function() {
-        fetch('/logout', { credentials: 'include' }).then(() => window.location.reload());
+        fetch(`${API_BASE}/logout`, { credentials: 'include' }).then(() => window.location.reload());
     });
 
     // Initial load
