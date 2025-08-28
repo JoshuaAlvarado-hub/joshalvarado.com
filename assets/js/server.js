@@ -8,9 +8,12 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: 'https://joshalvarado.com',
-    credentials: true
+  origin: 'https://joshalvarado.com',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
 }));
+
 app.use(express.json());
 
 // Session setup
@@ -23,6 +26,7 @@ app.use(session({
         secure: true
     }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -81,7 +85,7 @@ app.get('/api/user', (req, res) => {
 app.get('/logout', (req, res, next) => {
     req.logout(function(err) {
         if (err) { return next(err); }
-        res.redirect('/');
+        res.redirect('https://joshalvarado.com/todo/');
     });
 });
 

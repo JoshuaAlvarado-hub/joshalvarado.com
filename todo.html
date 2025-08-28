@@ -136,29 +136,34 @@ permalink: /todo/
 </script>
 
 <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff; padding: 15px; display: none; z-index: 999;">
-  <span>This site uses necessary cookies for login and session management.</span>
-  <button id="accept-cookies" style="margin-left: 10px;">Accept</button>
+    <span>This site uses necessary cookies for login and session management.</span>
+    <button id="accept-cookies" style="margin-left: 10px;">Accept</button>
 </div>
 
 <script>
-  function hasConsentedToCookies() {
-    return localStorage.getItem('cookieConsent') === 'true';
-  }
-
-  function showCookieBanner() {
-    if (!hasConsentedToCookies()) {
-      document.getElementById('cookie-banner').style.display = 'block';
-    } else {
-      checkAuthAndLoadTodos(); // Proceed with login/session-dependent logic
+    function hasConsentedToCookies() {
+        return localStorage.getItem('cookieConsent') === 'true';
     }
-  }
 
-  document.getElementById('accept-cookies').addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'true');
-    document.getElementById('cookie-banner').style.display = 'none';
-    checkAuthAndLoadTodos();
-  });
+    function showCookieBanner() {
+        if (!hasConsentedToCookies()) {
+            document.getElementById('cookie-banner').style.display = 'block';
+        } else {
+            checkAuthAndLoadTodos(); // Proceed with login/session-dependent logic
+        }
+    }
 
-  // Only run login/session checks if consent is given
-  window.addEventListener('DOMContentLoaded', showCookieBanner);
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+        checkAuthAndLoadTodos();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (hasConsentedToCookies()) {
+            checkAuthAndLoadTodos();
+        } else {
+            document.getElementById('cookie-banner').style.display = 'block';
+        }
+    });
 </script>
