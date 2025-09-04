@@ -5,6 +5,7 @@ permalink: /todo/
 ---
 <script>
     const API_BASE = 'https://api.joshalvarado.com';
+    // const API_BASE = 'https://localhost:3001';
 </script>
 
 <div class="container">
@@ -26,6 +27,7 @@ permalink: /todo/
     <button id="logout-btn" style="display:none;">Logout</button>
     <span id="user-info"></span>
 </div>
+
 <script>
     function showAuthUI(user) {
         if (user) {
@@ -66,14 +68,14 @@ permalink: /todo/
             .then(todos => {
                 const todoList = document.getElementById('todo-list');
                 todoList.innerHTML = '';
-                todos.forEach((todo, idx) => {
+                todos.forEach(todo => {
                     const li = document.createElement('li');
+
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
-                    checkbox.id = 'task' + idx;
                     checkbox.checked = todo.completed;
                     checkbox.addEventListener('change', () => {
-                        fetch(`${API_BASE}/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ completed: checkbox.checked }),
@@ -84,9 +86,8 @@ permalink: /todo/
                     const label = document.createElement('input');
                     label.type = 'text';
                     label.value = todo.text;
-                    label.id = 'label' + idx;
                     label.addEventListener('change', () => {
-                        fetch(`${API_BASE}/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: label.value }),
@@ -94,11 +95,10 @@ permalink: /todo/
                         }).then(() => loadTodos());
                     });
 
-                    // Delete button
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Delete';
                     deleteBtn.addEventListener('click', () => {
-                        fetch(`${API_BASE}/api/todos/${idx}`, {
+                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
                             method: 'DELETE',
                             credentials: 'include'
                         }).then(() => loadTodos());
@@ -131,7 +131,8 @@ permalink: /todo/
 
     // Logout handler
     document.getElementById('logout-btn').addEventListener('click', function() {
-        fetch(`${API_BASE}/logout`, { credentials: 'include' }).then(() => window.location.reload());
+        fetch(`${API_BASE}/logout`, { credentials: 'include' })
+            .then(() => window.location.reload());
     });
 </script>
 
