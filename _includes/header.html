@@ -22,10 +22,28 @@
     <div class="nav-right">
         <!-- auth buttons -->
         <div id="auth-buttons" class="auth-buttons">
-            <a href="https://api.joshalvarado.com/auth/google" id="login-btn" class="btn-auth">Sign in</a>
-            <button id="logout-btn" class="btn-auth logout" style="display:none;">Logout</button>
+          <a href="#" id="login-btn" class="btn-auth">Sign in</a>
+          <button id="logout-btn" class="btn-auth logout" style="display:none;">Logout</button>
         </div>
     </div>
-
   </nav>
 </header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginBtn = document.getElementById("login-btn");
+    if (loginBtn) {
+      const currentPage = window.location.href;
+      loginBtn.href = `https://api.joshalvarado.com/auth/google?redirect=${encodeURIComponent(currentPage)}`;
+    }
+
+    const logoutBtn = document.getElementById("logout-btn");
+    if (logoutBtn) {
+      const currentPage = window.location.href;
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = `https://api.joshalvarado.com/logout?redirect=${encodeURIComponent(currentPage)}`;
+      });
+    }
+  });
+</script>

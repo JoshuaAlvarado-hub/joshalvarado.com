@@ -81,14 +81,20 @@ passport.deserializeUser(async (id, done) => {
 });
 
 // Routes
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+app.get('/auth/google', (req, res, next) => {
+  // Store redirect
+  if (req.query.redirect) {
+    req.session.returnTo = req.query.redirect;
+  }
+  passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+});
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('https://joshalvarado.com/todo/');
+    const redirectUrl = req.session.returnTo || 'https://joshalvarado.com/';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
   }
 );
 
@@ -103,7 +109,8 @@ app.get('/api/user', (req, res) => {
 app.get('/logout', (req, res, next) => {
   req.logout(err => {
     if (err) return next(err);
-    res.redirect('https://joshalvarado.com/todo/');
+    const redirectUrl = req.query.redirect || 'https://joshalvarado.com/';
+    res.redirect(redirectUrl);
   });
 });
 
