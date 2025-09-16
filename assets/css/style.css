@@ -76,7 +76,7 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-secondary);
     line-height: var(--line-height-normal);
     margin: 0;
     padding: 0;
@@ -533,18 +533,6 @@ footer {
     transition: color 0.3s ease;
 }
 
-.btn-auth.logout {
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--logo-fontsize);
-    white-space: nowrap;
-}
-
-.btn-auth.logout:hover {
-    color: var(--secondary-color);
-    transition: color 0.3s ease;
-}
-
 /* Media Queries */
 
 /* Extra Large Screens */
@@ -689,7 +677,7 @@ footer {
     }
 
     .contact-form h3 {
-        font-size: var(--font-size-h3) - 1rem;
+        font-size: calc(var(--font-size-h3) - 1rem);
     }
 
     .btn {
