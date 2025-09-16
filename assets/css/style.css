@@ -13,7 +13,7 @@
     --text-muted-color: #666;
     --border-color: #ddd;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --hover-color: #699ab6;
+    --hover-color: #84a8d1;
 
     /* Fonts */
     --font-primary: 'Poppins', sans-serif;
@@ -54,7 +54,7 @@
     --padding-large: 40px;
 
     /* Border Radius */
-    --border-radius: 9999px;
+    --border-radius: 8px;
 
     /* Navigation */
     --logo-fontsize: 1.5rem;
@@ -408,10 +408,6 @@ footer {
     align-self: flex-start;
 }
 
-.project .btn:hover {
-    background-color: var(--hover-color);
-}
-
 /* Contact Page */
 .contact-wrapper {
     display: flex;
@@ -526,30 +522,27 @@ footer {
 }
 
 .btn-auth {
-    padding: 0.4rem 0.8rem;
-    background: var(--secondary-color);
-    border-radius: var(--border-radius);
-    color: var(--tertiary-color);
-    text-decoration: none;
-    border: none;
-    font-size: var(--font-size-small);
+    font-family: var(--font-primary);
     font-weight: var(--font-weight-bold);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: var(--font-secondary);
+    font-size: var(--logo-fontsize);
+    white-space: nowrap;
 }
 
 .btn-auth:hover {
-    background: var(--hover-color);
-    transform: translateY(-1px);
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
 }
 
 .btn-auth.logout {
-    background: #e74c3c;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--logo-fontsize);
+    white-space: nowrap;
 }
 
 .btn-auth.logout:hover {
-    background: #c0392b;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
 }
 
 /* Media Queries */
