@@ -1,34 +1,31 @@
 <header>
-    <nav>
-        <!-- logo -->
-        <div class="nav-left">
-            <a href="{{ '/' | relative_url }}" class="logo">Joshua Alvarado</a>
+  <nav>
+    <!-- logo -->
+    <div class="nav-left">
+      <a href="{{ '/' | relative_url }}" class="logo">Joshua Alvarado</a>
+    </div>
+
+    <!-- menu button -->
+    <button class="menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- nav items -->
+    <ul id="nav-items" class="nav-items">
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li><a href="{{ '/resume/' | relative_url }}">Resume</a></li>
+      <li><a href="{{ '/projects/' | relative_url }}">Projects</a></li>
+      <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+      <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <!-- auth buttons -->
+        <div id="auth-buttons" class="auth-buttons">
+            <a href="https://api.joshalvarado.com/auth/google" id="login-btn" class="btn-auth">Sign in</a>
+            <button id="logout-btn" class="btn-auth logout" style="display:none;">Logout</button>
         </div>
+    </div>
 
-        <!-- menu button -->
-        <button class="menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="menu">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- nav items -->
-        <ul id="nav-items" class="nav-items">
-            <li><a href="{{ '/' | relative_url }}">Home</a></li>
-            <li><a href="{{ '/resume/' | relative_url }}">Resume</a></li>
-            <li><a href="{{ '/projects/' | relative_url }}">Projects</a></li>
-            <li><a href="{{ '/about/' | relative_url }}">About</a></li>
-            <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
-        </ul>
-
-        <div class="nav-right">
-            <a href="https://github.com/JoshuaAlvarado-hub" target="_blank" aria-label="GitHub Profile">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/joshua-brian-alvarado" target="_blank" aria-label="LinkedIn Profile">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="{{ '/contact/' | relative_url }}" aria-label="Contact Page">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
-    </nav>
+  </nav>
 </header>

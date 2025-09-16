@@ -54,7 +54,7 @@
     --padding-large: 40px;
 
     /* Border Radius */
-    --border-radius: 8px;
+    --border-radius: 9999px;
 
     /* Navigation */
     --logo-fontsize: 1.5rem;
@@ -203,7 +203,6 @@ nav {
 .nav-right {
     margin-left: auto;
     display: flex;
-    gap: var(--gap-medium);
     align-items: center;
 }
 
@@ -516,6 +515,41 @@ footer {
 .contact-form textarea {
     resize: vertical;
     height: 80px;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-small);
+    margin-left: var(--gap-medium);
+}
+
+.btn-auth {
+    padding: 0.4rem 0.8rem;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
+    color: var(--tertiary-color);
+    text-decoration: none;
+    border: none;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: var(--font-secondary);
+}
+
+.btn-auth:hover {
+    background: var(--hover-color);
+    transform: translateY(-1px);
+}
+
+.btn-auth.logout {
+    background: #e74c3c;
+}
+
+.btn-auth.logout:hover {
+    background: #c0392b;
 }
 
 /* Media Queries */
