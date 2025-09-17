@@ -1,7 +1,5 @@
-// firebase.js
-import admin from "firebase-admin";
-import dotenv from "dotenv";
-
+import admin from 'firebase-admin';
+import dotenv from 'dotenv';
 dotenv.config();
 
 if (!admin.apps.length) {
@@ -12,5 +10,4 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-export { db, admin };
+export { admin, db };

@@ -1,26 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-        <script src="{{ '/assets/js/manager.js' | relative_url }}" defer></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- title -->
-        <title>{{ page.title }} - Joshua Alvarado</title>
-        <meta name="title" content="Joshua Alvarado - Portfolio">
-        <meta name="description" content="Joshua Alvarado's portfolio website showcasing projects, resume, and contact information.">
-        <!-- favicon -->
-        <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
-    </head>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body>
-        {% include header.html %}
-        <main>
-            {{ content }}
-        </main>
-        {% include footer.html %}
-    </body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- Firebase config injected by Jekyll -->
+    <script>
+      window.firebaseConfig = {
+        apiKey: "{{ site.firebase.apiKey }}",
+        authDomain: "{{ site.firebase.authDomain }}",
+        projectId: "{{ site.firebase.projectId }}",
+        storageBucket: "{{ site.firebase.storageBucket }}",
+        messagingSenderId: "{{ site.firebase.messagingSenderId }}",
+        appId: "{{ site.firebase.appId }}",
+        measurementId: "{{ site.firebase.measurementId }}"
+      };
+    </script>
+
+    <!-- JS -->
+    <script src="{{ '/assets/js/manager.js' | relative_url }}" defer></script>
+    <script type="module" src="{{ '/assets/js/authManager.js' | relative_url }}" defer></script>
+
+    <!-- Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- SEO -->
+    <title>{{ page.title }} - Joshua Alvarado</title>
+    <meta name="title" content="Joshua Alvarado - Portfolio">
+    <meta name="description" content="Joshua Alvarado's portfolio website showcasing projects, resume, and contact information.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+  </head>
+
+  <body>
+    {% include header.html %}
+    <main>
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
 </html>
