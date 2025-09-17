@@ -1,25 +1,26 @@
+// assets/js/authManager.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 
-// Firebase config injected by Jekyll in default.html
+// Firebase config injected via Jekyll in default.html
 const firebaseConfig = window.firebaseConfig;
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Detect backend API
+// Backend API base
 const API_BASE =
   window.location.hostname === "localhost"
     ? "http://localhost:3001/api"
-    : "https://joshalvarado.com/api";
+    : "https://api.joshalvarado.com/api";
 
 // DOM elements
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 
-// Update buttons based on server session
+/**
+ * Updates the visibility of login/logout buttons
+ */
 export async function updateAuthButtons() {
   try {
     const res = await fetch(`${API_BASE}/user`, { credentials: "include" });
@@ -37,7 +38,9 @@ export async function updateAuthButtons() {
   }
 }
 
-// Login
+/**
+ * Login with Google, exchange ID token for session cookie
+ */
 export async function login() {
   try {
     const result = await signInWithPopup(auth, provider);
@@ -57,7 +60,9 @@ export async function login() {
   }
 }
 
-// Logout
+/**
+ * Logout, clear session cookie and Firebase auth
+ */
 export async function logout() {
   try {
     await fetch(`${API_BASE}/logout`, {
