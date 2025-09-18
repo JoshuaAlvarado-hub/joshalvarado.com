@@ -1,12 +1,12 @@
 import express from "express";
 import { db } from "../firebase.js";
-import { ensureAuthenticated } from "../middleware/auth.js"; // make sure filename is lowercase "auth.js"
+import { ensureAuthenticated } from "../middleware/auth.js";
 
 const router = express.Router();
 
 router.use(ensureAuthenticated);
 
-// GET /api/todos
+// GET
 router.get("/", async (req, res) => {
   try {
     const snapshot = await db
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST /api/todos
+// POST
 router.post("/", async (req, res) => {
   try {
     const { text, completed } = req.body;
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT /api/todos/:id
+// PUT
 router.put("/:id", async (req, res) => {
   try {
     await db
@@ -57,7 +57,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE /api/todos/:id
+// DELETE
 router.delete("/:id", async (req, res) => {
   try {
     await db

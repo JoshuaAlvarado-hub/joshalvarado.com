@@ -8,3 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         navItems.classList.toggle('active');
     });
 });
+
+export function closeMobileMenu() {
+  const navItems = document.querySelector('.nav-items');
+  const menuButton = document.querySelector('.menu-button');
+  if (navItems?.classList.contains('active')) {
+    navItems.classList.remove('active');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }
+}

@@ -513,6 +513,10 @@ footer {
     height: 80px;
 }
 
+.mobile-only {
+    display: none;
+}
+
 /* Auth Buttons */
 .auth-buttons {
     display: flex;
@@ -585,6 +589,10 @@ footer {
     .nav-items.active {
         visibility: visible;
         opacity: 1;
+    }
+
+    .mobile-only {
+        display: block;
     }
 }
 
@@ -684,5 +692,9 @@ footer {
         width: 100%;
         padding: var(--padding-small);
         font-size: var(--font-size-body);
+    }
+
+    .mobile-only {
+        display: block;
     }
 }

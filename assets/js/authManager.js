@@ -1,6 +1,6 @@
-// assets/js/authManager.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import { closeMobileMenu } from "./manager.js";
 
 // Firebase config injected via Jekyll in default.html
 const firebaseConfig = window.firebaseConfig;
@@ -15,32 +15,34 @@ const API_BASE =
     : "https://api.joshalvarado.com/api";
 
 // DOM elements
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
+const desktopLoginBtn = document.getElementById("desktop-login-btn");
+const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
+const mobileLoginBtn = document.getElementById("mobile-login-btn");
+const mobileLogoutBtn = document.getElementById("mobile-logout-btn");
 
-/**
- * Updates the visibility of login/logout buttons
- */
+// Update the visibility of login/logout buttons
 export async function updateAuthButtons() {
   try {
     const res = await fetch(`${API_BASE}/user`, { credentials: "include" });
     const data = await res.json();
 
     if (data.user) {
-      loginBtn?.style.setProperty("display", "none");
-      logoutBtn?.style.setProperty("display", "inline-block");
+      desktopLoginBtn?.style.setProperty("display", "none");
+      desktopLogoutBtn?.style.setProperty("display", "inline-block");
+      mobileLoginBtn?.style.setProperty("display", "none");
+      mobileLogoutBtn?.style.setProperty("display", "inline-block");
     } else {
-      loginBtn?.style.setProperty("display", "inline-block");
-      logoutBtn?.style.setProperty("display", "none");
+      desktopLoginBtn?.style.setProperty("display", "inline-block");
+      desktopLogoutBtn?.style.setProperty("display", "none");
+      mobileLoginBtn?.style.setProperty("display", "inline-block");
+      mobileLogoutBtn?.style.setProperty("display", "none");
     }
   } catch (err) {
     console.error("User check error:", err);
   }
 }
 
-/**
- * Login with Google, exchange ID token for session cookie
- */
+// Login with Google, exchange ID token for session cookie
 export async function login() {
   try {
     const result = await signInWithPopup(auth, provider);
@@ -60,9 +62,7 @@ export async function login() {
   }
 }
 
-/**
- * Logout, clear session cookie and Firebase auth
- */
+// Logout, clear session cookie and Firebase auth
 export async function logout() {
   try {
     await fetch(`${API_BASE}/logout`, {
@@ -77,17 +77,21 @@ export async function logout() {
   }
 }
 
-// Attach event listeners on DOMContentLoaded
+// Attach event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  loginBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    login();
-  });
+  [desktopLoginBtn, mobileLoginBtn].forEach(btn =>
+    btn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      login().then(() => closeMobileMenu());
+    })
+  );
 
-  logoutBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    logout();
-  });
+  [desktopLogoutBtn, mobileLogoutBtn].forEach(btn =>
+    btn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      logout().then(() => closeMobileMenu());
+    })
+  );
 
-  updateAuthButtons(); // initialize buttons
+  updateAuthButtons();
 });
