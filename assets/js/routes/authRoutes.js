@@ -3,9 +3,7 @@ import { admin, db } from "../firebase.js";
 
 const router = express.Router();
 
-// ---------------------------
 // Login: Exchange ID token for session cookie
-// ---------------------------
 router.post("/sessionLogin", async (req, res) => {
   const { idToken } = req.body;
   const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
@@ -40,14 +38,12 @@ router.post("/sessionLogin", async (req, res) => {
 
     res.json({ success: true });
   } catch (err) {
-    console.error("SessionLogin error:", err);
+    console.error("SessionLogin error:", err.code, err.message, err.stack);
     res.status(401).json({ message: "Unauthorized" });
   }
 });
 
-// ---------------------------
 // Logout: Clear session cookie
-// ---------------------------
 router.post("/logout", (req, res) => {
   res.clearCookie("session", {
     httpOnly: true,
@@ -58,9 +54,7 @@ router.post("/logout", (req, res) => {
   res.json({ success: true });
 });
 
-// ---------------------------
 // Get current user from session cookie
-// ---------------------------
 router.get("/user", async (req, res) => {
   try {
     const sessionCookie = req.cookies.session || "";
