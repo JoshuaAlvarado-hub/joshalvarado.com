@@ -10,7 +10,7 @@ github_username: JoshuaAlvarado-hub
 firebase:
   apiKey: "AIzaSyArzL_9hbkZ1r_5AXCO2lgJR9EBYGxSNdo"
   authDomain: "joshalvarado-com.firebaseapp.com"
-  projectId: "joshalvarado-id"
+  projectId: "joshalvarado-com"
   storageBucket: "joshalvarado-com.firebasestorage.com"
   messagingSenderId: "539697055519"
   appId: "1:539697055519:web:59bdd478a345eb521bd22a"
