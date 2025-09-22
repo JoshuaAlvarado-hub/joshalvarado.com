@@ -513,6 +513,10 @@ footer {
     height: 80px;
 }
 
+.desktop-only {
+  display: block;
+}
+
 .mobile-only {
     display: none;
 }
@@ -591,6 +595,10 @@ footer {
         opacity: 1;
     }
 
+    .desktop-only {
+      display: none;
+    }
+
     .mobile-only {
         display: block;
     }
@@ -605,6 +613,14 @@ footer {
 
     .nav-right {
         display: none;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+        display: block;
     }
 
     .menu-button {
@@ -692,9 +708,5 @@ footer {
         width: 100%;
         padding: var(--padding-small);
         font-size: var(--font-size-body);
-    }
-
-    .mobile-only {
-        display: block;
     }
 }
