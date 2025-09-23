@@ -15,27 +15,27 @@ const API_BASE =
     : "https://api.joshalvarado.com/api";
 
 // DOM elements
-const desktopLoginBtn = document.getElementById("desktop-login-btn");
-const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
-const mobileLoginBtn = document.getElementById("mobile-login-btn");
-const mobileLogoutBtn = document.getElementById("mobile-logout-btn");
+const desktopAuthBtn = document.getElementById("desktop-auth-btn");
+const mobileAuthBtn = document.getElementById("mobile-auth-btn");
 
-// Update the visibility of login/logout buttons
+// Update the text & state of auth buttons
 export async function updateAuthButtons() {
   try {
     const res = await fetch(`${API_BASE}/user`, { credentials: "include" });
     const data = await res.json();
 
     if (data.user) {
-      desktopLoginBtn?.style.setProperty("display", "none");
-      desktopLogoutBtn?.style.setProperty("display", "inline-block");
-      mobileLoginBtn?.style.setProperty("display", "none");
-      mobileLogoutBtn?.style.setProperty("display", "inline-block");
+      desktopAuthBtn.textContent = "Logout";
+      desktopAuthBtn.dataset.action = "logout";
+
+      mobileAuthBtn.textContent = "Logout";
+      mobileAuthBtn.dataset.action = "logout";
     } else {
-      desktopLoginBtn?.style.setProperty("display", "inline-block");
-      desktopLogoutBtn?.style.setProperty("display", "none");
-      mobileLoginBtn?.style.setProperty("display", "inline-block");
-      mobileLogoutBtn?.style.setProperty("display", "none");
+      desktopAuthBtn.textContent = "Sign in";
+      desktopAuthBtn.dataset.action = "login";
+
+      mobileAuthBtn.textContent = "Sign in";
+      mobileAuthBtn.dataset.action = "login";
     }
   } catch (err) {
     console.error("User check error:", err);
@@ -43,7 +43,7 @@ export async function updateAuthButtons() {
 }
 
 // Login with Google, exchange ID token for session cookie
-export async function login() {
+async function login() {
   try {
     const result = await signInWithPopup(auth, provider);
     const idToken = await result.user.getIdToken();
@@ -63,7 +63,7 @@ export async function login() {
 }
 
 // Logout, clear session cookie and Firebase auth
-export async function logout() {
+async function logout() {
   try {
     await fetch(`${API_BASE}/logout`, {
       method: "POST",
@@ -79,17 +79,17 @@ export async function logout() {
 
 // Attach event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  [desktopLoginBtn, mobileLoginBtn].forEach(btn =>
-    btn?.addEventListener("click", (e) => {
+  [desktopAuthBtn, mobileAuthBtn].forEach(btn =>
+    btn?.addEventListener("click", async (e) => {
       e.preventDefault();
-      login().then(() => closeMobileMenu());
-    })
-  );
 
-  [desktopLogoutBtn, mobileLogoutBtn].forEach(btn =>
-    btn?.addEventListener("click", (e) => {
-      e.preventDefault();
-      logout().then(() => closeMobileMenu());
+      if (btn.dataset.action === "login") {
+        await login();
+      } else {
+        await logout();
+      }
+
+      closeMobileMenu();
     })
   );
 
