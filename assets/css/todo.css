@@ -84,10 +84,18 @@
     align-items: center;
     justify-content: center;
     margin-right: 0.5rem;
+    flex-shrink: 0;
+    position: relative;
 }
 
 .circle-checkbox input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  pointer-events: all;
 }
 
 .circle-checkbox .checkmark {
@@ -95,21 +103,26 @@
   height: 20px;
   border: 2px solid #00003D;
   border-radius: 50%;
-  display: inline-block;
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.circle-checkbox .checkmark::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #00003D;
+  transform: scale(0);
+  transition: transform 0.12s ease;
 }
 
 .circle-checkbox input:checked + .checkmark::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  background-color: #00003D;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: scale(1);
 }
 
 #todo-list li input[type="text"] {
