@@ -3,10 +3,7 @@ layout: default
 title: Todo List
 permalink: /todo/
 ---
-<script>
-    const API_BASE = 'https://api.joshalvarado.com';
-    // const API_BASE = 'https://localhost:3001';
-</script>
+<script src="/assets/js/todo.js"></script>
 
 <div class="container">
     <div class="page-header">
@@ -14,147 +11,17 @@ permalink: /todo/
         <p>Manage your tasks efficiently with this simple todo list application.</p>
     </div>
 
+    <h2 id="greeting"></h2>
+
     <div class="todo-wrapper" style="display:none;">
         <input type="text" id="todo-input" placeholder="Add a new task..." />
         <button id="add-todo-btn">Add Task</button>
     </div>
 
-    <ul id="todo-list" style="display:none;">
-        <!-- Items dynamically added here -->
-    </ul>
+    <ul id="todo-list" style="display:none;"></ul>
 </div>
-
-<script>
-    function showAuthUI(user) {
-        if (user) {
-            document.getElementById('login-btn').style.display = 'none';
-            document.getElementById('logout-btn').style.display = 'inline-block';
-            document.getElementById('user-info').textContent = `Signed in as ${user.name} (${user.email})`;
-            document.querySelector('.todo-wrapper').style.display = '';
-            document.getElementById('todo-list').style.display = '';
-        } else {
-            document.getElementById('login-btn').style.display = 'inline-block';
-            document.getElementById('logout-btn').style.display = 'none';
-            document.getElementById('user-info').textContent = '';
-            document.querySelector('.todo-wrapper').style.display = 'none';
-            document.getElementById('todo-list').style.display = 'none';
-        }
-    }
-
-    // Check login status and load todos if logged in
-    function checkAuthAndLoadTodos() {
-        fetch(`${API_BASE}/api/user`, { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => {
-                showAuthUI(data.user);
-                if (data.user) loadTodos();
-            });
-    }
-
-    // Load todos from API
-    function loadTodos() {
-        fetch(`${API_BASE}/api/todos`, { credentials: 'include' })
-            .then(res => {
-                if (res.status === 401) {
-                    showAuthUI(null);
-                    return [];
-                }
-                return res.json();
-            })
-            .then(todos => {
-                const todoList = document.getElementById('todo-list');
-                todoList.innerHTML = '';
-                todos.forEach(todo => {
-                    const li = document.createElement('li');
-
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.checked = todo.completed;
-                    checkbox.addEventListener('change', () => {
-                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
-                            method: 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ completed: checkbox.checked }),
-                            credentials: 'include'
-                        }).then(() => loadTodos());
-                    });
-
-                    const label = document.createElement('input');
-                    label.type = 'text';
-                    label.value = todo.text;
-                    label.addEventListener('change', () => {
-                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
-                            method: 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: label.value }),
-                            credentials: 'include'
-                        }).then(() => loadTodos());
-                    });
-
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'Delete';
-                    deleteBtn.addEventListener('click', () => {
-                        fetch(`${API_BASE}/api/todos/${todo.id}`, {
-                            method: 'DELETE',
-                            credentials: 'include'
-                        }).then(() => loadTodos());
-                    });
-
-                    li.appendChild(checkbox);
-                    li.appendChild(label);
-                    li.appendChild(deleteBtn);
-                    todoList.appendChild(li);
-                });
-            });
-    }
-
-    // Add new todo via API
-    document.getElementById('add-todo-btn').addEventListener('click', () => {
-        const input = document.getElementById('todo-input');
-        const text = input.value.trim();
-        if (text) {
-            fetch(`${API_BASE}/api/todos`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, completed: false }),
-                credentials: 'include'
-            }).then(() => {
-                input.value = '';
-                loadTodos();
-            });
-        }
-    });
-</script>
 
 <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff; padding: 15px; display: none; z-index: 999;">
     <span>This site uses necessary cookies for login and session management.</span>
     <button id="accept-cookies" style="margin-left: 10px;">Accept</button>
 </div>
-
-<script>
-    function hasConsentedToCookies() {
-        return localStorage.getItem('cookieConsent') === 'true';
-    }
-
-    function showCookieBanner() {
-        if (!hasConsentedToCookies()) {
-            document.getElementById('cookie-banner').style.display = 'block';
-        } else {
-            checkAuthAndLoadTodos(); // Proceed with login/session-dependent logic
-        }
-    }
-
-    document.getElementById('accept-cookies').addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'true');
-        document.getElementById('cookie-banner').style.display = 'none';
-        checkAuthAndLoadTodos();
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-        if (hasConsentedToCookies()) {
-            checkAuthAndLoadTodos();
-        } else {
-            document.getElementById('cookie-banner').style.display = 'block';
-        }
-    });
-</script>
