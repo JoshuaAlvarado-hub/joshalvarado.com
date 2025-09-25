@@ -12,7 +12,7 @@ function showAuthUI(user) {
         document.querySelector('.todo-wrapper').style.display = '';
         document.getElementById('todo-list').style.display = '';
     } else {
-        greeting.innerHTML = 'Hello, please sign in to view your tasks.</a>';
+        greeting.innerHTML = 'Hello, please sign in to view your tasks.';
         document.querySelector('.todo-wrapper').style.display = 'none';
         document.getElementById('todo-list').style.display = 'none';
     }
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('todo-input');
 
     if (addBtn && input) {
-        addBtn.addEventListener('click', () => {
+        function addTodo() {
             const text = input.value.trim();
             if (text) {
                 fetch(`${API_BASE}/api/todos`, {
@@ -110,17 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(res => res.json())
                     .then(newTodo => {
                         input.value = '';
-                        renderTodo(newTodo);
+                        loadTodos();
                     })
                     .catch(() => alert('Error adding task.'));
             }
-        });
+        }
 
-        // Enter key adds todo
+        addBtn.addEventListener('click', addTodo);
+
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                addBtn.click();
+                addTodo();   // call directly instead of .click()
             }
         });
     }
