@@ -3,6 +3,7 @@ layout: default
 title: Todo List
 permalink: /todo/
 ---
+<link rel="stylesheet" href="{{ '/assets/css/todo.css' | relative_url }}">
 <script src="/assets/js/todo.js"></script>
 
 <div class="container">
@@ -12,6 +13,22 @@ permalink: /todo/
     </div>
 
     <h2 id="greeting"></h2>
+
+    <section class="todo-grid">
+        <article class="category">
+            <div class="category-header">
+                <h2>Today</h2>
+                <span class="count">Num</span>
+            </div>
+        </article>
+
+        <article class="category">
+            <div class="category-header">
+                <h2>All</h2>
+                <span class="count">Num</span>
+            </div>
+        </article>
+    </section>
 
     <div class="todo-wrapper" style="display:none;">
         <input type="text" id="todo-input" placeholder="Add a new task..." />
