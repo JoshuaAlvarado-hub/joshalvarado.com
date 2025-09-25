@@ -36,6 +36,9 @@ function renderTodo(todo) {
     const li = document.createElement('li');
     li.dataset.id = todo.id;
 
+    const label = document.createElement('label');
+    label.className = 'circle-checkbox';
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = todo.completed;
@@ -48,30 +51,38 @@ function renderTodo(todo) {
         }).catch(() => alert('Error updating task.'));
     });
 
-    const label = document.createElement('input');
-    label.type = 'text';
-    label.value = todo.text;
-    label.addEventListener('change', () => {
+    const checkmark = document.createElement('span');
+    checkmark.className = 'checkmark';
+
+    label.append(checkbox, checkmark);
+
+    // Task text input
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.value = todo.text;
+    textInput.addEventListener('change', () => {
         fetch(`${API_BASE}/api/todos/${todo.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: label.value }),
+            body: JSON.stringify({ text: textInput.value }),
             credentials: 'include'
         }).catch(() => alert('Error saving changes.'));
     });
 
+    // Delete button
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.textContent = 'x';
     deleteBtn.addEventListener('click', () => {
         fetch(`${API_BASE}/api/todos/${todo.id}`, {
             method: 'DELETE',
             credentials: 'include'
         })
-            .then(() => li.remove())
-            .catch(() => alert('Error deleting task.'));
+        .then(() => li.remove())
+        .catch(() => alert('Error deleting task.'));
     });
 
-    li.append(checkbox, label, deleteBtn);
+    // Append everything to li
+    li.append(label, textInput, deleteBtn);
     todoList.appendChild(li);
 }
 
