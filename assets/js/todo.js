@@ -7,7 +7,8 @@ function showAuthUI(user) {
     const greeting = document.getElementById('greeting');
 
     if (user) {
-        greeting.textContent = `Hello, ${user.name}`;
+        const firstName = user.name.split(' ')[0];
+        greeting.textContent = `Hello, ${firstName}`;
         document.querySelector('.todo-wrapper').style.display = '';
         document.getElementById('todo-list').style.display = '';
     } else {
