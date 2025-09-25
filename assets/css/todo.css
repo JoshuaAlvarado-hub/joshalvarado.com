@@ -6,6 +6,7 @@
   margin-top: var(--margin-large);
 }
 
+/* Categories */
 .category {
   display: flex;
   flex-direction: column;
@@ -55,4 +56,77 @@
   color: var(--text-secondary-color);
   margin-bottom: var(--margin-medium);
   flex-grow: 1;
+}
+
+/* Tasks */
+#todo-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    margin-bottom: var(--margin-small);
+    background-color: var(--tertiary-color);
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-body);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#todo-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.circle-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.circle-checkbox input {
+  display: none;
+}
+
+.circle-checkbox .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00003D;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.circle-checkbox input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #00003D;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#todo-list li input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: var(--font-size-body);
+    color: var(--text-color);
+    flex-grow: 1;
+    margin: 0 0.5rem;
+}
+
+#todo-list li button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0 0.5rem;
 }
