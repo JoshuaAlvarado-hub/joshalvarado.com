@@ -1,6 +1,7 @@
 // Config
 const API_BASE = 'https://api.joshalvarado.com';
 // const API_BASE = 'https://localhost:3001';
+const LOCAL_TESTING = false;
 
 // UI Helpers
 function showAuthUI(user) {
@@ -19,8 +20,27 @@ function showAuthUI(user) {
 }
 
 // Auth + Loading
-// Check auth status and load todos if authenticated
 function checkAuthAndLoadTodos() {
+    if (LOCAL_TESTING) {
+        showAuthUI({ name: "Local Tester" });
+
+        renderTodo({
+            id: 123,
+            text: "Finish project report",
+            completed: false,
+            dueDate: "2025-09-30T17:00:00"
+        });
+
+        renderTodo({
+            id: 124,
+            text: "Buy groceries",
+            completed: true,
+            dueDate: "2025-09-26T12:00:00"
+        });
+
+        return;
+    }
+
     fetch(`${API_BASE}/api/user`, { credentials: 'include' })
         .then(res => res.json())
         .then(data => {
@@ -36,9 +56,13 @@ function renderTodo(todo) {
     const li = document.createElement('li');
     li.dataset.id = todo.id;
 
-    const label = document.createElement('label');
-    label.className = 'circle-checkbox';
+    // pill container (hoverable)
+    const pillContainer = document.createElement('div');
+    pillContainer.classList.add('pill-container');
 
+    // checkbox
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.classList.add('circle-checkbox');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = todo.completed;
@@ -48,41 +72,49 @@ function renderTodo(todo) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ completed: checkbox.checked }),
             credentials: 'include'
-        }).catch(() => alert('Error updating task.'));
+        });
     });
-
     const checkmark = document.createElement('span');
-    checkmark.className = 'checkmark';
+    checkmark.classList.add('checkmark');
+    checkboxLabel.append(checkbox, checkmark);
 
-    label.append(checkbox, checkmark);
+    // task wrapper
+    const taskWrapper = document.createElement('div');
+    taskWrapper.classList.add('task-wrapper');
 
-    // Task text input
-    const textInput = document.createElement('input');
-    textInput.type = 'text';
-    textInput.value = todo.text;
-    textInput.addEventListener('change', () => {
+    if (todo.dueDate) {
+        const dueDiv = document.createElement('div');
+        dueDiv.classList.add('todo-due');
+        dueDiv.textContent = `Due: ${new Date(todo.dueDate).toLocaleString()}`;
+        taskWrapper.appendChild(dueDiv);
+    }
+
+    const label = document.createElement('input');
+    label.type = 'text';
+    label.value = todo.text;
+    label.addEventListener('change', () => {
         fetch(`${API_BASE}/api/todos/${todo.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: textInput.value }),
+            body: JSON.stringify({ text: label.value }),
             credentials: 'include'
-        }).catch(() => alert('Error saving changes.'));
+        });
     });
+    taskWrapper.appendChild(label);
 
-    // Delete button
+    // delete button
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'x';
+    deleteBtn.textContent = '×';
     deleteBtn.addEventListener('click', () => {
         fetch(`${API_BASE}/api/todos/${todo.id}`, {
             method: 'DELETE',
             credentials: 'include'
-        })
-        .then(() => li.remove())
-        .catch(() => alert('Error deleting task.'));
+        }).then(() => li.remove());
     });
 
-    // Append everything to li
-    li.append(label, textInput, deleteBtn);
+    // assemble
+    pillContainer.append(checkboxLabel, taskWrapper, deleteBtn);
+    li.appendChild(pillContainer);
     todoList.appendChild(li);
 }
 
@@ -111,19 +143,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addBtn && input) {
         function addTodo() {
             const text = input.value.trim();
+            const dueInput = document.getElementById('due-date');
+            const dueDate = dueInput.value ? new Date(dueInput.value).toISOString() : null;
+
             if (text) {
                 fetch(`${API_BASE}/api/todos`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text, completed: false }),
+                    body: JSON.stringify({ text, completed: false, dueDate }),
                     credentials: 'include'
                 })
-                    .then(res => res.json())
-                    .then(newTodo => {
-                        input.value = '';
-                        loadTodos();
-                    })
-                    .catch(() => alert('Error adding task.'));
+                .then(res => res.json())
+                .then(() => {
+                    input.value = '';
+                    dueInput.value = '';
+                    loadTodos();
+                })
+                .catch(() => alert('Error adding task.'));
             }
         }
 

@@ -60,32 +60,32 @@
 
 /* Tasks */
 #todo-list li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-    margin-bottom: var(--margin-small);
-    background-color: var(--tertiary-color);
-    border-radius: 50px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    font-family: var(--font-secondary);
-    font-size: var(--font-size-body);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  list-style: none;
+  margin-bottom: var(--margin-small);
 }
 
-#todo-list li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+.pill-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--tertiary-color);
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 0.5rem 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pill-container:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 .circle-checkbox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
-    flex-shrink: 0;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 .circle-checkbox input {
@@ -99,11 +99,11 @@
 }
 
 .circle-checkbox .checkmark {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border: 2px solid #00003D;
   border-radius: 50%;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -112,9 +112,8 @@
 
 .circle-checkbox .checkmark::after {
   content: "";
-  display: block;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: #00003D;
   transform: scale(0);
@@ -125,21 +124,35 @@
   transform: scale(1);
 }
 
-#todo-list li input[type="text"] {
-    border: none;
-    background: transparent;
-    font-size: var(--font-size-body);
-    color: var(--text-color);
-    flex-grow: 1;
-    margin: 0 0.5rem;
+.task-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.task-wrapper .todo-due {
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 0.25rem;
+}
+
+.task-wrapper input[type="text"] {
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-body);
+  color: var(--text-color);
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 #todo-list li button {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    padding: 0 0.5rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0 0.5rem;
 }
