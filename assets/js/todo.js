@@ -18,18 +18,20 @@ function formatDueDate(dateStr) {
 // UI Helpers
 function showAuthUI(user) {
     const greeting = document.getElementById('greeting');
+    const todoWrapper = document.querySelector('.todo-wrapper');
+    const todoList = document.getElementById('todo-list');
+    const categories = document.querySelector('.todo-grid');
 
     if (user) {
-        const firstName = user.name.split(' ')[0];
-        greeting.textContent = `Hello, ${firstName}`;
-        document.querySelector('.todo-grid').style.display = '';
-        document.querySelector('.category').style.display = '';
-        document.getElementById('todo-list').style.display = '';
+        greeting.textContent = `Hello, ${user.name.split(' ')[0]}`;
+        if (todoWrapper) todoWrapper.style.display = '';
+        if (todoList) todoList.style.display = '';
+        if (categories) categories.style.display = '';
     } else {
-        greeting.innerHTML = 'Hello, please sign in to view your tasks.';
-        document.querySelector('.todo-grid').style.display = 'none';
-        document.querySelector('.category').style.display = 'none';
-        document.getElementById('todo-list').style.display = 'none';
+        greeting.textContent = 'Hello, please sign in to view your tasks.';
+        if (todoWrapper) todoWrapper.style.display = 'none';
+        if (todoList) todoList.style.display = 'none';
+        if (categories) categories.style.display = 'none';
     }
 }
 
