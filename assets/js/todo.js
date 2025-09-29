@@ -22,7 +22,7 @@ function formatDueDate(dateStr) {
         month: 'short',
         day: 'numeric',
         hour: '2-digit',
-        minute: '2-digit'
+        minute: '2-digit',
     });
 }
 
@@ -149,8 +149,13 @@ function renderTodo(todo) {
             method: 'DELETE',
             credentials: 'include'
         })
-            .then(() => li.remove())
-            .catch(() => alert('Error deleting task.'));
+        .then(() => {
+            li.remove();
+            // Remove from global array and update counts
+            allTodos = allTodos.filter(t => t.id !== todo.id);
+            updateCategoryCounts();
+        })
+        .catch(() => alert('Error deleting task.'));
     });
 
     // assemble
@@ -196,23 +201,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addBtn && input) {
         function addTodo() {
             const text = input.value.trim();
-            const dueDate = dueInput && dueInput.value ? new Date(dueInput.value).toISOString() : null;
+            const dueDate = dueInput.value || null;
 
-            if (text) {
-                fetch(`${API_BASE}/api/todos`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text, completed: false, dueDate }),
-                    credentials: 'include'
-                })
-                    .then(res => res.json())
-                    .then(newTodo => {
-                        input.value = '';
-                        if (dueInput) dueInput.value = '';
-                        renderTodo(newTodo);
-                    })
-                    .catch(() => alert('Error adding task.'));
-            }
+            if (!text) return;
+
+            fetch(`${API_BASE}/api/todos`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, completed: false, dueDate }),
+                credentials: 'include'
+            })
+            .then(res => res.json())
+            .then(newTodo => {
+                input.value = '';
+                if (dueInput) dueInput.value = '';
+
+                allTodos.push(newTodo);
+                renderTodo(newTodo);
+                updateCategoryCounts();
+            })
+            .catch(() => alert('Error adding task.'));
         }
 
         addBtn.addEventListener('click', addTodo);
