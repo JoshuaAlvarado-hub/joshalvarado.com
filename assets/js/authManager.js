@@ -55,7 +55,8 @@ async function login() {
       credentials: "include",
     });
 
-    await updateAuthButtons();
+    window.location.reload();
+
   } catch (err) {
     console.error("Login error:", err);
     alert("Sign-in failed");
@@ -71,7 +72,9 @@ async function logout() {
     });
 
     await signOut(auth);
-    await updateAuthButtons();
+
+    window.location.reload();
+
   } catch (err) {
     console.error("Logout error:", err);
   }
