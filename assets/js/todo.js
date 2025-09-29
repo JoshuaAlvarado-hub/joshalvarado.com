@@ -22,11 +22,13 @@ function showAuthUI(user) {
     if (user) {
         const firstName = user.name.split(' ')[0];
         greeting.textContent = `Hello, ${firstName}`;
-        document.querySelector('.todo-wrapper').style.display = '';
+        document.querySelector('.todo-grid').style.display = '';
+        document.querySelector('.category').style.display = '';
         document.getElementById('todo-list').style.display = '';
     } else {
         greeting.innerHTML = 'Hello, please sign in to view your tasks.';
-        document.querySelector('.todo-wrapper').style.display = 'none';
+        document.querySelector('.todo-grid').style.display = 'none';
+        document.querySelector('.category').style.display = 'none';
         document.getElementById('todo-list').style.display = 'none';
     }
 }
