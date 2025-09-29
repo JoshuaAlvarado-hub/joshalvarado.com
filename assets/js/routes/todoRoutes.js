@@ -26,14 +26,21 @@ router.get("/", async (req, res) => {
 // POST
 router.post("/", async (req, res) => {
   try {
-    const { text, completed } = req.body;
-    await db
+    const { text, completed, dueDate } = req.body;
+
+    const todo = {
+      text,
+      completed,
+      dueDate: dueDate || null,
+    };
+
+    const docRef = await db
       .collection("profiles")
       .doc(req.user.uid)
       .collection("todos")
-      .add({ text, completed });
+      .add(todo);
 
-    res.json({ success: true });
+    res.json({ id: docRef.id, ...todo });
   } catch (err) {
     console.error("Error adding todo:", err);
     res.status(500).json({ message: "Failed to add todo" });
@@ -43,12 +50,19 @@ router.post("/", async (req, res) => {
 // PUT
 router.put("/:id", async (req, res) => {
   try {
+    const { text, completed, dueDate } = req.body;
+
+    const updates = {};
+    if (text !== undefined) updates.text = text;
+    if (completed !== undefined) updates.completed = completed;
+    if (dueDate !== undefined) updates.dueDate = dueDate || null;
+
     await db
       .collection("profiles")
       .doc(req.user.uid)
       .collection("todos")
       .doc(req.params.id)
-      .update(req.body);
+      .update(updates);
 
     res.json({ success: true });
   } catch (err) {
