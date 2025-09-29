@@ -3,6 +3,17 @@ const API_BASE = 'https://api.joshalvarado.com';
 // const API_BASE = 'https://localhost:3001';
 const LOCAL_TESTING = false; // set true for local sample data
 
+let allTodos = []; // store loaded todos globally
+
+// Helper to check if a date is today
+function isToday(dateStr) {
+    const date = new Date(dateStr);
+    const now = new Date();
+    return date.getFullYear() === now.getFullYear() &&
+           date.getMonth() === now.getMonth() &&
+           date.getDate() === now.getDate();
+}
+
 // Date formatting helper
 function formatDueDate(dateStr) {
     const date = new Date(dateStr);
@@ -32,6 +43,18 @@ function showAuthUI(user) {
         if (todoWrapper) todoWrapper.style.display = 'none';
         if (todoList) todoList.style.display = 'none';
         if (categories) categories.style.display = 'none';
+    }
+}
+
+// Update category counts
+function updateCategoryCounts() {
+    const allCountSpan = document.querySelector('.category:nth-child(2) .count'); // All
+    const todayCountSpan = document.querySelector('.category:nth-child(1) .count'); // Today
+
+    if (allCountSpan) allCountSpan.textContent = allTodos.length;
+    if (todayCountSpan) {
+        const todayCount = allTodos.filter(todo => todo.dueDate && isToday(todo.dueDate)).length;
+        todayCountSpan.textContent = todayCount;
     }
 }
 
@@ -136,6 +159,7 @@ function renderTodo(todo) {
     todoList.appendChild(li);
 }
 
+// Load
 function loadTodos() {
     fetch(`${API_BASE}/api/todos`, { credentials: 'include' })
         .then(res => {
@@ -146,11 +170,21 @@ function loadTodos() {
             return res.json();
         })
         .then(todos => {
+            allTodos = todos; // store globally
             const todoList = document.getElementById('todo-list');
             todoList.innerHTML = '';
             todos.forEach(renderTodo);
+            updateCategoryCounts();
         })
         .catch(() => alert('Error loading todos.'));
+}
+
+// Only Today tasks
+function renderTodayTodos() {
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = '';
+    allTodos.filter(todo => todo.dueDate && isToday(todo.dueDate))
+            .forEach(renderTodo);
 }
 
 // Add todos
