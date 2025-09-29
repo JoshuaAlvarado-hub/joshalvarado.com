@@ -26,6 +26,12 @@ function formatDueDate(dateStr) {
     });
 }
 
+function getLocalISODate(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const date = new Date(year, month - 1, day); // local time
+    return date.toISOString(); // converts to full ISO including UTC offset
+}
+
 // UI Helpers
 function showAuthUI(user) {
     const greeting = document.getElementById('greeting');
@@ -201,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addBtn && input) {
         function addTodo() {
             const text = input.value.trim();
-            const dueDate = dueInput.value || null;
+            const dueDate = dueInput.value ? getLocalISODate(dueInput.value) : null;
 
             if (!text) return;
 
