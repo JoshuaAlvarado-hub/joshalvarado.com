@@ -35,18 +35,14 @@ function getLocalISODate(dateStr) {
 // UI Helpers
 function showAuthUI(user) {
     const greeting = document.getElementById('greeting');
-    const todoWrapper = document.querySelector('.todo-wrapper');
     const todoList = document.getElementById('todo-list');
     const categories = document.querySelector('.todo-grid');
 
     if (user) {
         greeting.textContent = `Hello, ${user.name.split(' ')[0]}`;
-        if (todoWrapper) todoWrapper.style.display = '';
         if (todoList) todoList.style.display = '';
         if (categories) categories.style.display = '';
     } else {
-        greeting.textContent = 'Hello, please sign in to view your tasks.';
-        if (todoWrapper) todoWrapper.style.display = 'none';
         if (todoList) todoList.style.display = 'none';
         if (categories) categories.style.display = 'none';
     }
@@ -96,8 +92,7 @@ function checkAuthAndLoadTodos() {
 }
 
 // Todos
-function renderTodo(todo) {
-    const todoList = document.getElementById('todo-list');
+function renderTodo(todo, todoList = document.getElementById('todo-list')) {
     const li = document.createElement('li');
     li.dataset.id = todo.id;
 
@@ -167,7 +162,10 @@ function renderTodo(todo) {
     // assemble
     pill.append(checkboxLabel, taskWrapper, deleteBtn);
     li.appendChild(pill);
-    todoList.appendChild(li);
+
+    // Always insert after the add pill
+    const addItem = todoList.querySelector('.add-todo-item');
+    todoList.insertBefore(li, addItem.nextSibling);
 }
 
 // Load
@@ -182,9 +180,11 @@ function loadTodos() {
         })
         .then(todos => {
             allTodos = todos; // store globally
+
             const todoList = document.getElementById('todo-list');
-            todoList.innerHTML = '';
-            todos.forEach(renderTodo);
+            todoList.querySelectorAll('li:not(.add-todo-item)').forEach(el => el.remove());
+
+            todos.forEach(todo => renderTodo(todo, todoList));
             updateCategoryCounts();
         })
         .catch(() => alert('Error loading todos.'));
@@ -193,9 +193,10 @@ function loadTodos() {
 // Only Today tasks
 function renderTodayTodos() {
     const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = '';
+    todoList.querySelectorAll('li:not(.add-todo-item)').forEach(el => el.remove());
+
     allTodos.filter(todo => todo.dueDate && isToday(todo.dueDate))
-            .forEach(renderTodo);
+            .forEach(todo => renderTodo(todo, todoList));
 }
 
 // Add todos
