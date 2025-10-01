@@ -607,8 +607,8 @@ footer {
 /* Phones */
 @media screen and (max-width: 599px) {
     :root {
-        --logo-fontsize: 1rem;
-        --footercircles: 3rem;
+        --logo-fontsize: 1.5rem;
+        --footercircles: 4rem;
     }
 
     .nav-right {
