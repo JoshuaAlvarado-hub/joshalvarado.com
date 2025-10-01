@@ -12,39 +12,40 @@ permalink: /todo/
         <p>Manage your tasks efficiently with this simple todo list application.</p>
     </div>
 
-    <h2 id="greeting">Hello, please sign in to view your tasks.</h2>
-
-    <section class="todo-grid" style="display:none;">
-        <article class="category">
-            <div class="category-header">
-                <h2>Today</h2>
-                <span class="count"></span>
-            </div>
-        </article>
-
-        <article class="category">
-            <div class="category-header">
-                <h2>All</h2>
-                <span class="count"></span>
-            </div>
-        </article>
-    </section>
-
-    <ul id="todo-list" style="display:none;">
-        <li class="add-todo-item">
-            <div class="pill-add">
-                <div class="circle-add">
-                    <button id="add-todo-btn" class="circle-add-btn">+</button>
+    <div class="todo-app">
+        <h2 id="greeting">Hello, please sign in to view your tasks.</h2>
+        <section class="todo-grid" style="display:none;">
+            <article class="category">
+                <div class="category-header">
+                    <h2>Today</h2>
+                    <span class="count"></span>
                 </div>
-                <div class="task-wrapper">
-                    <div class="todo-due">
-                        <input type="date" id="due-date" />
+            </article>
+
+            <article class="category">
+                <div class="category-header">
+                    <h2>All</h2>
+                    <span class="count"></span>
+                </div>
+            </article>
+        </section>
+
+        <ul id="todo-list" style="display:none;">
+            <li class="add-todo-item">
+                <div class="pill-add">
+                    <div class="circle-add">
+                        <button id="add-todo-btn" class="circle-add-btn">+</button>
                     </div>
-                    <div class="todo-text">
-                        <input type="text" id="todo-input" placeholder="Add a new task..." />
+                    <div class="task-wrapper">
+                        <div class="todo-due">
+                            <input type="date" id="due-date" />
+                        </div>
+                        <div class="todo-text">
+                            <input type="text" id="todo-input" placeholder="Add a new task..." />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 </div>

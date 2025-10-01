@@ -5,6 +5,18 @@ const LOCAL_TESTING = false; // set true for local sample data
 
 let allTodos = []; // store loaded todos globally
 
+function setTodoPalette(paletteName) {
+  const container = document.querySelector('.todo-app');
+  container.classList.remove('palette-dark', 'palette-pastel');
+  if (paletteName) {
+    container.classList.add(paletteName);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTodoPalette();
+});
+
 // Helper to check if a date is today
 function isToday(dateStr) {
     const date = new Date(dateStr);

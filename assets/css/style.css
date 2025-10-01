@@ -125,7 +125,8 @@ ul li {
 
 /* Layout */
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
+    max-height: 100vh;
     margin: 0 auto;
     padding: var(--padding-medium);
     font-family: var(--font-secondary);
@@ -609,6 +610,10 @@ footer {
     :root {
         --logo-fontsize: 1.5rem;
         --footercircles: 4rem;
+    }
+
+    .container {
+        padding: var(--padding-small);
     }
 
     .nav-right {
