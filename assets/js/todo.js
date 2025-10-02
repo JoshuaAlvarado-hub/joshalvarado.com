@@ -41,7 +41,7 @@ function formatDueDate(dateStr) {
 function getLocalISODate(dateStr) {
     const [year, month, day] = dateStr.split('-').map(Number);
     const date = new Date(year, month - 1, day); // local time
-    return date.toISOString(); // converts to full ISO including UTC offset
+    return date.toISOString();
 }
 
 // UI Helpers
@@ -79,16 +79,29 @@ function checkAuthAndLoadTodos() {
 
         renderTodo({
             id: 123,
-            text: "Finish project report",
+            text: "Today",
             completed: false,
-            dueDate: "2025-09-30T17:00:00"
+            dueDate: "2025-10-02T00:00:00"
         });
 
         renderTodo({
             id: 124,
-            text: "Buy groceries",
+            text: "All",
+            completed: false,
+        });
+
+        renderTodo({
+            id: 124,
+            text: "Overdue",
+            completed: false,
+            dueDate: "2001-03-23T12:00:00"
+        });
+
+        renderTodo({
+            id: 124,
+            text: "Completed",
             completed: true,
-            dueDate: "2025-09-26T12:00:00"
+            dueDate: "2025-10-31T12:00:00"
         });
 
         return;

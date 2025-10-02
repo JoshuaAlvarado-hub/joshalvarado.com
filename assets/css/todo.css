@@ -9,6 +9,9 @@
     --text-muted-color: #666;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --hover-color: #84a8d1;
+
+    /* Fonts */
+    --font-size-category: 1rem;
     
     --pill-border-thickness: 3px;
     --pill-border-color: #ddd;
@@ -16,14 +19,16 @@
     --accessory-color: #00003D;
 
     max-width: 1200px;
-    height: 75vh;
-    margin: 2rem auto;
+    min-height: 0;
+    margin: auto;
     padding: var(--padding-medium);
     border-radius: 32px;
     background-color: var(--background-color);
     box-shadow: 0 4px 10px var(--shadow-color);
     display: flex;
     flex-direction: column;
+
+    overflow: hidden;
 }
 
 /* Halloween palette */
@@ -43,16 +48,18 @@
 
 .todo-app #greeting {
   margin-top: 0;
-  padding-top: 0.5rem;
+  padding-top: 0;
 }
 
 /* Grid / Categories */
 .todo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--gap-medium);
   justify-content: center;
-  margin-top: var(--margin-large);
+  margin-top: var(--margin-medium);
+  padding: var(--padding-small);
+  padding-top: 0;
 }
 
 .category {
@@ -65,6 +72,7 @@
   padding: var(--padding-medium);
   box-shadow: 0 2px 5px var(--shadow-color);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 180px;
   height: 100%;
 }
 
@@ -155,7 +163,15 @@
 }
 
 /* Tasks */
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--margin-medium) 0;
+  margin-bottom: 0;
+}
+
 #todo-list li {
+  justify-content: center;
   list-style: none;
   margin-bottom: var(--margin-small);
 }
@@ -234,7 +250,7 @@
 .task-wrapper .todo-due {
   font-size: 0.8rem;
   color: var(--text-secondary-color);
-  margin-bottom: 0.25rem;
+  margin: 0.25rem;
 }
 
 .task-wrapper input[type="text"] {
@@ -271,5 +287,21 @@
 
 /* Phones */
 @media screen and (max-width: 599px) {
-    
+  .category-header h2 {
+    font-size: var(--font-size-category);
+  }
+
+  .todo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-small);
+  }
+
+  .category {
+    text-align: center;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius + 16px);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    background: var(--tertiary-color);
+    min-width: 140px;
+  }
 }
