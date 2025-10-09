@@ -3,7 +3,7 @@
 // Config
 const API_BASE = 'https://api.joshalvarado.com';
 // const API_BASE = 'https://localhost:3001';
-const LOCAL_TESTING = true; // set true for local sample data
+const LOCAL_TESTING = false; // set true for local sample data
 
 let allTodos = []; // store loaded todos globally
 
