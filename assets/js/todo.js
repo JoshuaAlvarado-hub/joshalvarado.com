@@ -248,20 +248,21 @@ function renderTodo(todo, todoList = document.getElementById('todo-list')) {
   checkbox.type = 'checkbox';
   checkbox.checked = !!todo.completed;
   checkbox.addEventListener('change', () => {
-    // update backend (if not LOCAL_TESTING)
     if (!LOCAL_TESTING) {
-      fetch(`${API_BASE}/api/todos/${todo.id}`, {
+        fetch(`${API_BASE}/api/todos/${todo.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ completed: checkbox.checked }),
         credentials: 'include'
-      }).catch(() => alert('Error updating task.'));
-    } else {
-      // local testing: update in-memory
-      const found = allTodos.find(t => t.id === todo.id);
-      if (found) found.completed = checkbox.checked;
-      updateCategoryCounts();
+        })
+        .catch(() => alert('Error updating task.'));
     }
+
+    // Update local state
+    const found = allTodos.find(t => t.id === todo.id);
+    if (found) found.completed = checkbox.checked;
+
+    updateCategoryCounts();
   });
   const checkmark = document.createElement('span');
   checkmark.classList.add('checkmark');
