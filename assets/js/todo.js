@@ -78,12 +78,10 @@ function isToday(dateStr) {
 // Date formatting helper
 function formatDueDate(dateStr) {
   const date = new Date(dateStr);
-  return date.toLocaleString([], {
+  return date.toLocaleDateString([], {
     year: 'numeric',
     month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+    day: 'numeric'
   });
 }
 
@@ -110,16 +108,102 @@ function showAuthUI(user) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Existing code...
+
+  document.querySelectorAll('.category').forEach(cat => {
+    cat.addEventListener('click', () => {
+      const filter = cat.dataset.filter;
+      setActiveCategory(filter);
+    });
+  });
+});
+
 // Update category counts
 function updateCategoryCounts() {
-  const allCountSpan = document.querySelector('.category:nth-child(2) .count'); // All
-  const todayCountSpan = document.querySelector('.category:nth-child(1) .count'); // Today
+  const todayCountSpan = document.querySelector('.category[data-filter="today"] .count');
+  const allCountSpan = document.querySelector('.category[data-filter="all"] .count');
+  const overdueCountSpan = document.querySelector('.category[data-filter="overdue"] .count');
+  const completedCountSpan = document.querySelector('.category[data-filter="completed"] .count');
+
+  const now = new Date();
 
   if (allCountSpan) allCountSpan.textContent = allTodos.length;
+
   if (todayCountSpan) {
     const todayCount = allTodos.filter(todo => todo.dueDate && isToday(todo.dueDate)).length;
     todayCountSpan.textContent = todayCount;
   }
+
+  if (overdueCountSpan) {
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    const overdueCount = allTodos.filter(todo => {
+        if (!todo.dueDate) return false;
+        const due = new Date(todo.dueDate);
+        due.setHours(0, 0, 0, 0);
+        return due < todayMidnight && !todo.completed;
+    }).length;
+
+    overdueCountSpan.textContent = overdueCount;
+  }
+
+  if (completedCountSpan) {
+    const completedCount = allTodos.filter(todo => todo.completed).length;
+    completedCountSpan.textContent = completedCount;
+  }
+}
+
+let currentFilter = 'all'; // default filter
+
+function setActiveCategory(categoryName) {
+  currentFilter = categoryName;
+
+  // Toggle active state visually
+  document.querySelectorAll('.category').forEach(cat => {
+    cat.classList.remove('active');
+  });
+  const active = document.querySelector(`.category[data-filter="${categoryName}"]`);
+  if (active) active.classList.add('active');
+
+  // Render based on the filter
+  renderFilteredTodos();
+}
+
+function renderFilteredTodos() {
+  const todoList = document.getElementById('todo-list');
+  if (!todoList) return;
+  todoList.querySelectorAll('li:not(.add-todo-item)').forEach(el => el.remove());
+
+  let filtered = [...allTodos];
+  const now = new Date();
+
+  switch (currentFilter) {
+    case 'today':
+      filtered = filtered.filter(todo => todo.dueDate && isToday(todo.dueDate));
+      break;
+    case 'overdue':
+        const todayMidnight = new Date();
+        todayMidnight.setHours(0, 0, 0, 0);
+
+        filtered = filtered.filter(todo => {
+            if (!todo.dueDate) return false;
+            const due = new Date(todo.dueDate);
+            due.setHours(0, 0, 0, 0);
+            return due < todayMidnight && !todo.completed;
+        });
+        break;
+    case 'completed':
+      filtered = filtered.filter(todo => todo.completed);
+      break;
+    case 'all':
+    default:
+      break;
+  }
+
+  filtered = sortTodosArray(filtered);
+  filtered.forEach(todo => renderTodo(todo, todoList));
 }
 
 // Auth + Loading
@@ -135,6 +219,7 @@ function checkAuthAndLoadTodos() {
 
     showAuthUI({ name: "Local Tester" });
     renderAllTodos();
+    setActiveCategory('all');
     return;
   }
 

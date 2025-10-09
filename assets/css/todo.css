@@ -106,6 +106,31 @@
   font-weight: normal;
 }
 
+.category {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+}
+
+.category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px var(--shadow-color);
+  opacity: 1;
+}
+
+/* Active state */
+.category.active {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
+  color: var(--tertiary-color);
+  opacity: 1;
+}
+
+.category.active .category-header h2,
+.category.active .count {
+  color: var(--tertiary-color);
+}
+
 /* Add Button */
 .category p {
   font-family: var(--font-secondary);

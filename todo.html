@@ -15,35 +15,35 @@ permalink: /todo/
     <div class="todo-app">
         <h2 id="greeting">Hello, please sign in to view your tasks.</h2>
         <section class="todo-grid" style="display:none;">
-            <article class="category">
+            <article class="category" data-filter="today">
                 <div class="category-header">
-                    <h2>Today</h2>
-                    <span class="count"></span>
+                <h2>Today</h2>
+                <span class="count"></span>
                 </div>
             </article>
 
-            <article class="category">
+            <article class="category" data-filter="all">
                 <div class="category-header">
-                    <h2>All</h2>
-                    <span class="count"></span>
+                <h2>All</h2>
+                <span class="count"></span>
                 </div>
             </article>
 
-            <article class="category">
+            <article class="category" data-filter="overdue">
                 <div class="category-header">
-                    <h2>Overdue</h2>
-                    <span class="count"></span>
+                <h2>Overdue</h2>
+                <span class="count"></span>
                 </div>
             </article>
 
-            <article class="category">
+            <article class="category" data-filter="completed">
                 <div class="category-header">
-                    <h2>Completed</h2>
-                    <span class="count"></span>
+                <h2>Completed</h2>
+                <span class="count"></span>
                 </div>
             </article>
         </section>
-
+        
         <ul id="todo-list" style="display:none;">
             <li class="add-todo-item">
                 <div class="pill-add">
