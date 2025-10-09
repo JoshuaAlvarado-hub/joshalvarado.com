@@ -35,7 +35,7 @@
 .todo-app.palette-halloween {
     --primary-color: #f9ea9a;
     --secondary-color: #f4442e;
-    --tertiary-color: #91c9b4;
+    --tertiary-color: #f9ea9a;
     --background-color: #1a1a1a;
     --border-color: #efd79b;
     --shadow-color: rgba(0,0,0,0.5);
@@ -301,7 +301,6 @@
     padding: var(--padding-small);
     border-radius: var(--border-radius + 16px);
     box-shadow: 0 2px 5px var(--shadow-color);
-    background: var(--tertiary-color);
     min-width: 140px;
   }
 }
