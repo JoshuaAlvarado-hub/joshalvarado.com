@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 import authRoutes from "./routes/authRoutes.js";
 import todoRoutes from "./routes/todoRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api", authRoutes);
 app.use("/api/todos", todoRoutes);
+app.use("/api/items", itemRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
