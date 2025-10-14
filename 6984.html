@@ -1,0 +1,45 @@
+---
+layout: default
+title: 6984 Driver Help
+permalink: /6984/
+---
+<link rel="stylesheet" href="{{ '/assets/css/6984.css' | relative_url }}">
+<script src="{{ '/assets/js/6984.js' | relative_url }}"></script>
+
+<div class="container">
+  <div class="page-header">
+    <h1>6984 Driver Help</h1>
+    <p>Find useful information to help you on your delivery.</p>
+  </div>
+
+  <div class="driver-help-app">
+    <ul id="item-list" style="list-style: none; padding: 0; margin: 0;">
+      <li class="add-entry-item">
+        <div class="pill-add">
+          <div class="circle-add">
+            <button id="add-item-btn" class="circle-add-btn">+</button>
+          </div>
+
+          <div class="entry-wrapper">
+            <div class="entry-field">
+              <input
+                type="text"
+                id="item-title"
+                placeholder="Add a title..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="entry-field">
+              <textarea
+                id="item-details"
+                placeholder="Add details..."
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+/* Color palette */
+.driver-help-app {
+  --primary-color: #00003D;
+  --secondary-color: #92BCEA;
+  --background-color: #F4F4F4;
+  --text-color: #333;
+  --border-color: #ddd;
+  --shadow-color: rgba(0,0,0,0.1);
+  --hover-color: #84a8d1;
+
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 24px;
+  background-color: var(--background-color);
+  box-shadow: 0 4px 10px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+/* Entry list */
+#item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Shared pill style */
+.pill-container,
+.pill-add {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--background-color);
+  border-radius: 50px;
+  border: 2px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pill-container:hover,
+.pill-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+/* Add button circle */
+.circle-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.circle-add-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.circle-add-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+/* Entry wrapper inside pills */
+.pill-container .entry-wrapper,
+.pill-add .entry-wrapper {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Inputs and textareas inside wrapper */
+.pill-container input,
+.pill-container textarea,
+.pill-add input,
+.pill-add textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.4;
+  resize: none;
+  outline: none;
+}
+
+.pill-container input:focus,
+.pill-container textarea:focus,
+.pill-add input:focus,
+.pill-add textarea:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(146,188,234,0.3);
+}
+
+/* Delete button */
+.pill-container button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.pill-container button:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+  .driver-help-app {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .circle-add-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+  }
+
+  .pill-container,
+  .pill-add {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

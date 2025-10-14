@@ -26,7 +26,7 @@ function sortTodosArray(arr) {
 
 document.addEventListener('DOMContentLoaded', () => {
   // pick default palette (you can change)
-  setTodoPalette('palette-halloween');
+  setTodoPalette();
 
   // wire up cookie-banner logic & loading (keeps your existing behaviour)
   const banner = document.getElementById('cookie-banner');
