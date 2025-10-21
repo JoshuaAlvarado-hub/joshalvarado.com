@@ -22,12 +22,13 @@ router.get("/", async (req, res) => {
 // POST a new item
 router.post("/", async (req, res) => {
   try {
-    const { title, details, completed } = req.body;
+    const { title, details, gateCode, doorCode } = req.body;
 
     const item = {
       title: title || "",
       details: details || "",
-      completed: completed || false,
+      gateCode: gateCode || "",
+      doorCode: doorCode || "",
     };
 
     const docRef = await db.collection(ITEMS_COLLECTION).add(item);
@@ -41,12 +42,13 @@ router.post("/", async (req, res) => {
 // PUT /:id — update item
 router.put("/:id", async (req, res) => {
   try {
-    const { title, details, completed } = req.body;
+    const { title, details, gateCode, doorCode } = req.body;
 
     const updates = {};
     if (title !== undefined) updates.title = title;
     if (details !== undefined) updates.details = details;
-    if (completed !== undefined) updates.completed = completed;
+    if (gateCode !== undefined) updates.gateCode = gateCode;
+    if (doorCode !== undefined) updates.doorCode = doorCode;
 
     await db.collection(ITEMS_COLLECTION).doc(req.params.id).update(updates);
     res.json({ success: true });

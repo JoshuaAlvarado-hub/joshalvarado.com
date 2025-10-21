@@ -16,26 +16,53 @@ permalink: /6984/
     <ul id="item-list" style="list-style: none; padding: 0; margin: 0;">
       <li class="add-entry-item">
         <div class="pill-add">
-          <div class="circle-add">
-            <button id="add-item-btn" class="circle-add-btn">+</button>
-          </div>
-
           <div class="entry-wrapper">
+            <!-- Address -->
             <div class="entry-field">
+              <label for="address" class="entry-label centered-label">Address</label>
               <input
                 type="text"
-                id="item-title"
-                placeholder="Add a title..."
+                id="address"
+                placeholder="Enter address..."
+                autocomplete="off";
+              ></input>
+            </div>
+
+            <!-- Gate Code -->
+            <div class="entry-field">
+              <label for="gate-code" class="entry-label centered-label">Gate Code</label>
+              <input
+                type="text"
+                id="gate-code"
+                placeholder="Enter gate code..."
                 autocomplete="off"
               />
             </div>
 
+            <!-- Door Code -->
             <div class="entry-field">
+              <label for="door-code" class="entry-label centered-label">Door Code</label>
+              <input
+                type="text"
+                id="door-code"
+                placeholder="Enter door code..."
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- Notes -->
+            <div class="entry-field">
+              <label for="notes" class="entry-label centered-label">Notes</label>
               <textarea
-                id="item-details"
-                placeholder="Add details..."
-                rows="2"
+                id="notes"
+                placeholder="Enter additional notes..."
+                rows="3"
               ></textarea>
+            </div>
+
+            <!-- Add button at the bottom -->
+            <div class="add-btn-wrapper">
+              <button id="add-item-btn" class="circle-add-btn">+</button>
             </div>
           </div>
         </div>
