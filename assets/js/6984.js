@@ -1,7 +1,7 @@
 // Config
 const API_BASE = 'https://api.joshalvarado.com';
 // const API_BASE = 'http://localhost:3001'; // for local testing
-const LOCAL_TESTING = true;
+const LOCAL_TESTING = false;
 
 let allItems = []; // global array of delivery entries
 
