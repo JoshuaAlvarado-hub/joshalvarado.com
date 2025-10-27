@@ -1,7 +1,7 @@
 // Config
 const API_BASE = 'https://api.joshalvarado.com';
 // const API_BASE = 'http://localhost:3001'; // for local testing
-const LOCAL_TESTING = false;
+const LOCAL_TESTING = true;
 
 let allItems = []; // global array of delivery entries
 
@@ -272,7 +272,14 @@ function render() {
 // Helpers
 function sortItems(arr) {
   return arr.slice().sort((a, b) => {
-    const clean = (str) => (str || '').replace(/^\d+\s*/, '').toLowerCase();
-    return clean(a.title).localeCompare(clean(b.title));
+    // Extract street name by removing numbers and trimming
+    const getStreetName = (str) => {
+      const addr = str || '';
+      // Remove numbers from start of string and any spaces
+      const streetName = addr.replace(/^[\d\s-/]*/, '').trim();
+      return streetName.toLowerCase();
+    };
+    
+    return getStreetName(a.address).localeCompare(getStreetName(b.address));
   });
 }

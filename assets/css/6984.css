@@ -1,5 +1,9 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 /* Color Palette */
 .driver-help-app {
+  /* Colors */
   --primary-color: #00003d;
   --secondary-color: #92bcea;
   --background-color: #f4f4f4;
@@ -7,6 +11,11 @@
   --border-color: #ddd;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --hover-color: #84a8d1;
+  
+  /* Fonts */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  --font-monospace: 'Space Mono', monospace;
 
   max-width: 800px;
   margin: 0 auto;
@@ -89,6 +98,16 @@
   line-height: 1.4;
   resize: none;
   outline: none;
+  font-family: var(--font-secondary);
+}
+
+.pill-container input::placeholder,
+.pill-container textarea::placeholder,
+.pill-add input::placeholder,
+.pill-add textarea::placeholder {
+  font-family: var(--font-monospace);
+  font-size: var(--font-size-body);
+  color: var(--text-muted-color);
 }
 
 .pill-container input:focus,
